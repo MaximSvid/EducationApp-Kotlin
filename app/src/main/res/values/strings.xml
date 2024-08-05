@@ -5,4 +5,8 @@
     <string name="folder">Folder</string>
     <string name="teach">Teach</string>
     <string name="_25">25</string>
+    <string name="learnt">Learnt</string>
+    <string name="start">Start</string>
+    <string name="add">Add+</string>
+    <string name="quick_note">Quick Note</string>
 </resources>
