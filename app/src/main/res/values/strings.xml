@@ -9,4 +9,7 @@
     <string name="start">Start</string>
     <string name="add">Add+</string>
     <string name="quick_note">Quick Note</string>
+    <string name="question">Question</string>
+    <string name="answer">Answer</string>
+    <string name="save">Save</string>
 </resources>

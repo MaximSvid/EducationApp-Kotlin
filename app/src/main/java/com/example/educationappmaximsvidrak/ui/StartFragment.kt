@@ -6,18 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.educationappmaximsvidrak.R
-import com.example.educationappmaximsvidrak.databinding.FragmentHomeBinding
+import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
 
 
-class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+class StartFragment : Fragment() {
+
+    private lateinit var binding: FragmentStartBinding
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentStartBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
         return binding.root
     }
