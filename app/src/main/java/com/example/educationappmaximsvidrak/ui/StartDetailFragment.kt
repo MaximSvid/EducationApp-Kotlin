@@ -7,15 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
-import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
+import com.example.educationappmaximsvidrak.databinding.FragmentStartDetailBinding
 
+class StartDetailFragment : Fragment() {
 
-class StartFragment : Fragment() {
-
-    private lateinit var binding: FragmentStartBinding
+    private lateinit var binding: FragmentStartDetailBinding
     private val viewModel: MainViewModel by activityViewModels()
 
 
@@ -23,7 +21,7 @@ class StartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentStartBinding.inflate(layoutInflater)
+        binding = FragmentStartDetailBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -32,30 +30,31 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.ibBack.setOnClickListener {
-            findNavController().navigate(StartFragmentDirections.actionStartFragmentToHomeFragment())
+            findNavController().navigate(StartDetailFragmentDirections.actionStartDetailFragmentToHomeFragment())
         }
 
         viewModel.flashcardList.observe(viewLifecycleOwner) {flashcards ->
             if (flashcards.isNotEmpty()) {
-                binding.tvQuestion.text = flashcards[0].question
+                binding.tvAnswer.text = flashcards[0].question
             } else {
-                binding.tvQuestion.text = R.string.no_card.toString()
+                binding.tvAnswer.text = R.string.no_card.toString()
             }
         }
 
-        binding.mcvQuestion.setOnClickListener {
-            findNavController().navigate(StartFragmentDirections.actionStartFragmentToStartDetailFragment())
+        binding.ivBackToQuestion.setOnClickListener {
+            findNavController().navigateUp()
         }
 
+//        binding.ivForwardToNewQuestion.setOnClickListener {
+//            var index = viewModel.flashcardList.value.index
+//            viewModel.flashcardList.observe(viewLifecycleOwner) {
+//                if (it.isNotEmpty()) {
+//                    binding.tvAnswer
+//                }
+//            }
+//        }
 
 
     }
 
 }
-
-//        viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
-//            val adapter = QuestionAnswerAdapter (flashcards)
-//
-//            binding.rvQuestionAnswer.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-//            binding.rvQuestionAnswer.adapter = adapter
-//        }
