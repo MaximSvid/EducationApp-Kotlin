@@ -3,8 +3,8 @@ package com.example.educationappmaximsvidrak.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.ItemAnswerBinding
-import com.example.educationappmaximsvidrak.databinding.ItemQuestionAnswerBinding
 import com.example.educationappmaximsvidrak.databinding.ItemQuestionBinding
 import com.example.educationappmaximsvidrak.model.FlashcardData
 
@@ -24,12 +24,16 @@ class QuestionAnswerAdapter (
     inner class QuestionViewHolder(private val binding: ItemQuestionBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind (flashcard: FlashcardData) {
             binding.tvQuestion.text = flashcard.question
+            binding.mcvQuestion.strokeWidth = 10
+            binding.mcvQuestion.strokeColor = binding.root.context.getColor(R.color.blue)
         }
     }
 
     inner class AnswerViewHolder (private val binding: ItemAnswerBinding): RecyclerView.ViewHolder (binding.root) {
         fun bind (flashcard: FlashcardData) {
             binding.tvAnswer.text = flashcard.answer
+            binding.mcvAnswer.strokeWidth = 10
+            binding.mcvAnswer.strokeColor = binding.root.context.getColor(R.color.green)
         }
     }
 

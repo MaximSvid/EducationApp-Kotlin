@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
@@ -30,6 +31,10 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.ibBack.setOnClickListener {
+            findNavController().navigate(StartFragmentDirections.actionStartFragmentToHomeFragment())
+        }
 
         viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
             val adapter = QuestionAnswerAdapter (flashcards)

@@ -21,10 +21,18 @@
         android:id="@+id/addQuestionFragment"
         android:name="com.example.educationappmaximsvidrak.ui.AddQuestionFragment"
         android:label="fragment_add_question"
-        tools:layout="@layout/fragment_add_question" />
+        tools:layout="@layout/fragment_add_question" >
+        <action
+            android:id="@+id/action_addQuestionFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/startFragment"
         android:name="com.example.educationappmaximsvidrak.ui.StartFragment"
         android:label="fragment_start"
-        tools:layout="@layout/fragment_start" />
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

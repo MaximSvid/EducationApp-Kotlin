@@ -34,6 +34,10 @@ class AddQuestionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.ibBack.setOnClickListener {
+            findNavController().navigate(AddQuestionFragmentDirections.actionAddQuestionFragmentToHomeFragment())
+        }
+
         binding.btnSave.setOnClickListener {
             val question = binding.tietQuestion.text.toString()
             val answer = binding.tietAnswer.text.toString()
