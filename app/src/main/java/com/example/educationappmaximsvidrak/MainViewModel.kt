@@ -1,4 +1,27 @@
 package com.example.educationappmaximsvidrak
 
-class MainViewModel {
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.educationappmaximsvidrak.data.Repository
+import com.example.educationappmaximsvidrak.data.local.getDatabase
+import com.example.educationappmaximsvidrak.model.FlashcardData
+import kotlinx.coroutines.launch
+
+class MainViewModel (application: Application) : AndroidViewModel (application) {
+
+    private val database = getDatabase(application)
+    private val repository = Repository(database)
+
+    fun addFlashcard (flashcard: FlashcardData) {
+        viewModelScope.launch {
+            repository.addFlashcard(flashcard)
+        }
+    }
+
+    fun updateFlashcard (flashcard: FlashcardData) {
+        viewModelScope.launch {
+            repository.updateFlashcard(flashcard)
+        }
+    }
 }
