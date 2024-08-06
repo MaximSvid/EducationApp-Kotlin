@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
 
@@ -12,6 +14,7 @@ import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
 class StartFragment : Fragment() {
 
     private lateinit var binding: FragmentStartBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -21,6 +24,12 @@ class StartFragment : Fragment() {
         binding = FragmentStartBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
     }
 
 }
