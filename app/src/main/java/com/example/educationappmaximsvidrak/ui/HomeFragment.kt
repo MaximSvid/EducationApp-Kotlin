@@ -32,6 +32,10 @@ class HomeFragment : Fragment() {
         binding.btnAdd.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddQuestionFragment())
         }
+
+        binding.btnStart.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
+        }
     }
 
 }

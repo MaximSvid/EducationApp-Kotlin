@@ -2,6 +2,7 @@ package com.example.educationappmaximsvidrak
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.educationappmaximsvidrak.data.Repository
 import com.example.educationappmaximsvidrak.data.local.getDatabase
@@ -12,6 +13,8 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
 
     private val database = getDatabase(application)
     private val repository = Repository(database)
+
+    val flashcardList: LiveData<List<FlashcardData>> = repository.flashcardList
 
     fun addFlashcard (flashcard: FlashcardData) {
         viewModelScope.launch {
