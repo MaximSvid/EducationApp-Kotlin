@@ -174,7 +174,7 @@
         android:layout_marginTop="26dp"/>
 
     <Button
-        android:id="@+id/btn_note"
+        android:id="@+id/btn_chatGPT"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

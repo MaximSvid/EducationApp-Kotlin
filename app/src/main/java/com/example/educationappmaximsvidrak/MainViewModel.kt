@@ -27,4 +27,14 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
             repository.updateFlashcard(flashcard)
         }
     }
+
+    init {
+        loadChat()
+    }
+
+    fun loadChat () {
+        viewModelScope.launch {
+            repository.loadChat()
+        }
+    }
 }

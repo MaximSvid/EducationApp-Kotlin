@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_startFragment"
             app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_chatGPTFragment"
+            app:destination="@id/chatGPTFragment" />
     </fragment>
     <fragment
         android:id="@+id/addQuestionFragment"
@@ -33,6 +36,15 @@
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_startFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatGPTFragment"
+        android:name="com.example.educationappmaximsvidrak.ui.ChatGPTFragment"
+        android:label="fragment_chat_g_p_t"
+        tools:layout="@layout/fragment_chat_g_p_t" >
+        <action
+            android:id="@+id/action_chatGPTFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

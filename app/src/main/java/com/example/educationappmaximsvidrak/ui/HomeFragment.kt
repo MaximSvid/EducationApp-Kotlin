@@ -36,6 +36,9 @@ class HomeFragment : Fragment() {
         binding.btnStart.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
         }
-    }
 
+        binding.btnChatGPT.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChatGPTFragment())
+        }
+    }
 }

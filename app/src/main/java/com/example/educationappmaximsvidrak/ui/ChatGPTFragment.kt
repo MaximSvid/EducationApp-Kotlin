@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentChatGPTBinding
 import okhttp3.OkHttpClient
@@ -14,7 +15,6 @@ class ChatGPTFragment : Fragment() {
 
     private lateinit var binding: FragmentChatGPTBinding
 
-    private val client = OkHttpClient()
 
 
     override fun onCreateView(
@@ -29,6 +29,10 @@ class ChatGPTFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.ibBack.setOnClickListener {
+            findNavController().navigate(ChatGPTFragmentDirections.actionChatGPTFragmentToHomeFragment())
+        }
 
 
 
