@@ -13,4 +13,5 @@
     <string name="answer">Answer</string>
     <string name="save">Save</string>
     <string name="no_card">No questions available</string>
+    <string name="chat_gpt">Chat GPT</string>
 </resources>

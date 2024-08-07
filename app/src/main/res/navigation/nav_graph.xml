@@ -34,17 +34,10 @@
         <action
             android:id="@+id/action_startFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_startFragment_to_startDetailFragment"
-            app:destination="@id/startDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/startDetailFragment"
         android:name="com.example.educationappmaximsvidrak.ui.StartDetailFragment"
         android:label="fragment_start_detail"
-        tools:layout="@layout/fragment_start_detail" >
-        <action
-            android:id="@+id/action_startDetailFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_start_detail" />
 </navigation>

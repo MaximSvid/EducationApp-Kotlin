@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
+import com.example.educationappmaximsvidrak.adapter.QuestionAnswerAdapter
 import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
 
 
@@ -35,17 +36,24 @@ class StartFragment : Fragment() {
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToHomeFragment())
         }
 
-        viewModel.flashcardList.observe(viewLifecycleOwner) {flashcards ->
-            if (flashcards.isNotEmpty()) {
-                binding.tvQuestion.text = flashcards[0].question
-            } else {
-                binding.tvQuestion.text = R.string.no_card.toString()
-            }
+        viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
+            val adapter = QuestionAnswerAdapter (flashcards)
+
+            binding.rvQuestionAnswer.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.rvQuestionAnswer.adapter = adapter
         }
 
-        binding.mcvQuestion.setOnClickListener {
-            findNavController().navigate(StartFragmentDirections.actionStartFragmentToStartDetailFragment())
-        }
+//        viewModel.flashcardList.observe(viewLifecycleOwner) {flashcards ->
+//            if (flashcards.isNotEmpty()) {
+//                binding.tvQuestion.text = flashcards[0].question
+//            } else {
+//                binding.tvQuestion.text = R.string.no_card.toString()
+//            }
+//        }
+//
+//        binding.mcvQuestion.setOnClickListener {
+//            findNavController().navigate(StartFragmentDirections.actionStartFragmentToStartDetailFragment())
+//        }
 
 
 
@@ -53,9 +61,3 @@ class StartFragment : Fragment() {
 
 }
 
-//        viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
-//            val adapter = QuestionAnswerAdapter (flashcards)
-//
-//            binding.rvQuestionAnswer.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-//            binding.rvQuestionAnswer.adapter = adapter
-//        }

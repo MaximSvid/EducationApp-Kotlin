@@ -29,21 +29,21 @@ class StartDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.ibBack.setOnClickListener {
-            findNavController().navigate(StartDetailFragmentDirections.actionStartDetailFragmentToHomeFragment())
-        }
-
-        viewModel.flashcardList.observe(viewLifecycleOwner) {flashcards ->
-            if (flashcards.isNotEmpty()) {
-                binding.tvAnswer.text = flashcards[0].question
-            } else {
-                binding.tvAnswer.text = R.string.no_card.toString()
-            }
-        }
-
-        binding.ivBackToQuestion.setOnClickListener {
-            findNavController().navigateUp()
-        }
+//        binding.ibBack.setOnClickListener {
+//            findNavController().navigate(StartDetailFragmentDirections.actionStartDetailFragmentToHomeFragment())
+//        }
+//
+//        viewModel.flashcardList.observe(viewLifecycleOwner) {flashcards ->
+//            if (flashcards.isNotEmpty()) {
+//                binding.tvAnswer.text = flashcards[0].question
+//            } else {
+//                binding.tvAnswer.text = R.string.no_card.toString()
+//            }
+//        }
+//
+//        binding.ivBackToQuestion.setOnClickListener {
+//            findNavController().navigateUp()
+//        }
 
 //        binding.ivForwardToNewQuestion.setOnClickListener {
 //            var index = viewModel.flashcardList.value.index
