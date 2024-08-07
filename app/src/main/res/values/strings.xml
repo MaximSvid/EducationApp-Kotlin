@@ -14,4 +14,7 @@
     <string name="save">Save</string>
     <string name="no_card">No questions available</string>
     <string name="chat_gpt">Chat GPT</string>
+    <string name="enter_your_question">Enter your question</string>
+    <string name="welocom_to_chat_gpt_n_enter_your_question">Welocom to Chat GPT\n Enter your question...</string>
+    <string name="your_message">Your message...</string>
 </resources>
