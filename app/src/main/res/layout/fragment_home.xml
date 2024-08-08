@@ -184,5 +184,16 @@
         android:backgroundTint="@color/blue"
         android:layout_marginTop="62dp"/>
 
+    <Button
+        android:id="@+id/btn_flashcard"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_chatGPT"
+        android:text="@string/flashcards"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="26dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

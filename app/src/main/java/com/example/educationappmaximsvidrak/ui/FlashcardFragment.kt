@@ -1,5 +1,6 @@
 package com.example.educationappmaximsvidrak.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,11 +10,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
-import com.example.educationappmaximsvidrak.databinding.FragmentHomeBinding
+import com.example.educationappmaximsvidrak.adapter.FlashcardAdapter
+import com.example.educationappmaximsvidrak.databinding.FragmentFlashcardBinding
 
 
-class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+class FlashcardFragment : Fragment() {
+
+    private lateinit var binding: FragmentFlashcardBinding
     private val viewModel: MainViewModel by activityViewModels()
 
 
@@ -21,7 +24,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentFlashcardBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -29,20 +32,22 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnAdd.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddQuestionFragment())
+        viewModel.flashcardList.observe(viewLifecycleOwner) {
+            binding.rvFlashcard.adapter = FlashcardAdapter(it, viewModel)
         }
 
-        binding.btnStart.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
+        binding.ibBack.setOnClickListener {
+            findNavController().navigate(FlashcardFragmentDirections.actionFlashcardFragmentToHomeFragment())
         }
 
-        binding.btnChatGPT.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChatGPTFragment())
-        }
+        binding.btnNewFlashcard.setOnClickListener {
 
-        binding.btnFlashcard.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFlashcardFragment())
         }
     }
+
+    private fun showAlertDialog(context: Context) {
+
+    }
+
+
 }

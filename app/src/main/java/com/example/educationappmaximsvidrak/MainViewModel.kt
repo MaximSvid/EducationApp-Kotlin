@@ -28,6 +28,12 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
         }
     }
 
+    fun deleteFlashcard(flashcard: FlashcardData) {
+        viewModelScope.launch {
+            repository.deleteFlashcard(flashcard)
+        }
+    }
+
     init {
         loadChat()
     }
