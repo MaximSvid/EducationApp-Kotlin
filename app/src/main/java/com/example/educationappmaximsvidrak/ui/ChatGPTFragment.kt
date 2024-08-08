@@ -6,14 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
+import com.example.educationappmaximsvidrak.adapter.ChatGPTAdapter
 import com.example.educationappmaximsvidrak.databinding.FragmentChatGPTBinding
 import okhttp3.OkHttpClient
 
 class ChatGPTFragment : Fragment() {
 
     private lateinit var binding: FragmentChatGPTBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
 
 
@@ -29,6 +33,28 @@ class ChatGPTFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        val adapter = ChatGPTAdapter(emptyList(), viewModel)
+//        binding.rvChatGPT.adapter = adapter
+
+//        viewModel.message.observe(viewLifecycleOwner) { messages ->
+//            adapter.
+//
+//        }
+
+        viewModel.message.observe(viewLifecycleOwner) {
+            binding.rvChatGPT.adapter = ChatGPTAdapter(it, viewModel)
+        }
+
+        binding.ibSend.setOnClickListener {
+            val userMessage = binding.etMessage.text.toString()
+            if (userMessage.isNotEmpty()) {
+                viewModel.sendMessage(userMessage)
+                binding.etMessage.text.clear()
+            }
+        }
+
+
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(ChatGPTFragmentDirections.actionChatGPTFragmentToHomeFragment())

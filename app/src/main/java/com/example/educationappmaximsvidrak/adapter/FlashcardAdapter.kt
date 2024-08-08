@@ -14,6 +14,7 @@ class FlashcardAdapter (
     private val viewModel: MainViewModel
 ): RecyclerView.Adapter<FlashcardAdapter.ItemViewHolder>() {
 
+
     inner class ItemViewHolder(val binding: ItemFlashcardBinding): RecyclerView.ViewHolder(binding.root)
     override fun onCreateViewHolder(
         parent: ViewGroup,

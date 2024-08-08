@@ -15,6 +15,8 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
     private val database = getDatabase(application)
     private val repository = Repository(database)
 
+    val message = repository.chat
+
     val flashcardList: LiveData<List<FlashcardData>> = repository.flashcardList
 
     fun addFlashcard (flashcard: FlashcardData) {
@@ -42,13 +44,20 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
         _selectedCard.postValue(flashcard)
     }
 
-    init {
-        loadChat()
-    }
-
-    fun loadChat () {
+    fun sendMessage(content: String) {
         viewModelScope.launch {
-            repository.loadChat()
+            repository.sendMessage(content)
         }
     }
+
+    init {
+//        loadMessage()
+
+    }
+
+//    fun loadMessage () {
+//        viewModelScope.launch {
+//            repository.loadMessage()
+//        }
+//    }
 }

@@ -65,14 +65,14 @@
         android:layout_marginTop="60dp"
         android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/tv_welcome_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/welocom_to_chat_gpt_n_enter_your_question"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tv_welcome_text"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:text="@string/welocom_to_chat_gpt_n_enter_your_question"-->
+<!--        android:textSize="18sp"-->
+<!--        android:textStyle="bold"/>-->
 
     <RelativeLayout
         android:id="@+id/bottom_layout"
