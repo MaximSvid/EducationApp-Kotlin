@@ -2,10 +2,12 @@ package com.example.educationappmaximsvidrak.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.databinding.ItemFlashcardBinding
 import com.example.educationappmaximsvidrak.model.FlashcardData
+import com.example.educationappmaximsvidrak.ui.FlashcardFragmentDirections
 
 class FlashcardAdapter (
     private val flashcards: List<FlashcardData>,
@@ -30,6 +32,12 @@ class FlashcardAdapter (
 
         binding.ibDelete.setOnClickListener {
             viewModel.deleteFlashcard(flashcard)
+        }
+
+        binding.mcvFlashcard.setOnClickListener {
+            viewModel.selectedFlashcard(flashcard)
+
+            holder.itemView.findNavController().navigate(FlashcardFragmentDirections.actionFlashcardFragmentToFlashcardDetailFragment())
         }
     }
 

@@ -3,6 +3,7 @@ package com.example.educationappmaximsvidrak
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.educationappmaximsvidrak.data.Repository
 import com.example.educationappmaximsvidrak.data.local.getDatabase
@@ -32,6 +33,13 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
         viewModelScope.launch {
             repository.deleteFlashcard(flashcard)
         }
+    }
+
+    private var _selectedCard = MutableLiveData<FlashcardData>()
+    val selectedCard: LiveData<FlashcardData> = _selectedCard
+
+    fun selectedFlashcard(flashcard: FlashcardData){
+        _selectedCard.postValue(flashcard)
     }
 
     init {
