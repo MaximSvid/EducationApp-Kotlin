@@ -3,6 +3,7 @@ package com.example.educationappmaximsvidrak.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import coil.network.HttpException
 import com.example.educationappmaximsvidrak.data.local.FlashcardDatabase
 import com.example.educationappmaximsvidrak.data.remote.EducationApi
 import com.example.educationappmaximsvidrak.model.ChatCompletionRequest
@@ -43,16 +44,11 @@ class Repository(private val database: FlashcardDatabase) {
     private var _chat = MutableLiveData<List<Message>>()
     val chat: LiveData<List<Message>> = _chat
 
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error
 
 
-//    suspend fun loadMessage() {
-//        try {
-//            val response = EducationApi.retrofitService.sendMessage(API_KEY)
-//            _chat.postValue(response)
-//        } catch (e: Exception) {
-//            Log.e ("RepositoryLog", e.message.toString())
-//        }
-//    }
+
 
     suspend fun sendMessage(content: String) {
         try {
@@ -67,4 +63,25 @@ class Repository(private val database: FlashcardDatabase) {
         }
     }
 
+//    suspend fun sendMessage(content: String) {
+//        try {
+//            val request = ChatCompletionRequest(
+//                "gpt-3.5-turbo",
+//                messages = listOf(Message(role =  "user", content =  content))
+//            )
+//            val response = EducationApi.retrofitService.sendMessage("Bearer $API_KEY", request)
+//            _chat.postValue(response.choices.map { it.message })
+//        } catch (e: HttpException) {
+//            when (e.hashCode()){
+//                429 -> _error.value = "HTP429"
+//                else -> _error.value = "An error has occurred. Check your internet connection."
+//
+//            }
+//            Log.e("RepositoryLog", e.message.toString())
+//        } catch (e: Exception) {
+//            _error.value = "An error has occurred. Check your internet connection."
+//        }
+//    }
+
 }
+

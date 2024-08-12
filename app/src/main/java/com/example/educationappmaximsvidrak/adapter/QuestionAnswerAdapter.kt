@@ -2,6 +2,7 @@ package com.example.educationappmaximsvidrak.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.ItemAnswerBinding
@@ -10,6 +11,7 @@ import com.example.educationappmaximsvidrak.model.FlashcardData
 
 class QuestionAnswerAdapter (
     private val flashcards: List<FlashcardData>,
+    private val recyclerView: RecyclerView
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     companion object {
@@ -26,6 +28,16 @@ class QuestionAnswerAdapter (
             binding.tvQuestion.text = flashcard.question
             binding.mcvQuestion.strokeWidth = 10
             binding.mcvQuestion.strokeColor = binding.root.context.getColor(R.color.blue)
+
+
+            binding.mcvQuestion.setOnClickListener {
+                val answerPosition = adapterPosition + 1
+                if (answerPosition < itemCount) {
+                    recyclerView.smoothScrollToPosition(answerPosition)
+                }
+//                notifyItemChanged(answerPosition)
+//                (binding.root.context as? RecyclerView)?.smoothScrollToPosition(answerPosition)
+            }
         }
     }
 
@@ -34,6 +46,26 @@ class QuestionAnswerAdapter (
             binding.tvAnswer.text = flashcard.answer
             binding.mcvAnswer.strokeWidth = 10
             binding.mcvAnswer.strokeColor = binding.root.context.getColor(R.color.green)
+
+            binding.ivBackToQuestion.setOnClickListener {
+                val  questionPosition = adapterPosition -1
+                if (questionPosition >= 0) {
+                    recyclerView.smoothScrollToPosition(questionPosition)
+                }
+
+            }
+
+            binding.ivForwardToNewQuestion.setOnClickListener {
+                val nextQuestion = adapterPosition + 1
+                if (nextQuestion < itemCount) {
+                   recyclerView.smoothScrollToPosition(nextQuestion)
+                }
+                else {
+                    Toast.makeText(binding.root.context, "You've learned all the cards", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
         }
     }
 
@@ -57,6 +89,8 @@ class QuestionAnswerAdapter (
         } else {
             (holder as AnswerViewHolder).bind(currentCard)
         }
+
+
 
 
     }

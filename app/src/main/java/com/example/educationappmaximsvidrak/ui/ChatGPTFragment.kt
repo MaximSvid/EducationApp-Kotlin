@@ -1,6 +1,7 @@
 package com.example.educationappmaximsvidrak.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +9,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.ChatGPTAdapter
 import com.example.educationappmaximsvidrak.databinding.FragmentChatGPTBinding
+import com.example.educationappmaximsvidrak.model.Message
 import okhttp3.OkHttpClient
 
 class ChatGPTFragment : Fragment() {
 
     private lateinit var binding: FragmentChatGPTBinding
     private val viewModel: MainViewModel by activityViewModels()
-
 
 
     override fun onCreateView(
@@ -34,17 +36,34 @@ class ChatGPTFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val adapter = ChatGPTAdapter(emptyList(), viewModel)
-//        binding.rvChatGPT.adapter = adapter
+//        val testMessages = listOf(
+//            Message(role = "user", content = "Hello! How are you?"),
+//            Message(
+//                role = "assistant",
+//                content = "I'm fine, thank you! How can I assist you today?"
+//            ),
+//            Message(role = "user", content = "Tell me something interesting."),
+//            Message(
+//                role = "assistant",
+//                content = "Did you know that honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible!"
+//            )
+//        )
 
-//        viewModel.message.observe(viewLifecycleOwner) { messages ->
-//            adapter.
-//
-//        }
+        binding.rvChatGPT.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.message.observe(viewLifecycleOwner) {
-            binding.rvChatGPT.adapter = ChatGPTAdapter(it, viewModel)
+        val chatAdapter = ChatGPTAdapter(mutableListOf(), viewModel)
+        binding.rvChatGPT.adapter = chatAdapter
+
+//        chatAdapter.updateMessages(testMessages)
+//        binding.rvChatGPT.scrollToPosition(testMessages.size - 1)
+
+
+        viewModel.message.observe(viewLifecycleOwner) { messages ->
+            Log.e("ChatGPTFragment", "Messages: $messages")
+            chatAdapter.updateMessages(messages)
+            binding.rvChatGPT.scrollToPosition(messages.size - 1)
         }
+
 
         binding.ibSend.setOnClickListener {
             val userMessage = binding.etMessage.text.toString()
@@ -54,29 +73,14 @@ class ChatGPTFragment : Fragment() {
             }
         }
 
+//       viewModel.error.observe(viewLifecycleOwner) {
+//           Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+//       }
+
 
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(ChatGPTFragmentDirections.actionChatGPTFragmentToHomeFragment())
         }
-
-
-
-
-//        binding.btnQuestionEnter.setOnClickListener {
-//            val question = binding.etQuestion.text.toString()
-//            Toast.makeText(context, question, Toast.LENGTH_SHORT).show()
-//            getResponse(question) {response ->
-//            }
-//        }
-
     }
-
-//    fun getResponse(question: String) {
-//        val apiKey = "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"
-//        val url = "https://api.openai.com/v1/chat/completions"
-//
-//    }
-
-
 }

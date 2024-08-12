@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.educationappmaximsvidrak.data.Repository
 import com.example.educationappmaximsvidrak.data.local.getDatabase
 import com.example.educationappmaximsvidrak.model.FlashcardData
+import com.example.educationappmaximsvidrak.model.Message
 import kotlinx.coroutines.launch
 
 class MainViewModel (application: Application) : AndroidViewModel (application) {
@@ -16,6 +17,8 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
     private val repository = Repository(database)
 
     val message = repository.chat
+
+    val error = repository.error
 
     val flashcardList: LiveData<List<FlashcardData>> = repository.flashcardList
 
@@ -44,11 +47,16 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
         _selectedCard.postValue(flashcard)
     }
 
+
+
+
     fun sendMessage(content: String) {
         viewModelScope.launch {
             repository.sendMessage(content)
         }
     }
+
+
 
     init {
 //        loadMessage()

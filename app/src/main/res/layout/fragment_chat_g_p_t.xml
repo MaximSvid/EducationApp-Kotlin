@@ -63,7 +63,9 @@
         android:layout_above="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_marginTop="60dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_chat_left"/>
 
 <!--    <TextView-->
 <!--        android:id="@+id/tv_welcome_text"-->

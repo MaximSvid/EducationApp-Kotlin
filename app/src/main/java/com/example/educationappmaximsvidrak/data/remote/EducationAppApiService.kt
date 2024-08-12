@@ -50,15 +50,7 @@ interface EducationAppApiService {
         @Body requestBody: ChatCompletionRequest
     ): ChatCompletionResponse
 
-//    @GET ("v1/chat/completions")
-//    suspend fun sendMessage (
-//       @Query("key") key: String
-//    ): List<Message>
-//
-//    @GET ("v1/chat/completions")
-//    suspend fun getResponse(
-//        @Query("key") key: String
-//    ): List<Message>
+
 }
 
 object EducationApi {

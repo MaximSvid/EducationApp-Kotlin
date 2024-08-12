@@ -7,4 +7,8 @@ class NonScrollableLinearLayoutManager (context: Context) : LinearLayoutManager 
     override fun canScrollVertically(): Boolean {
         return false
     }
+
+    override fun canScrollHorizontally(): Boolean {
+        return false
+    }
 }

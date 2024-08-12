@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.QuestionAnswerAdapter
+import com.example.educationappmaximsvidrak.customElements.NonScrollableLinearLayoutManager
 import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
 
 
@@ -37,23 +39,13 @@ class StartFragment : Fragment() {
         }
 
         viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
-            val adapter = QuestionAnswerAdapter (flashcards)
+            val adapter = QuestionAnswerAdapter (flashcards, binding.rvQuestionAnswer )
 
             binding.rvQuestionAnswer.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.rvQuestionAnswer.adapter = adapter
         }
 
-//        viewModel.flashcardList.observe(viewLifecycleOwner) {flashcards ->
-//            if (flashcards.isNotEmpty()) {
-//                binding.tvQuestion.text = flashcards[0].question
-//            } else {
-//                binding.tvQuestion.text = R.string.no_card.toString()
-//            }
-//        }
-//
-//        binding.mcvQuestion.setOnClickListener {
-//            findNavController().navigate(StartFragmentDirections.actionStartFragmentToStartDetailFragment())
-//        }
+
 
 
 
