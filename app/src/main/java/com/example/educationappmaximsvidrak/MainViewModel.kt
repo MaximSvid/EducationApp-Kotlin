@@ -18,7 +18,6 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
 
     val message = repository.chat
 
-    val error = repository.error
 
     val flashcardList: LiveData<List<FlashcardData>> = repository.flashcardList
 
@@ -56,16 +55,4 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
         }
     }
 
-
-
-    init {
-//        loadMessage()
-
-    }
-
-//    fun loadMessage () {
-//        viewModelScope.launch {
-//            repository.loadMessage()
-//        }
-//    }
 }

@@ -12,8 +12,6 @@ import com.example.educationappmaximsvidrak.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         navHostFragment.navController.addOnDestinationChangedListener {_, destination, _ ->
             when(destination.id) {
-                R.id.chatGPTFragment,
-                R.id.startFragment,
-                R.id.addQuestionFragment -> {binding.bottomNavigation.visibility = View.GONE}
+                R.id.chatGPTFragment, R.id.startFragment, R.id.addQuestionFragment -> {binding.bottomNavigation.visibility = View.GONE}
                 else -> binding.bottomNavigation.visibility = View.VISIBLE
             }
         }

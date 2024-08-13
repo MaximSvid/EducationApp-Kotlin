@@ -9,6 +9,8 @@ import com.example.educationappmaximsvidrak.data.remote.EducationApi
 import com.example.educationappmaximsvidrak.model.ChatCompletionRequest
 import com.example.educationappmaximsvidrak.model.FlashcardData
 import com.example.educationappmaximsvidrak.model.Message
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class Repository(private val database: FlashcardDatabase) {
 
@@ -41,47 +43,66 @@ class Repository(private val database: FlashcardDatabase) {
         }
     }
 
-    private var _chat = MutableLiveData<List<Message>>()
-    val chat: LiveData<List<Message>> = _chat
-
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> get() = _error
-
-
-
-
-    suspend fun sendMessage(content: String) {
-        try {
-            val request = ChatCompletionRequest(
-                 "gpt-3.5-turbo",
-                messages = listOf(Message(role =  "user", content =  content))
-            )
-            val response = EducationApi.retrofitService.sendMessage("Bearer $API_KEY", request)
-            _chat.postValue(response.choices.map { it.message })
-        } catch (e: Exception) {
-            Log.e("RepositoryLog", e.message.toString())
-        }
-    }
-
+//    private var _chat = MutableLiveData<List<Message>>()
+//    val chat: LiveData<List<Message>> = _chat
+//
+//
+//
+//
+//
 //    suspend fun sendMessage(content: String) {
 //        try {
 //            val request = ChatCompletionRequest(
-//                "gpt-3.5-turbo",
+//                 "gpt-3.5-turbo",
 //                messages = listOf(Message(role =  "user", content =  content))
 //            )
 //            val response = EducationApi.retrofitService.sendMessage("Bearer $API_KEY", request)
 //            _chat.postValue(response.choices.map { it.message })
-//        } catch (e: HttpException) {
-//            when (e.hashCode()){
-//                429 -> _error.value = "HTP429"
-//                else -> _error.value = "An error has occurred. Check your internet connection."
-//
-//            }
-//            Log.e("RepositoryLog", e.message.toString())
 //        } catch (e: Exception) {
-//            _error.value = "An error has occurred. Check your internet connection."
+//            Log.e("RepositoryLog", e.message.toString())
 //        }
 //    }
 
+    private val _chat = MutableLiveData<MutableList<Message>>(mutableListOf())
+    val chat: LiveData<MutableList<Message>> get() = _chat
+
+    suspend fun sendMessage(content: String) {
+        //Асинхронные операции: Сетевые запросы выполняются внутри withContext(Dispatchers.IO), что обеспечивает выполнение в фоновом потоке.
+        withContext(Dispatchers.IO) {
+            try {
+                val currentMessages = _chat.value ?: mutableListOf()
+
+                // Добавляем сообщение пользователя
+                val userMessage = Message(role = "user", content = content)
+                currentMessages.add(userMessage)
+
+                // Создаем запрос с учетом всех предыдущих сообщений
+                val request = ChatCompletionRequest(
+                    model = "gpt-3.5-turbo",
+                    messages = currentMessages
+                )
+
+                // Отправляем запрос в API
+                val response = EducationApi.retrofitService.sendMessage("Bearer $API_KEY", request)
+
+                // Получаем ответ от ChatGPT
+                val gptMessage = response.choices.first().message
+
+                // Добавляем ответ в список сообщений
+                currentMessages.add(gptMessage)
+
+                // Обновляем LiveData
+                _chat.postValue(currentMessages)
+            } catch (e: Exception) {
+                Log.e("RepositoryLog", e.message.toString())
+            }
+        }
+    }
 }
+
+
+
+
+
+
 
