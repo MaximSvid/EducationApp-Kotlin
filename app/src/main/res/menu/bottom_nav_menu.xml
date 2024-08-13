@@ -5,11 +5,7 @@
         android:id="@+id/homeFragment"
         android:icon="@drawable/home_icon"
         android:title="@string/home"/>
-
-    <item
-        android:id="@+id/chatGPTFragment"
-        android:icon="@drawable/chat_icon"
-        android:title="@string/chat"/>
+    
 
     <item
         android:id="@+id/flashcardFragment"
