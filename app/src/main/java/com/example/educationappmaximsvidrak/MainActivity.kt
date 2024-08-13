@@ -9,35 +9,32 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.educationappmaximsvidrak.databinding.ActivityMainBinding
 //import com.example.educationappmaximsvidrak.adapter.ChatGPTAdapter
 import com.example.educationappmaximsvidrak.model.Message
 import okhttp3.OkHttpClient
 
 class MainActivity : AppCompatActivity() {
 
-//    val API_KEY = "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"
-//
-//    lateinit var recyclerView: RecyclerView
-//    lateinit var welcomeText : TextView
-//    lateinit var messageEditText: EditText
-//    lateinit var sendButton: ImageButton
-//    lateinit var messageList: MutableList<Message>
-////    lateinit var chatGPTAdapter: ChatGPTAdapter
-//    val client = OkHttpClient
-    @SuppressLint("MissingInflatedId")
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-//        messageList = ArrayList()
-//        recyclerView = findViewById(R.id.rv_chatGPT)
-//        welcomeText = findViewById(R.id.tv_welcome_text)
-//        messageEditText = findViewById(R.id.et_message)
-//        sendButton = findViewById(R.id.ib_send)
-////        chatGPTAdapter = ChatGPTAdapter(messageList)
-////        recyclerView.adapter = chatGPTAdapter
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView2) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.bottomNavigation.setupWithNavController(navController)
+    }
 
-
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

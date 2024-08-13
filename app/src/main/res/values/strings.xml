@@ -18,4 +18,7 @@
     <string name="welocom_to_chat_gpt_n_enter_your_question">Welocom to Chat GPT\n Enter your question...</string>
     <string name="your_message">Your message...</string>
     <string name="flashcards">Flashcards</string>
+    <string name="home">Home</string>
+    <string name="chat">Chat</string>
+    <string name="cards">Cards</string>
 </resources>
