@@ -43,25 +43,6 @@ class Repository(private val database: FlashcardDatabase) {
         }
     }
 
-//    private var _chat = MutableLiveData<List<Message>>()
-//    val chat: LiveData<List<Message>> = _chat
-//
-//
-//
-//
-//
-//    suspend fun sendMessage(content: String) {
-//        try {
-//            val request = ChatCompletionRequest(
-//                 "gpt-3.5-turbo",
-//                messages = listOf(Message(role =  "user", content =  content))
-//            )
-//            val response = EducationApi.retrofitService.sendMessage("Bearer $API_KEY", request)
-//            _chat.postValue(response.choices.map { it.message })
-//        } catch (e: Exception) {
-//            Log.e("RepositoryLog", e.message.toString())
-//        }
-//    }
 
     private val _chat = MutableLiveData<MutableList<Message>>(mutableListOf())
     val chat: LiveData<MutableList<Message>> get() = _chat

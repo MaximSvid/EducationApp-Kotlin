@@ -2,8 +2,10 @@ package com.example.educationappmaximsvidrak
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.educationappmaximsvidrak.databinding.ActivityMainBinding
@@ -28,11 +30,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true){
-//            override fun handleOnBackPressed() {
-//                binding.fragmentContainerView2.findNavController().navigateUp()
-//            }
-//        })
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                binding.fragmentContainerView.findNavController().navigateUp()
+            }
+        })
     }
 
 

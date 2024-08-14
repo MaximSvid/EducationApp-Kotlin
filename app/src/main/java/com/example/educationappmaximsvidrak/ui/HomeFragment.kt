@@ -1,20 +1,30 @@
 package com.example.educationappmaximsvidrak.ui
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentHomeBinding
+import com.example.educationappmaximsvidrak.model.FlashcardData
+import com.google.android.material.textfield.TextInputEditText
 
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private val folderList = mutableListOf<String>()
 
 
     override fun onCreateView(
@@ -44,5 +54,71 @@ class HomeFragment : Fragment() {
         binding.btnFlashcard.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFlashcardFragment())
         }
+
+        binding.tvFolder.setOnClickListener { view ->
+            showPopupMenu(view)
+        }
+
+    }
+
+    private fun showPopupMenu (view: View) {
+        val  popupMenu = android.widget.PopupMenu(context, view)
+
+        // Добавляем папки в меню
+        folderList.forEachIndexed { index, folderName ->
+            popupMenu.menu.add(0,index,0,folderName)
+        }
+        // Добавляем кнопку "Добавить папку" в конце
+        popupMenu.menu.add(1, folderList.size, 1, "Add a folder")
+
+        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+            if (menuItem.groupId == 1) {
+                showAlertDialog(requireContext())
+            } else {
+                Toast.makeText(requireContext(), "Open ${menuItem.title}", Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
+        popupMenu.show()
+    }
+
+    private fun showAlertDialog(context: Context) {
+        val dialogBuilder = AlertDialog.Builder(context)
+        val inflater = LayoutInflater.from(context)
+        val dialogView = inflater.inflate(R.layout.alert_new_folder, null)
+        dialogBuilder.setView(dialogView)
+
+        val folderEditText = dialogView.findViewById<EditText>(R.id.alert_new_folder)
+
+        dialogBuilder.setTitle("Enter a folder name")
+        dialogBuilder.setPositiveButton("Save") {_,_ ->}
+        dialogBuilder.setNegativeButton("Cancel") {dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val alertDialog = dialogBuilder.create()
+        alertDialog.show()
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val  nameFolder = folderEditText.text.toString().trim()
+
+            if (nameFolder.isBlank()) {
+                Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                // добавляем новую папку в начало списка
+                folderList.add(0, nameFolder)
+                Toast.makeText(context, "Folder $nameFolder added", Toast.LENGTH_SHORT).show()
+
+                //закрываем диалог
+                alertDialog.dismiss()
+
+                // Обновляем меню после добавления новой папки
+                showPopupMenu(binding.tvFolder)
+
+
+            }
+        }
+
+
     }
 }

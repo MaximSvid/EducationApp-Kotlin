@@ -35,8 +35,6 @@ class QuestionAnswerAdapter (
                 if (answerPosition < itemCount) {
                     recyclerView.smoothScrollToPosition(answerPosition)
                 }
-//                notifyItemChanged(answerPosition)
-//                (binding.root.context as? RecyclerView)?.smoothScrollToPosition(answerPosition)
             }
         }
     }

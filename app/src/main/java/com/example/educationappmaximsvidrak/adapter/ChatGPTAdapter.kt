@@ -60,11 +60,6 @@ class ChatGPTAdapter(
         }
     }
 
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun updateMessages (newMessages: List<Message>) {
-//        messageList.addAll(newMessages)
-//        notifyDataSetChanged()
-//    }
 
         @SuppressLint("NotifyDataSetChanged")
     fun updateMessages (newMessages: List<Message>) {
