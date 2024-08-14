@@ -30,7 +30,7 @@ class FolderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.folderList.observe(viewLifecycleOwner) {
-            binding.rvFolder.adapter = FolderAdapter(it)
+            binding.rvFolder.adapter = FolderAdapter(it, viewModel)
         }
 
 

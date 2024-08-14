@@ -3,14 +3,18 @@ package com.example.educationappmaximsvidrak.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.databinding.ItemFoldersBinding
 import com.example.educationappmaximsvidrak.model.Folder
 
-class FolderAdapter (
-    private val folders: List<Folder>
-): RecyclerView.Adapter<FolderAdapter.ItemViewHolder>() {
+class FolderAdapter(
+    private val folders: List<Folder>,
+    private val viewModel: MainViewModel
+) : RecyclerView.Adapter<FolderAdapter.ItemViewHolder>() {
 
-    inner class ItemViewHolder (val binding: ItemFoldersBinding): RecyclerView.ViewHolder(binding.root)
+    inner class ItemViewHolder(val binding: ItemFoldersBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -26,6 +30,8 @@ class FolderAdapter (
         binding.tvFolder.text = folder.name
 
         binding.mcvFolder.setOnClickListener {
+            viewModel.selectFolder(folder)
+
 
         }
     }

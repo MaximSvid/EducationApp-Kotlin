@@ -59,7 +59,7 @@ class AddQuestionFragment : Fragment() {
                     binding.tietQuestion.text?.clear()
                     binding.tietAnswer.text?.clear()
                 } else {
-                    Toast.makeText(context, "Bag null...", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, "Enter a Folder and fill in all fields", Toast.LENGTH_SHORT)
                         .show()
 
             }
@@ -129,6 +129,8 @@ class AddQuestionFragment : Fragment() {
                 //закрываем диалог
                 alertDialog.dismiss()
 
+                // Обновляем меню после добавления новой папки
+                showPopupMenu(binding.tvFolder)
             }
         }
 
