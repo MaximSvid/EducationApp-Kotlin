@@ -22,4 +22,5 @@
     <string name="chat">Chat</string>
     <string name="cards">Cards</string>
     <string name="enter_a_folder_name">Enter a folder name</string>
+    <string name="name_of_folder">Name of Folder</string>
 </resources>

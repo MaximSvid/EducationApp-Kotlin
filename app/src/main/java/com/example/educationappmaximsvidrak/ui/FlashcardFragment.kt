@@ -78,7 +78,7 @@ class FlashcardFragment : Fragment() {
             } else {
                 val updateFlashcard = FlashcardData (
                     question = questionText,
-                    answer = answerText
+                    answer = answerText, folderId = 0
                 )
                 viewModel.addFlashcard(updateFlashcard)
                 alertDialog.dismiss()

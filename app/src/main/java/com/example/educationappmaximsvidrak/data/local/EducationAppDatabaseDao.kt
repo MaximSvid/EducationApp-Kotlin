@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.educationappmaximsvidrak.model.FlashcardData
+import com.example.educationappmaximsvidrak.model.Folder
 
 @Dao
 interface EducationAppDatabaseDao {
@@ -22,7 +23,16 @@ interface EducationAppDatabaseDao {
     suspend fun update(card: FlashcardData)
 
     @Query ("SELECT * FROM flashcard_table")
-    fun getAll(): LiveData<List<FlashcardData>>
+    fun getAllCards(): LiveData<List<FlashcardData>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertFolder(folder: Folder)
+
+    @Query("SELECT * FROM folder_table")
+    fun getAllFolders(): LiveData<List<Folder>>
+
+    @Query("SELECT * FROM flashcard_table WHERE folderId = :folderId")
+    fun getCardsByFolder(folderId: Long): LiveData<List<FlashcardData>>
 
 
 }

@@ -34,13 +34,15 @@ class FlashcardDetailFragment : Fragment() {
         viewModel.selectedCard.observe(viewLifecycleOwner) {
             binding.tietQuestion.setText(it.question)
             binding.tietAnswer.setText(it.answer)
+            val selectedFolder = viewModel.selectedFolder.value
         }
 
         binding.btnSave.setOnClickListener {
             val updateFlashcard = FlashcardData (
                 viewModel.selectedCard.value!!.id,
                 binding.tietQuestion.text.toString(),
-                binding.tietAnswer.text.toString()
+                binding.tietAnswer.text.toString(),
+                folderId = viewModel.selectedFolder.value!!.id
             )
             viewModel.updateFlashcard(updateFlashcard)
             findNavController().navigate(FlashcardDetailFragmentDirections.actionFlashcardDetailFragmentToFlashcardFragment())

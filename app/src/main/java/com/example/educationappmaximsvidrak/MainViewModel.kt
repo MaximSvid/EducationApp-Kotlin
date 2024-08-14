@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.educationappmaximsvidrak.data.Repository
 import com.example.educationappmaximsvidrak.data.local.getDatabase
 import com.example.educationappmaximsvidrak.model.FlashcardData
+import com.example.educationappmaximsvidrak.model.Folder
 import com.example.educationappmaximsvidrak.model.Message
 import kotlinx.coroutines.launch
 
@@ -20,6 +21,20 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
 
 
     val flashcardList: LiveData<List<FlashcardData>> = repository.flashcardList
+    val folderList: LiveData<List<Folder>> = repository.folderList
+
+    fun addFolder(folder: Folder) {
+        viewModelScope.launch {
+            repository.addFolder(folder)
+        }
+    }
+
+    private var _selectedFolder = MutableLiveData<Folder>()
+    val selectedFolder: LiveData<Folder> = _selectedFolder
+
+    fun selectFolder (folder: Folder) {
+        _selectedFolder.postValue(folder)
+    }
 
     fun addFlashcard (flashcard: FlashcardData) {
         viewModelScope.launch {

@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_flashcardFragment"
             app:destination="@id/flashcardFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_folderFragment"
+            app:destination="@id/folderFragment" />
     </fragment>
     <fragment
         android:id="@+id/addQuestionFragment"
@@ -71,4 +74,9 @@
             android:id="@+id/action_flashcardDetailFragment_to_flashcardFragment"
             app:destination="@id/flashcardFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/folderFragment"
+        android:name="com.example.educationappmaximsvidrak.ui.FolderFragment"
+        android:label="fragment_folder"
+        tools:layout="@layout/fragment_folder" />
 </navigation>

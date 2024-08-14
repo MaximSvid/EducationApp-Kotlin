@@ -55,6 +55,15 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFlashcardFragment())
         }
 
+        binding.btnFolders.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment())
+        }
+
+        viewModel.folderList.observe(viewLifecycleOwner) {
+            folderList.clear()
+            folderList.addAll(it.map { it.name })
+        }
+
         binding.tvFolder.setOnClickListener { view ->
             showPopupMenu(view)
         }

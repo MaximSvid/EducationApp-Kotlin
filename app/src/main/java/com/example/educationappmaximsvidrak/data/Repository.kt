@@ -3,11 +3,11 @@ package com.example.educationappmaximsvidrak.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import coil.network.HttpException
 import com.example.educationappmaximsvidrak.data.local.FlashcardDatabase
 import com.example.educationappmaximsvidrak.data.remote.EducationApi
 import com.example.educationappmaximsvidrak.model.ChatCompletionRequest
 import com.example.educationappmaximsvidrak.model.FlashcardData
+import com.example.educationappmaximsvidrak.model.Folder
 import com.example.educationappmaximsvidrak.model.Message
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,7 +17,16 @@ class Repository(private val database: FlashcardDatabase) {
     val API_KEY = "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"
 
 
-    val flashcardList: LiveData<List<FlashcardData>> = database.flashcardDAO.getAll()
+    val flashcardList: LiveData<List<FlashcardData>> = database.flashcardDAO.getAllCards()
+    val folderList: LiveData<List<Folder>> = database.flashcardDAO.getAllFolders()
+
+    suspend fun addFolder (folder: Folder) {
+        try {
+            database.flashcardDAO.insertFolder(folder)
+        } catch (e: Exception) {
+            Log.e ("RepositoryLog", e.message.toString())
+        }
+    }
 
     suspend fun addFlashcard (flashcard: FlashcardData) {
         try {
