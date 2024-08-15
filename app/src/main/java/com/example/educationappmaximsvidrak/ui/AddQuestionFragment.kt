@@ -75,8 +75,9 @@ class AddQuestionFragment : Fragment() {
             showPopupMenu(it)
         }
 
-
-
+        binding.ivArrow.setOnClickListener {
+            showPopupMenu(it)
+        }
 
     }
 

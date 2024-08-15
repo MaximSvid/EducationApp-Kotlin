@@ -2,15 +2,9 @@ package com.example.educationappmaximsvidrak.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.educationappmaximsvidrak.MainViewModel
-import com.example.educationappmaximsvidrak.R
-import com.example.educationappmaximsvidrak.databinding.ItemChatBinding
 import com.example.educationappmaximsvidrak.databinding.ItemChatLeftBinding
 import com.example.educationappmaximsvidrak.databinding.ItemChatRightBinding
 import com.example.educationappmaximsvidrak.model.Message
