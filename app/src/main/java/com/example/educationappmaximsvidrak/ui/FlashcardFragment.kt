@@ -25,6 +25,7 @@ class FlashcardFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,9 +38,16 @@ class FlashcardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.flashcardList.observe(viewLifecycleOwner) {
-            binding.rvFlashcard.adapter = FlashcardAdapter(it, viewModel)
+        // Подписываемся на список заметок, связанных с выбранной папкой
+        viewModel.getFlashcardsBySelectedFolder().observe(viewLifecycleOwner) {flashcards ->
+            binding.rvFlashcard.adapter = FlashcardAdapter(flashcards, viewModel)
         }
+
+
+
+//        viewModel.flashcardList.observe(viewLifecycleOwner) {
+//            binding.rvFlashcard.adapter = FlashcardAdapter(it, viewModel)
+//        }
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(FlashcardFragmentDirections.actionFlashcardFragmentToFolderFragment())
@@ -61,8 +69,8 @@ class FlashcardFragment : Fragment() {
         val answer = dialogView.findViewById<TextInputEditText>(R.id.alert_answer)
 
         dialogBuilder.setTitle("Add new flashcard")
-        dialogBuilder.setPositiveButton("Save") {_,_ ->}
-        dialogBuilder.setNegativeButton("Cancel") {dialog, _ ->
+        dialogBuilder.setPositiveButton("Save") { _, _ -> }
+        dialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
             dialog.dismiss()
         }
 
@@ -76,7 +84,7 @@ class FlashcardFragment : Fragment() {
             if (questionText.isBlank() || answerText.isBlank()) {
                 Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                val updateFlashcard = FlashcardData (
+                val updateFlashcard = FlashcardData(
                     question = questionText,
                     answer = answerText, folderId = 0
                 )

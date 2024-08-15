@@ -36,6 +36,19 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
         _selectedFolder.postValue(folder)
     }
 
+    fun getFlashcardsBySelectedFolder(): LiveData<List<FlashcardData>> {
+        val folder = _selectedFolder.value
+        return if (folder != null) {
+            repository.getCardsByFolder(folder.id)
+        } else {
+            MutableLiveData(emptyList()) // Возвращаем пустой список, если папка не выбрана
+        }
+    }
+
+    suspend fun getFlashcardsByFolder (folderId: Long): LiveData<List<FlashcardData>> {
+        return  repository.getCardsByFolder(folderId)
+    }
+
     fun addFlashcard (flashcard: FlashcardData) {
         viewModelScope.launch {
             repository.addFlashcard(flashcard)
@@ -51,6 +64,12 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
     fun deleteFlashcard(flashcard: FlashcardData) {
         viewModelScope.launch {
             repository.deleteFlashcard(flashcard)
+        }
+    }
+
+    fun deleteFolder(folder: Folder) {
+        viewModelScope.launch {
+            repository.deleteFolder(folder)
         }
     }
 

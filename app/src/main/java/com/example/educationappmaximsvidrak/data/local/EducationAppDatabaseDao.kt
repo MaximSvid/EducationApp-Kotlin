@@ -34,5 +34,8 @@ interface EducationAppDatabaseDao {
     @Query("SELECT * FROM flashcard_table WHERE folderId = :folderId")
     fun getCardsByFolder(folderId: Long): LiveData<List<FlashcardData>>
 
+    @Delete
+    suspend fun deleteFolder(folder: Folder)
+
 
 }

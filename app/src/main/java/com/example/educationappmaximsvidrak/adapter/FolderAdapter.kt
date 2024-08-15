@@ -31,6 +31,10 @@ class FolderAdapter(
 
         binding.tvFolder.text = folder.name
 
+        binding.ibDelete.setOnClickListener {
+            viewModel.deleteFolder(folder)
+        }
+
         binding.mcvFolder.setOnClickListener {
             viewModel.selectFolder(folder)
             holder.itemView.findNavController().navigate(FolderFragmentDirections.actionFolderFragmentToFlashcardFragment())

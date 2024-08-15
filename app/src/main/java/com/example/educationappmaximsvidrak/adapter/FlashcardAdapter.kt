@@ -10,7 +10,7 @@ import com.example.educationappmaximsvidrak.model.FlashcardData
 import com.example.educationappmaximsvidrak.ui.FlashcardFragmentDirections
 
 class FlashcardAdapter (
-    private val flashcards: List<FlashcardData>,
+    private var flashcards: List<FlashcardData>,
     private val viewModel: MainViewModel
 ): RecyclerView.Adapter<FlashcardAdapter.ItemViewHolder>() {
 
@@ -45,5 +45,7 @@ class FlashcardAdapter (
     override fun getItemCount(): Int {
      return flashcards.size
     }
+
+
 
 }

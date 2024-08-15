@@ -14,25 +14,35 @@ import kotlinx.coroutines.withContext
 
 class Repository(private val database: FlashcardDatabase) {
 
-    val API_KEY = "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"
+    val API_KEY =
+        "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"
 
 
     val flashcardList: LiveData<List<FlashcardData>> = database.flashcardDAO.getAllCards()
     val folderList: LiveData<List<Folder>> = database.flashcardDAO.getAllFolders()
 
-    suspend fun addFolder (folder: Folder) {
-        try {
-            database.flashcardDAO.insertFolder(folder)
+     fun getCardsByFolder(folderId: Long): LiveData<List<FlashcardData>> {
+        return try {
+            database.flashcardDAO.getCardsByFolder(folderId)
         } catch (e: Exception) {
-            Log.e ("RepositoryLog", e.message.toString())
+            Log.e("RepositoryLog", e.message.toString())
+            MutableLiveData<List<FlashcardData>>() // Вернуть пустой LiveData, если произошла ошибка
         }
     }
 
-    suspend fun addFlashcard (flashcard: FlashcardData) {
+    suspend fun addFolder(folder: Folder) {
+        try {
+            database.flashcardDAO.insertFolder(folder)
+        } catch (e: Exception) {
+            Log.e("RepositoryLog", e.message.toString())
+        }
+    }
+
+    suspend fun addFlashcard(flashcard: FlashcardData) {
         try {
             database.flashcardDAO.insert(flashcard)
         } catch (e: Exception) {
-            Log.e ("RepositoryLog", e.message.toString())
+            Log.e("RepositoryLog", e.message.toString())
         }
     }
 
@@ -44,9 +54,17 @@ class Repository(private val database: FlashcardDatabase) {
         }
     }
 
-    suspend fun deleteFlashcard (flashcard: FlashcardData) {
+    suspend fun deleteFlashcard(flashcard: FlashcardData) {
         try {
             database.flashcardDAO.delete(flashcard)
+        } catch (e: Exception) {
+            Log.e("RepositoryLog", e.message.toString())
+        }
+    }
+
+    suspend fun deleteFolder (folder: Folder) {
+        try {
+            database.flashcardDAO.deleteFolder(folder)
         } catch (e: Exception) {
             Log.e("RepositoryLog", e.message.toString())
         }
