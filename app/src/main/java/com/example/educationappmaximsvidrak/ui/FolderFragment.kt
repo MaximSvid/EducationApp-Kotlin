@@ -35,7 +35,7 @@ class FolderFragment : Fragment() {
         }
 
         binding.ibBack.setOnClickListener {
-            findNavController().navigate(FolderFragmentDirections.actionFolderFragmentToFlashcardFragment())
+            findNavController().navigate(FolderFragmentDirections.actionFolderFragmentToHomeFragment())
         }
 
 
