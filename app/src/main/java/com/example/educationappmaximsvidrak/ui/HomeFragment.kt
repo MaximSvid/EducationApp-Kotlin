@@ -1,6 +1,5 @@
 package com.example.educationappmaximsvidrak.ui
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,14 +10,11 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentHomeBinding
-import com.example.educationappmaximsvidrak.model.FlashcardData
-import com.google.android.material.textfield.TextInputEditText
 
 
 class HomeFragment : Fragment() {
@@ -94,10 +90,10 @@ class HomeFragment : Fragment() {
     private fun showAlertDialog(context: Context) {
         val dialogBuilder = AlertDialog.Builder(context)
         val inflater = LayoutInflater.from(context)
-        val dialogView = inflater.inflate(R.layout.alert_new_folder, null)
+        val dialogView = inflater.inflate(R.layout.pop_menu_new_folder, null)
         dialogBuilder.setView(dialogView)
 
-        val folderEditText = dialogView.findViewById<EditText>(R.id.alert_new_folder)
+        val folderEditText = dialogView.findViewById<EditText>(R.id.pop_menu_new_folder)
 
         dialogBuilder.setTitle("Enter a folder name")
         dialogBuilder.setPositiveButton("Save") {_,_ ->}

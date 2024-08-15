@@ -100,10 +100,10 @@ class AddQuestionFragment : Fragment() {
     private fun showAlertDialog(context: Context) {
         val dialogBuilder = AlertDialog.Builder(context)
         val inflater = LayoutInflater.from(context)
-        val dialogView = inflater.inflate(R.layout.alert_new_folder, null)
+        val dialogView = inflater.inflate(R.layout.pop_menu_new_folder, null)
         dialogBuilder.setView(dialogView)
 
-        val folderEditText = dialogView.findViewById<EditText>(R.id.alert_new_folder)
+        val folderEditText = dialogView.findViewById<EditText>(R.id.pop_menu_new_folder)
 
         dialogBuilder.setTitle("Enter a folder name")
         dialogBuilder.setPositiveButton("Save") { _, _ -> }

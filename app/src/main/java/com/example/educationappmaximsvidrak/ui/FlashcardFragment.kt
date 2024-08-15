@@ -16,6 +16,7 @@ import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.FlashcardAdapter
 import com.example.educationappmaximsvidrak.databinding.FragmentFlashcardBinding
 import com.example.educationappmaximsvidrak.model.FlashcardData
+import com.example.educationappmaximsvidrak.model.Folder
 import com.google.android.material.textfield.TextInputEditText
 
 
@@ -56,6 +57,10 @@ class FlashcardFragment : Fragment() {
         binding.btnNewFlashcard.setOnClickListener {
             context?.let { it1 -> showAlertDialog(it1) }
         }
+
+        //показывается название текущей папки в заголовке
+        val selectedFolder = viewModel.selectedFolder.value
+        binding.tvFlashcard.text = selectedFolder?.name
     }
 
     @SuppressLint("MissingInflatedId")
@@ -84,16 +89,18 @@ class FlashcardFragment : Fragment() {
             if (questionText.isBlank() || answerText.isBlank()) {
                 Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                val updateFlashcard = FlashcardData(
-                    question = questionText,
-                    answer = answerText, folderId = 0
-                )
-                viewModel.addFlashcard(updateFlashcard)
-                alertDialog.dismiss()
+                val selectedFolder = viewModel.selectedFolder.value
+                if (selectedFolder != null) {
+                    val updateFlashcard = FlashcardData(
+                        question = questionText,
+                        answer = answerText,
+                        folderId = selectedFolder.id
+                    )
+                    viewModel.addFlashcard(updateFlashcard)
+                    alertDialog.dismiss()
+                }
             }
         }
-
-
     }
 
 

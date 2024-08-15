@@ -45,9 +45,6 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
         }
     }
 
-    suspend fun getFlashcardsByFolder (folderId: Long): LiveData<List<FlashcardData>> {
-        return  repository.getCardsByFolder(folderId)
-    }
 
     fun addFlashcard (flashcard: FlashcardData) {
         viewModelScope.launch {
