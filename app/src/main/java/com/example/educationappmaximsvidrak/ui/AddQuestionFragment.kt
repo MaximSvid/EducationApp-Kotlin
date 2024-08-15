@@ -1,7 +1,10 @@
 package com.example.educationappmaximsvidrak.ui
 
 import android.content.Context
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -47,27 +50,32 @@ class AddQuestionFragment : Fragment() {
 
             if (question.isNotEmpty() && answer.isNotEmpty() && selectedFolder != null) {
 
-                    val newFlashcard = FlashcardData(
-                        question = question,
-                        answer = answer,
-                        folderId = selectedFolder.id
-                    )
-                    viewModel.addFlashcard(newFlashcard)
-                    Toast.makeText(context, "Card Saved", Toast.LENGTH_SHORT).show()
+                val newFlashcard = FlashcardData(
+                    question = question,
+                    answer = answer,
+                    folderId = selectedFolder.id
+                )
+                viewModel.addFlashcard(newFlashcard)
+                Toast.makeText(context, "Card Saved", Toast.LENGTH_SHORT).show()
 
-                    binding.tietQuestion.text?.clear()
-                    binding.tietAnswer.text?.clear()
-                } else {
-                    Toast.makeText(context, "Enter a Folder and fill in all fields", Toast.LENGTH_SHORT)
-                        .show()
-
+                binding.tietQuestion.text?.clear()
+                binding.tietAnswer.text?.clear()
+            } else {
+                Toast.makeText(context, "Enter a Folder and fill in all fields", Toast.LENGTH_SHORT)
+                    .show()
             }
-
-
         }
+
+        //показывается название текущей папки в заголовке
+//        val selectedFolder = viewModel.selectedFolder.value
+//        binding.tvFolder.text = selectedFolder?.name
+
+
         binding.tvFolder.setOnClickListener {
             showPopupMenu(it)
         }
+
+
 
 
     }
@@ -79,14 +87,21 @@ class AddQuestionFragment : Fragment() {
         viewModel.folderList.value?.forEach { folder ->
             popupMenu.menu.add(0, folder.id.toInt(), 0, folder.name)
         }
+
+
+        // Создаем SpannableString для кнопки "Add a folder" с жирным шрифтом
+        val addFolderText = SpannableString("Add a folder+")
+        addFolderText.setSpan(StyleSpan(Typeface.BOLD), 0, addFolderText.length, 0)
+
         // Добавляем кнопку "Добавить папку" в конце
-        popupMenu.menu.add(1, viewModel.folderList.value?.size ?: 0, 1, "Add a folder")
+        popupMenu.menu.add(1, viewModel.folderList.value?.size ?: 0, 1, addFolderText)
 
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
             if (menuItem.groupId == 1) {
                 showAlertDialog(requireContext())
             } else {
-                val selectedFolder = viewModel.folderList.value?.find { it.id.toInt() == menuItem.itemId }
+                val selectedFolder =
+                    viewModel.folderList.value?.find { it.id.toInt() == menuItem.itemId }
                 if (selectedFolder != null) {
                     viewModel.selectFolder(selectedFolder)
                     binding.tvFolder.text = selectedFolder.name

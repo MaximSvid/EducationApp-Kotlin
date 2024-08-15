@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.MainViewModel
@@ -34,18 +35,23 @@ class FlashcardDetailFragment : Fragment() {
         viewModel.selectedCard.observe(viewLifecycleOwner) {
             binding.tietQuestion.setText(it.question)
             binding.tietAnswer.setText(it.answer)
-            val selectedFolder = viewModel.selectedFolder.value
         }
 
         binding.btnSave.setOnClickListener {
-            val updateFlashcard = FlashcardData (
-                viewModel.selectedCard.value!!.id,
-                binding.tietQuestion.text.toString(),
-                binding.tietAnswer.text.toString(),
-                folderId = viewModel.selectedFolder.value!!.id
-            )
-            viewModel.updateFlashcard(updateFlashcard)
-            findNavController().navigate(FlashcardDetailFragmentDirections.actionFlashcardDetailFragmentToFlashcardFragment())
+            val questionText = binding.tietQuestion.text.toString()
+            val answerText = binding.tietAnswer.text.toString()
+            if (questionText.isNotEmpty() && answerText.isNotEmpty()) {
+                val updateFlashcard = FlashcardData(
+                    viewModel.selectedCard.value!!.id,
+                    questionText,
+                    answerText,
+                    folderId = viewModel.selectedFolder.value!!.id
+                )
+                viewModel.updateFlashcard(updateFlashcard)
+                findNavController().navigate(FlashcardDetailFragmentDirections.actionFlashcardDetailFragmentToFlashcardFragment())
+            } else {
+                Toast.makeText(context, "Fill in all the fields", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.ibBack.setOnClickListener {
