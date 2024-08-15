@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
+import android.text.style.AbsoluteSizeSpan
 import android.text.style.StyleSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -91,8 +92,11 @@ class AddQuestionFragment : Fragment() {
 
 
         // Создаем SpannableString для кнопки "Add a folder" с жирным шрифтом
-        val addFolderText = SpannableString("Add a folder+")
+        val plus = SpannableString("+")
+        plus.setSpan(AbsoluteSizeSpan(27, true), 0, plus.length, 0)
+        val addFolderText = SpannableString("Add a new folder $plus")
         addFolderText.setSpan(StyleSpan(Typeface.BOLD), 0, addFolderText.length, 0)
+        addFolderText.setSpan(AbsoluteSizeSpan(18, true), 0, addFolderText.length, 0) // Устанавливаем размер текста
 
         // Добавляем кнопку "Добавить папку" в конце
         popupMenu.menu.add(1, viewModel.folderList.value?.size ?: 0, 1, addFolderText)
