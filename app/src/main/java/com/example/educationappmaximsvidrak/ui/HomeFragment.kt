@@ -51,8 +51,8 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChatGPTFragment())
         }
 
-        binding.btnFlashcard.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFlashcardFragment())
+        binding.btnFolders.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment())
         }
 
         binding.btnFolders.setOnClickListener {

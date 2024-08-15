@@ -20,9 +20,6 @@
             android:id="@+id/action_homeFragment_to_chatGPTFragment"
             app:destination="@id/chatGPTFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_flashcardFragment"
-            app:destination="@id/flashcardFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_folderFragment"
             app:destination="@id/folderFragment" />
     </fragment>
@@ -59,8 +56,8 @@
         android:label="fragment_flashcard"
         tools:layout="@layout/fragment_flashcard" >
         <action
-            android:id="@+id/action_flashcardFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_flashcardFragment_to_folderFragment"
+            app:destination="@id/folderFragment" />
         <action
             android:id="@+id/action_flashcardFragment_to_flashcardDetailFragment"
             app:destination="@id/flashcardDetailFragment" />
@@ -78,5 +75,12 @@
         android:id="@+id/folderFragment"
         android:name="com.example.educationappmaximsvidrak.ui.FolderFragment"
         android:label="fragment_folder"
-        tools:layout="@layout/fragment_folder" />
+        tools:layout="@layout/fragment_folder" >
+        <action
+            android:id="@+id/action_folderFragment_to_flashcardFragment"
+            app:destination="@id/flashcardFragment" />
+        <action
+            android:id="@+id/action_folderFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.FolderAdapter
@@ -31,6 +32,10 @@ class FolderFragment : Fragment() {
 
         viewModel.folderList.observe(viewLifecycleOwner) {
             binding.rvFolder.adapter = FolderAdapter(it, viewModel)
+        }
+
+        binding.ibBack.setOnClickListener {
+            findNavController().navigate(FolderFragmentDirections.actionFolderFragmentToFlashcardFragment())
         }
 
 

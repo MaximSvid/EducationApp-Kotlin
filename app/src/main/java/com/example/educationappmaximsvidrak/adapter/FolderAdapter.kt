@@ -2,10 +2,12 @@ package com.example.educationappmaximsvidrak.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.databinding.ItemFoldersBinding
 import com.example.educationappmaximsvidrak.model.Folder
+import com.example.educationappmaximsvidrak.ui.FolderFragmentDirections
 
 class FolderAdapter(
     private val folders: List<Folder>,
@@ -31,8 +33,7 @@ class FolderAdapter(
 
         binding.mcvFolder.setOnClickListener {
             viewModel.selectFolder(folder)
-
-
+            holder.itemView.findNavController().navigate(FolderFragmentDirections.actionFolderFragmentToFlashcardFragment())
         }
     }
 

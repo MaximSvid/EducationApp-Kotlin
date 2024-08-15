@@ -42,7 +42,7 @@ class FlashcardFragment : Fragment() {
         }
 
         binding.ibBack.setOnClickListener {
-            findNavController().navigate(FlashcardFragmentDirections.actionFlashcardFragmentToHomeFragment())
+            findNavController().navigate(FlashcardFragmentDirections.actionFlashcardFragmentToFolderFragment())
         }
 
         binding.btnNewFlashcard.setOnClickListener {

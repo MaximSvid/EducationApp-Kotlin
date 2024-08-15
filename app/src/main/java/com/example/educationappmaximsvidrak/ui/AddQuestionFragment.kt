@@ -30,7 +30,6 @@ class AddQuestionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddQuestionBinding.inflate(layoutInflater)
-        // Inflate the layout for this fragment
         return binding.root
     }
 
