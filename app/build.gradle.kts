@@ -5,6 +5,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.devtools.ksp")
+    //database Firebase
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -45,7 +47,8 @@ android {
 
 dependencies {
 
-//    implementation(libs.androidx.core.ktx)
+implementation(libs.firebase.database)
+    //    implementation(libs.androidx.core.ktx)
 //    implementation(libs.androidx.appcompat)
 //    implementation(libs.material)
 //    implementation(libs.androidx.activity)
@@ -88,4 +91,10 @@ dependencies {
 
     //chatGPT
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    //database Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+
 }
