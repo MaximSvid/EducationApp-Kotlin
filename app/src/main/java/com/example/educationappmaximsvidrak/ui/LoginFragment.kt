@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
@@ -33,13 +34,33 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         textColor()
 
-        binding.btnRegistr.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             val email = binding.tietEmail.text.toString()
             val pass = binding.tietPassword.text.toString()
 
-            if (email != "" && pass != "") {
-                viewModel.login(email, pass)
+            when {
+                email.isEmpty() -> {
+                    Toast.makeText(context, "Please fill in the email field", Toast.LENGTH_SHORT).show()
+                }
+                pass.isEmpty() -> {
+                    Toast.makeText(context, "Please fill in the password field", Toast.LENGTH_SHORT).show()
+                } email.isEmpty() && pass.isEmpty() -> {
+                    Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    viewModel.login(email, pass) {success, errorMessage ->
+                        if (success) {
+                            Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                            // Здесь можно добавить переход на другой экран или другие действия
+                        } else {
+                            Toast.makeText(context, errorMessage ?: "Login failed", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             }
+
+
 
             // Wenn User eingeloggt wird vom Login-Screen weg-navigiert
             viewModel.currentUser.observe(viewLifecycleOwner) {
@@ -49,7 +70,7 @@ class LoginFragment : Fragment() {
             }
 
             binding.tvSignIn.setOnClickListener {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+                findNavController().navigate(R.id.registerFragment)
             }
 
         }
