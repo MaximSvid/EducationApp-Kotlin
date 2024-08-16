@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentLoginBinding
@@ -31,6 +32,27 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         textColor()
+
+        binding.btnRegistr.setOnClickListener {
+            val email = binding.tietEmail.text.toString()
+            val pass = binding.tietPassword.text.toString()
+
+            if (email != "" && pass != "") {
+                viewModel.login(email, pass)
+            }
+
+            // Wenn User eingeloggt wird vom Login-Screen weg-navigiert
+            viewModel.currentUser.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                }
+            }
+
+            binding.tvSignIn.setOnClickListener {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+            }
+
+        }
 
 
     }
