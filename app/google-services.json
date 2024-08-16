@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "725345577986",
+    "project_id": "education-app-maxim-svidrak",
+    "storage_bucket": "education-app-maxim-svidrak.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725345577986:android:39c06645bd8332bfa24b1b",
+        "android_client_info": {
+          "package_name": "com.example.educationappmaximsvidrak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPLstMtALrWU7InGC464dBZV2gIab2s2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
