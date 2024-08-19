@@ -48,6 +48,10 @@ class RegisterFragment : Fragment() {
             }
         }
 
+        binding.tvLogin.setOnClickListener {
+            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
+        }
+
     }
 
     private fun textColor() {

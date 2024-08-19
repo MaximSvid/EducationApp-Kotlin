@@ -30,4 +30,6 @@
     <string name="sign_in">Sign in</string>
     <string name="registered_already">Registered already? Log in</string>
     <string name="dont_have_an_account">Don\'t have an account? Sign in</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
 </resources>

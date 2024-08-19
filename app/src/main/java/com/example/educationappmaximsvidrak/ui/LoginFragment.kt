@@ -44,25 +44,28 @@ class LoginFragment : Fragment() {
                 }
                 pass.isEmpty() -> {
                     Toast.makeText(context, "Please fill in the password field", Toast.LENGTH_SHORT).show()
-                } email.isEmpty() && pass.isEmpty() -> {
-                    Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-
-
-
-            // Wenn User eingeloggt wird vom Login-Screen weg-navigiert
-            viewModel.currentUser.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                } else -> {
+                    viewModel.login(email, pass)
                 }
             }
+        }
 
-            binding.tvSignIn.setOnClickListener {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+        // Наблюдение за результатом входа
+        viewModel.loginResult.observe(viewLifecycleOwner) { result ->
+            Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+        }
+
+
+
+        binding.tvSignIn.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+        }
+
+        // Wenn User eingeloggt wird vom Login-Screen weg-navigiert
+        viewModel.currentUser.observe(viewLifecycleOwner) {
+            if (it != null) {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
             }
-
         }
 
 

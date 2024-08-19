@@ -1,38 +1,30 @@
 package com.example.educationappmaximsvidrak
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseUser
+
 
 class LoginViewModel : ViewModel() {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
 
+    //LiveData currentUser
     private val _currentUser = MutableLiveData<FirebaseUser?>(firebaseAuth.currentUser)
     val currentUser: LiveData<FirebaseUser?> = _currentUser
 
-//    fun login(email: String, password: String, callback: (Boolean, String?) -> Unit) {
-//        firebaseAuth.signInWithEmailAndPassword(email, password)
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    callback(true, null)  // Вход успешен
-//                } else {
-//                    // Обработка ошибок
-//                    val errorCode = (task.exception as? FirebaseAuthException)?.errorCode
-//                    if (errorCode == "ERROR_USER_NOT_FOUND") {
-//                        callback(false, "User does not exist")
-//                    } else if (errorCode == "ERROR_WRONG_PASSWORD") {
-//                        callback(false, "Invalid password")
-//                    } else {
-//                        callback(false, task.exception?.localizedMessage)
-//                    }
-//                }
-//            }
-//    }
+    //LiveData für result Login
+    private val _loginResult = MutableLiveData<String>()
+    val loginResult: LiveData<String> = _loginResult
+
+
 
     fun login(email: String, pass: String) {
         firebaseAuth.signInWithEmailAndPassword(email, pass)
@@ -40,8 +32,26 @@ class LoginViewModel : ViewModel() {
                 if (it.isSuccessful) {
                     Log.i("LoginViewModel", "Login done")
                     _currentUser.value = it.result.user
+                    _loginResult.value = "Login successful"
                 } else {
-                    Log.e("LoginViewModel", "Login done")
+                    //bearbeitug Fehler
+                    val exception = it.exception
+                    when (exception) {
+                        is FirebaseAuthInvalidUserException -> {
+                            // Учетная запись не существует
+                            _loginResult.value = "Account does not exist"
+                        }
+                        is FirebaseAuthInvalidCredentialsException -> {
+                            // Неправильный пароль
+                            _loginResult.value = "Incorrect password"
+                        }
+                        else -> {
+                            // Другие ошибки
+                            _loginResult.value = "Login failed: ${exception?.message}"
+                        }
+                    }
+
+                    Log.e("LoginViewModel", "Login failed: ${exception?.message}")
                 }
             }
     }
@@ -53,7 +63,7 @@ class LoginViewModel : ViewModel() {
                     Log.i("LoginViewModel", "Login done")
                     _currentUser.value = it.result.user
                 } else {
-                    Log.e("LoginViewModel", "Login done")
+                    Log.e("LoginViewModel", "")
                 }
             }
     }
