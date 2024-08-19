@@ -1,6 +1,8 @@
 package com.example.educationappmaximsvidrak
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
+
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         binding.bottomNavigation.setupWithNavController(navHostFragment.navController)
@@ -43,15 +48,24 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-//        if (savedInstanceState == null) {
-//            val fragment = LoginFragment()
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.fragmentContainerView, fragment)
-//                .commit()
-//        }
+
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.nav_menu, menu)
+        return true
+    }
 
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.homeFragment -> {
+//                R.id.startFragment
+//                // Обработка нажатия на пункт меню
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 
 
 }

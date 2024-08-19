@@ -4,12 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
@@ -25,17 +28,38 @@ class HomeFragment : Fragment() {
     private val viewModelLogin: LoginViewModel by activityViewModels()
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentHomeBinding.inflate(inflater,container, false)
         // Inflate the layout for this fragment
+        binding.toolbar.inflateMenu(R.menu.nav_menu)
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Устанавливаем Toolbar как ActionBar
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
+        binding.toolbar.setOnMenuItemClickListener{
+            when(it.itemId) {
+                R.id.homeFragment -> {
+                    findNavController().navigate(R.id.addQuestionFragment)
+                    true
+                }
+                else -> false
+            }
+        }
 
         binding.btnAdd.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddQuestionFragment())
@@ -64,7 +88,11 @@ class HomeFragment : Fragment() {
 
         binding.btnLogout.setOnClickListener {
             viewModelLogin.logout()
-            Toast.makeText(context, "You have successfully logged out of your account", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                "You have successfully logged out of your account",
+                Toast.LENGTH_SHORT
+            ).show()
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
         }
 
@@ -74,12 +102,12 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun showPopupMenu (view: View) {
-        val  popupMenu = android.widget.PopupMenu(context, view)
+    private fun showPopupMenu(view: View) {
+        val popupMenu = android.widget.PopupMenu(context, view)
 
         // Добавляем папки в меню
         folderList.forEachIndexed { index, folderName ->
-            popupMenu.menu.add(0,index,0,folderName)
+            popupMenu.menu.add(0, index, 0, folderName)
         }
         // Добавляем кнопку "Добавить папку" в конце
         popupMenu.menu.add(1, folderList.size, 1, "Add a folder")
@@ -88,7 +116,8 @@ class HomeFragment : Fragment() {
             if (menuItem.groupId == 1) {
                 showAlertDialog(requireContext())
             } else {
-                Toast.makeText(requireContext(), "Open ${menuItem.title}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Open ${menuItem.title}", Toast.LENGTH_SHORT)
+                    .show()
             }
             true
         }
@@ -104,8 +133,8 @@ class HomeFragment : Fragment() {
         val folderEditText = dialogView.findViewById<EditText>(R.id.pop_menu_new_folder)
 
         dialogBuilder.setTitle("Enter a folder name")
-        dialogBuilder.setPositiveButton("Save") {_,_ ->}
-        dialogBuilder.setNegativeButton("Cancel") {dialog, _ ->
+        dialogBuilder.setPositiveButton("Save") { _, _ -> }
+        dialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
             dialog.dismiss()
         }
 
@@ -113,7 +142,7 @@ class HomeFragment : Fragment() {
         alertDialog.show()
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            val  nameFolder = folderEditText.text.toString().trim()
+            val nameFolder = folderEditText.text.toString().trim()
 
             if (nameFolder.isBlank()) {
                 Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
@@ -134,4 +163,23 @@ class HomeFragment : Fragment() {
 
 
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        // Инфлейтинг меню, как в Activity
+//        inflater.inflate(R.menu.nav_menu, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
+
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.action_settings -> {
+//                // Действия при нажатии на элемент меню
+//                findNavController().navigate(R.id.addQuestionFragment)
+//                true
+//            }
+//
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 }

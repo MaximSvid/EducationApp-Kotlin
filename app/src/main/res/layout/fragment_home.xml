@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.HomeFragment">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcv_teach"
