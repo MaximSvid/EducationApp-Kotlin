@@ -33,4 +33,6 @@
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
     <string name="logout">Logout</string>
+    <string name="education_app">Education App</string>
+    <string name="exampleemail_gmail_com">exampleEmail@gmail.com</string>
 </resources>
