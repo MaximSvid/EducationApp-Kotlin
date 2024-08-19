@@ -47,17 +47,7 @@ class LoginFragment : Fragment() {
                 } email.isEmpty() && pass.isEmpty() -> {
                     Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 }
-                else -> {
-                    viewModel.login(email, pass) {success, errorMessage ->
-                        if (success) {
-                            Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-                            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
-                            // Здесь можно добавить переход на другой экран или другие действия
-                        } else {
-                            Toast.makeText(context, errorMessage ?: "Login failed", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
+
             }
 
 
@@ -70,7 +60,7 @@ class LoginFragment : Fragment() {
             }
 
             binding.tvSignIn.setOnClickListener {
-                findNavController().navigate(R.id.registerFragment)
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
             }
 
         }

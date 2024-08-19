@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.educationappmaximsvidrak.LoginViewModel
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentHomeBinding
@@ -21,6 +22,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
     private val folderList = mutableListOf<String>()
+    private val viewModelLogin: LoginViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -60,9 +62,15 @@ class HomeFragment : Fragment() {
             folderList.addAll(it.map { it.name })
         }
 
-        binding.tvFolder.setOnClickListener { view ->
-            showPopupMenu(view)
+        binding.btnLogout.setOnClickListener {
+            viewModelLogin.logout()
+            Toast.makeText(context, "You have successfully logged out of your account", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
         }
+
+//        binding.tvFolder.setOnClickListener { view ->
+//            showPopupMenu(view)
+//        }
 
     }
 

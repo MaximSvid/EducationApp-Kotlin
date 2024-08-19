@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentRegisterBinding
@@ -30,8 +31,23 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         textColor()
+
+        binding.btnRegist.setOnClickListener {
+            val email = binding.tietEmail.text.toString()
+            val pass = binding.tietPassword.text.toString()
+
+            if (email != "" && pass != "") {
+                viewModel.register(email, pass)
+            }
+        }
+
+        viewModel.currentUser.observe(viewLifecycleOwner) {
+            if (it != null) {
+                findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToHomeFragment())
+            }
+        }
+
     }
 
     private fun textColor() {
