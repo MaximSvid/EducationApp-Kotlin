@@ -13,9 +13,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
+import com.example.educationappmaximsvidrak.MainActivity
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentHomeBinding
@@ -27,10 +30,12 @@ class HomeFragment : Fragment() {
     private val folderList = mutableListOf<String>()
     private val viewModelLogin: LoginViewModel by activityViewModels()
 
+    private lateinit var drawerLayout: DrawerLayout // Добавляем это для доступа к DrawerLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(true) // Сообщаем, что у фрагмента есть меню
     }
 
     override fun onCreateView(
@@ -39,7 +44,7 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater,container, false)
         // Inflate the layout for this fragment
-        binding.toolbar.inflateMenu(R.menu.nav_menu)
+//        binding.toolbar.inflateMenu(R.menu.nav_menu)
         return binding.root
     }
 
@@ -51,15 +56,28 @@ class HomeFragment : Fragment() {
         // Устанавливаем Toolbar как ActionBar
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-        binding.toolbar.setOnMenuItemClickListener{
-            when(it.itemId) {
-                R.id.homeFragment -> {
-                    findNavController().navigate(R.id.addQuestionFragment)
-                    true
-                }
-                else -> false
-            }
+        // Инициализация DrawerLayout из Activity
+        drawerLayout = (activity as MainActivity).findViewById(R.id.drawer_layout)
+
+        // Настройка кнопки меню для открытия DrawerLayout
+        binding.ibMenu.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
         }
+
+        binding.ibPlus
+
+//        // Устанавливаем Toolbar как ActionBar
+//        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+//
+//        binding.toolbar.setOnMenuItemClickListener{
+//            when(it.itemId) {
+//                R.id.homeFragment -> {
+//                    findNavController().navigate(R.id.homeFragment)
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
 
         binding.btnAdd.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddQuestionFragment())
@@ -100,6 +118,24 @@ class HomeFragment : Fragment() {
 //            showPopupMenu(view)
 //        }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.nav_menu, menu)  // Загрузка меню в Toolbar
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            // Обработка нажатий на элементы меню
+            R.id.homeFragment -> {
+                findNavController().navigate(R.id.addQuestionFragment)
+                // Действие при нажатии на элемент меню
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun showPopupMenu(view: View) {
@@ -155,7 +191,7 @@ class HomeFragment : Fragment() {
                 alertDialog.dismiss()
 
                 // Обновляем меню после добавления новой папки
-                showPopupMenu(binding.tvFolder)
+//                showPopupMenu(binding.tvFolder)
 
 
             }
