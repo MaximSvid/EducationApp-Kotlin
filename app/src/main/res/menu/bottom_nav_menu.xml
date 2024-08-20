@@ -5,11 +5,16 @@
         android:id="@+id/homeFragment"
         android:icon="@drawable/home_icon"
         android:title="@string/home"/>
+
+    <item
+        android:id="@+id/chatGPTFragment"
+        android:icon="@drawable/chat_icon"
+        android:title="@string/chat_gpt"/>
     
 
     <item
-        android:id="@+id/flashcardFragment"
-        android:icon="@drawable/cards_icon"
-        android:title="@string/cards"/>
+        android:id="@+id/folderFragment"
+        android:icon="@drawable/folder_icon"
+        android:title="@string/folder"/>
 
 </menu>

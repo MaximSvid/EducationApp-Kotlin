@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import android.widget.Toolbar
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -23,6 +25,7 @@ import com.example.educationappmaximsvidrak.MainActivity
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentHomeBinding
+import com.google.android.material.navigation.NavigationView
 
 
 class HomeFragment : Fragment() {
@@ -32,6 +35,8 @@ class HomeFragment : Fragment() {
     private val viewModelLogin: LoginViewModel by activityViewModels()
 
     private lateinit var drawerLayout: DrawerLayout // Добавляем это для доступа к DrawerLayout
+    private lateinit var navView: NavigationView
+    private lateinit var toggle: ActionBarDrawerToggle
 
 
     override fun onCreateView(
@@ -47,7 +52,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolbarNavigation()
+//        toolbarNavigation()
+//        toolbarNav()
 
 
 
@@ -156,6 +162,53 @@ class HomeFragment : Fragment() {
         }
 
 
+    }
+
+    private fun toolbarNav() {
+        // Установка Toolbar для этого фрагмента
+        val toolbar = binding.toolbar
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
+
+        toggle = ActionBarDrawerToggle(
+            requireActivity(),
+            drawerLayout,
+            toolbar,
+            R.string.open_nav,
+            R.string.close_nav
+        )
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.homeFragment -> {
+                    // Переход к фрагменту Home
+                    findNavController().navigate(R.id.homeFragment)
+                }
+                R.id.startFragment -> {
+                    // Переход к фрагменту Start
+                    findNavController().navigate(R.id.startFragment)
+                }
+                R.id.addQuestionFragment -> {
+                    findNavController().navigate(R.id.addQuestionFragment)
+                }
+                R.id.chatGPTFragment -> {
+                    findNavController().navigate(R.id.chatGPTFragment)
+                }
+                R.id.folderFragment -> {
+                    findNavController().navigate(R.id.folderFragment)
+                }
+            }
+            // Закрытие меню после выбора элемента
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+    }
+
+
+    fun getToolbar (): androidx.appcompat.widget.Toolbar {
+        return binding.toolbar
     }
 
     private fun toolbarNavigation () {

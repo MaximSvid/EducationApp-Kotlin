@@ -35,4 +35,5 @@
     <string name="logout">Logout</string>
     <string name="education_app">Education App</string>
     <string name="exampleemail_gmail_com">exampleEmail@gmail.com</string>
+    <string name="select_the_folder">Select the folder</string>
 </resources>

@@ -23,13 +23,22 @@
                 android:id="@+id/tv_folder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/folder"
+                android:text="@string/select_the_folder"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_icon"
+                app:layout_constraintStart_toEndOf="@+id/tv_folder"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
 
             <ImageButton
