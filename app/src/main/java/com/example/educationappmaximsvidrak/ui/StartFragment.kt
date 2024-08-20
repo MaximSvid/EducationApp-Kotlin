@@ -30,6 +30,7 @@ class StartFragment : Fragment() {
 
     private lateinit var binding: FragmentStartBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var adapter: QuestionAnswerAdapter
 
 
     override fun onCreateView(
@@ -48,13 +49,41 @@ class StartFragment : Fragment() {
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToHomeFragment())
         }
 
-        viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
-            val adapter = QuestionAnswerAdapter(flashcards, binding.rvQuestionAnswer)
+//        viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
+//            val adapter = QuestionAnswerAdapter(flashcards, binding.rvQuestionAnswer)
+//
+//            binding.rvQuestionAnswer.layoutManager =
+//                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//            binding.rvQuestionAnswer.adapter = adapter
+//        }
 
-            binding.rvQuestionAnswer.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvQuestionAnswer.adapter = adapter
+        adapter = QuestionAnswerAdapter(emptyList(), binding.rvQuestionAnswer)
+        binding.rvQuestionAnswer.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvQuestionAnswer.adapter = adapter
+
+        // Подписка на изменения списка карточек
+        viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
+            adapter.updateData(flashcards)
         }
+
+
+        // Подписка на изменения выбранной папки
+        viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
+            folder?.let {
+                viewModel.getFlashcardsBySelectedFolder().observe(viewLifecycleOwner) { flashcards ->
+//                    val adapter = QuestionAnswerAdapter(emptyList(), binding.rvQuestionAnswer)
+                        adapter.updateData(flashcards)
+                    }
+            } ?: run {
+                // Если папка не выбрана, показать все карточки
+                viewModel.flashcardList.value?.let { flashcards ->
+                    adapter.updateData(flashcards)
+                }
+            }
+        }
+
+
 
         binding.tvFolder.setOnClickListener {
             showPopupMenu(it)
@@ -84,7 +113,6 @@ class StartFragment : Fragment() {
 
         popupMenu.show()
     }
-
 
 
 }

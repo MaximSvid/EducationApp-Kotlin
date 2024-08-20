@@ -10,7 +10,7 @@ import com.example.educationappmaximsvidrak.databinding.ItemQuestionBinding
 import com.example.educationappmaximsvidrak.model.FlashcardData
 
 class QuestionAnswerAdapter (
-    private val flashcards: List<FlashcardData>,
+    private var flashcards: List<FlashcardData>,
     private val recyclerView: RecyclerView
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
@@ -89,11 +89,14 @@ class QuestionAnswerAdapter (
         }
 
 
-
-
     }
 
     override fun getItemCount(): Int {
         return flashcards.size * 2
+    }
+
+    fun updateData(newFlashcards: List<FlashcardData>) {
+        flashcards = newFlashcards
+        notifyDataSetChanged()
     }
 }
