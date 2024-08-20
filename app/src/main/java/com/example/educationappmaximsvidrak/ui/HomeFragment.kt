@@ -47,16 +47,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Устанавливаем Toolbar как ActionBar
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        toolbarNavigation()
 
-        // Инициализация DrawerLayout из Activity
-        drawerLayout = (activity as MainActivity).findViewById(R.id.drawer_layout)
-
-        // Настройка кнопки меню для открытия DrawerLayout
-        binding.ibMenu.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
 
 
 
@@ -166,20 +158,20 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun toolbarNavigation () {
+
+        // Устанавливаем Toolbar как ActionBar
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
+        // Инициализация DrawerLayout из Activity
+        drawerLayout = (activity as MainActivity).findViewById(R.id.drawer_layout)
+
+        // Настройка кнопки меню для открытия DrawerLayout
+        binding.ibMenu.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+    }
+
 }
 
-//        requireActivity().addMenuProvider(object : MenuProvider {
-//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-//                menuInflater.inflate(R.menu.nav_menu, menu)
-//            }
-//
-//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-//                return when (menuItem.itemId) {
-//                    R.id.homeFragment -> {
-//                        findNavController().navigate(R.id.homeFragment)
-//                        true
-//                    }
-//                    else -> false
-//                }
-//            }
-//        })

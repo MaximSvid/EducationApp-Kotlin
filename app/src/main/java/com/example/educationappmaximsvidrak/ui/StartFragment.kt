@@ -46,10 +46,9 @@ class StartFragment : Fragment() {
         }
 
 
-
-
-
     }
+
+
 
 }
 

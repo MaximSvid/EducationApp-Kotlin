@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
 
-    private lateinit var drawerNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // возврат назад
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 binding.fragmentContainerViewBottom.findNavController().navigateUp()
@@ -50,28 +50,26 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+
+
         // боковая навигация
 
         val drawerNavHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view_drawer) as NavHostFragment
-        drawerNavController = drawerNavHostFragment.navController
-        binding.drawerNavView.setupWithNavController(drawerNavController)
+        binding.drawerNavView.setupWithNavController(drawerNavHostFragment.navController)
 
-        binding.drawerNavView.setNavigationItemSelectedListener { menuItem ->
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-            drawerNavController.navigate(menuItem.itemId)
-            true
+        drawerNavHostFragment.navController.addOnDestinationChangedListener {_, destination, _ ->
+            binding.drawerNavView.visibility = View.VISIBLE
         }
 
 
+        // возврат назад
+        onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                binding.fragmentContainerViewDrawer.findNavController().navigateUp()
+            }
+        })
 
-//        val drawerNavHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerViewBottom) as NavHostFragment
-//        binding.drawerNavView.setupWithNavController(drawerNavHostFragment.navController)
-//
-//        binding.drawerNavView.setNavigationItemSelectedListener { menuItem ->
-//            binding.drawerLayout.closeDrawers(GravityCompat.START)
-//            drawerNavController.navigate(menuItem.itemId)
-//            true
-//        }
+
 
     }
 
