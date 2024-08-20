@@ -1,10 +1,19 @@
 package com.example.educationappmaximsvidrak.ui
 
+import android.content.Context
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.StyleSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +23,7 @@ import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.QuestionAnswerAdapter
 import com.example.educationappmaximsvidrak.customElements.NonScrollableLinearLayoutManager
 import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
+import com.example.educationappmaximsvidrak.model.Folder
 
 
 class StartFragment : Fragment() {
@@ -39,13 +49,40 @@ class StartFragment : Fragment() {
         }
 
         viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
-            val adapter = QuestionAnswerAdapter (flashcards, binding.rvQuestionAnswer )
+            val adapter = QuestionAnswerAdapter(flashcards, binding.rvQuestionAnswer)
 
-            binding.rvQuestionAnswer.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.rvQuestionAnswer.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.rvQuestionAnswer.adapter = adapter
         }
 
+        binding.tvFolder.setOnClickListener {
+            showPopupMenu(it)
+        }
 
+
+    }
+
+    private fun showPopupMenu(view: View) {
+        val popupMenu = android.widget.PopupMenu(context, view)
+
+        // Добавляем папки в меню
+        viewModel.folderList.value?.forEach { folder ->
+            popupMenu.menu.add(0, folder.id.toInt(), 0, folder.name)
+        }
+
+        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+            val selectedFolder =
+                viewModel.folderList.value?.find { it.id.toInt() == menuItem.itemId }
+            if (selectedFolder != null) {
+                viewModel.selectFolder(selectedFolder)
+                binding.tvFolder.text = selectedFolder.name
+
+            }
+            true
+        }
+
+        popupMenu.show()
     }
 
 

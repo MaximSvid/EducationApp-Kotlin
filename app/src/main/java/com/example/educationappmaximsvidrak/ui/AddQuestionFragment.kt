@@ -92,9 +92,7 @@ class AddQuestionFragment : Fragment() {
 
 
         // Создаем SpannableString для кнопки "Add a folder" с жирным шрифтом
-        val plus = SpannableString("+")
-        plus.setSpan(AbsoluteSizeSpan(27, true), 0, plus.length, 0)
-        val addFolderText = SpannableString("Add a new folder $plus")
+        val addFolderText = SpannableString("Add a new folder +")
         addFolderText.setSpan(StyleSpan(Typeface.BOLD), 0, addFolderText.length, 0)
         addFolderText.setSpan(AbsoluteSizeSpan(18, true), 0, addFolderText.length, 0) // Устанавливаем размер текста
 
