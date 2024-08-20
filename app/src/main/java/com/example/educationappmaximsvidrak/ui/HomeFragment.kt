@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.MenuProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -33,18 +34,11 @@ class HomeFragment : Fragment() {
     private lateinit var drawerLayout: DrawerLayout // Добавляем это для доступа к DrawerLayout
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true) // Сообщаем, что у фрагмента есть меню
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater,container, false)
-        // Inflate the layout for this fragment
-//        binding.toolbar.inflateMenu(R.menu.nav_menu)
         return binding.root
     }
 
@@ -64,20 +58,8 @@ class HomeFragment : Fragment() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        binding.ibPlus
 
-//        // Устанавливаем Toolbar как ActionBar
-//        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-//
-//        binding.toolbar.setOnMenuItemClickListener{
-//            when(it.itemId) {
-//                R.id.homeFragment -> {
-//                    findNavController().navigate(R.id.homeFragment)
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
+
 
         binding.btnAdd.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddQuestionFragment())
@@ -120,23 +102,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.nav_menu, menu)  // Загрузка меню в Toolbar
-        super.onCreateOptionsMenu(menu, inflater)
-    }
 
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            // Обработка нажатий на элементы меню
-            R.id.homeFragment -> {
-                findNavController().navigate(R.id.addQuestionFragment)
-                // Действие при нажатии на элемент меню
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     private fun showPopupMenu(view: View) {
         val popupMenu = android.widget.PopupMenu(context, view)
@@ -191,7 +157,7 @@ class HomeFragment : Fragment() {
                 alertDialog.dismiss()
 
                 // Обновляем меню после добавления новой папки
-//                showPopupMenu(binding.tvFolder)
+                showPopupMenu(binding.tvFolder)
 
 
             }
@@ -200,22 +166,20 @@ class HomeFragment : Fragment() {
 
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        // Инфлейтинг меню, как в Activity
-//        inflater.inflate(R.menu.nav_menu, menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
+}
 
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.action_settings -> {
-//                // Действия при нажатии на элемент меню
-//                findNavController().navigate(R.id.addQuestionFragment)
-//                true
+//        requireActivity().addMenuProvider(object : MenuProvider {
+//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//                menuInflater.inflate(R.menu.nav_menu, menu)
 //            }
 //
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
-}
+//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//                return when (menuItem.itemId) {
+//                    R.id.homeFragment -> {
+//                        findNavController().navigate(R.id.homeFragment)
+//                        true
+//                    }
+//                    else -> false
+//                }
+//            }
+//        })

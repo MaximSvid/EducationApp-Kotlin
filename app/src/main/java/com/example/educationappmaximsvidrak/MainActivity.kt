@@ -31,16 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         drawerLayout = binding.drawerLayout
 
-//        setSupportActionBar(binding.toolbar)
-//        val navigationView = binding.navView
-//
-//        val toggle = ActionBarDrawerToggle(this, drawerLayout, binding.toolbar, R.string.open_nav, R.string.close_nav)
-//        drawerLayout.addDrawerListener(toggle)
-//        toggle.syncState()
-
-
-
-
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -65,19 +55,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.nav_menu, menu)
-//        return true
-//    }
-
-
-
-
 }
-
-//    private fun replaceFragment(fragment: Fragment) {
-//        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-//        transaction.replace(R.id.fragmentCon)
-//    }
