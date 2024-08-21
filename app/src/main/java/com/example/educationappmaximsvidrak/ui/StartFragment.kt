@@ -1,5 +1,6 @@
 package com.example.educationappmaximsvidrak.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
@@ -49,13 +50,6 @@ class StartFragment : Fragment() {
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToHomeFragment())
         }
 
-//        viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
-//            val adapter = QuestionAnswerAdapter(flashcards, binding.rvQuestionAnswer)
-//
-//            binding.rvQuestionAnswer.layoutManager =
-//                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//            binding.rvQuestionAnswer.adapter = adapter
-//        }
 
         adapter = QuestionAnswerAdapter(emptyList(), binding.rvQuestionAnswer)
         binding.rvQuestionAnswer.layoutManager =
@@ -83,6 +77,11 @@ class StartFragment : Fragment() {
             }
         }
 
+        //название папки в заголовке
+        val selectedFolder = viewModel.selectedFolder.value
+        binding.tvFolder.text = selectedFolder?.name
+
+
 
 
         binding.tvFolder.setOnClickListener {
@@ -95,6 +94,7 @@ class StartFragment : Fragment() {
 
 
     }
+
 
     private fun showPopupMenu(view: View) {
         val popupMenu = android.widget.PopupMenu(context, view)
