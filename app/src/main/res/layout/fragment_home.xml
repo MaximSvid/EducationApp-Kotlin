@@ -76,7 +76,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_count_teach"
+                android:id="@+id/tv_count_folders"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="6dp"
-                android:text="@string/teach"
+                android:text="@string/folders1"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -125,7 +125,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_count_learnt"
+                android:id="@+id/tv_count_cards"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="6dp"
-                android:text="@string/learnt"
+                android:text="@string/cards1"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

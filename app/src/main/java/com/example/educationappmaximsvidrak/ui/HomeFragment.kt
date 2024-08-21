@@ -34,10 +34,6 @@ class HomeFragment : Fragment() {
     private val folderList = mutableListOf<String>()
     private val viewModelLogin: LoginViewModel by activityViewModels()
 
-    private lateinit var drawerLayout: DrawerLayout // Добавляем это для доступа к DrawerLayout
-    private lateinit var navView: NavigationView
-    private lateinit var toggle: ActionBarDrawerToggle
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,10 +48,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        toolbarNavigation()
-//        toolbarNav()
-
-
+        showFolders()
+        showFlashcards()
 
 
 
@@ -94,10 +88,22 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
         }
 
-//        binding.tvFolder.setOnClickListener { view ->
-//            showPopupMenu(view)
-//        }
+    }
 
+    private fun showFolders() {
+        //Количесво папок
+        viewModel.folderList.observe(viewLifecycleOwner) { folders ->
+            val count = folders.size
+            binding.tvCountFolders.text = count.toString()
+        }
+    }
+
+    private fun showFlashcards() {
+        //количесво карточек
+        viewModel.flashcardList.observe(viewLifecycleOwner) {flashcards ->
+            val count = flashcards.size
+            binding.tvCountCards.text = count.toString()
+        }
     }
 
 
@@ -164,67 +170,6 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun toolbarNav() {
-        // Установка Toolbar для этого фрагмента
-        val toolbar = binding.toolbar
-        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
-
-        toggle = ActionBarDrawerToggle(
-            requireActivity(),
-            drawerLayout,
-            toolbar,
-            R.string.open_nav,
-            R.string.close_nav
-        )
-
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.homeFragment -> {
-                    // Переход к фрагменту Home
-                    findNavController().navigate(R.id.homeFragment)
-                }
-                R.id.startFragment -> {
-                    // Переход к фрагменту Start
-                    findNavController().navigate(R.id.startFragment)
-                }
-                R.id.addQuestionFragment -> {
-                    findNavController().navigate(R.id.addQuestionFragment)
-                }
-                R.id.chatGPTFragment -> {
-                    findNavController().navigate(R.id.chatGPTFragment)
-                }
-                R.id.folderFragment -> {
-                    findNavController().navigate(R.id.folderFragment)
-                }
-            }
-            // Закрытие меню после выбора элемента
-            drawerLayout.closeDrawer(GravityCompat.START)
-            true
-        }
-    }
-
-
-    fun getToolbar (): androidx.appcompat.widget.Toolbar {
-        return binding.toolbar
-    }
-
-    private fun toolbarNavigation () {
-
-        // Устанавливаем Toolbar как ActionBar
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-
-        // Инициализация DrawerLayout из Activity
-        drawerLayout = (activity as MainActivity).findViewById(R.id.drawer_layout)
-
-        // Настройка кнопки меню для открытия DrawerLayout
-        binding.ibMenu.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-    }
 
 }
 

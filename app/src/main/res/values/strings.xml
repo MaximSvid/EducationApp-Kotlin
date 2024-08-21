@@ -36,4 +36,6 @@
     <string name="education_app">Education App</string>
     <string name="exampleemail_gmail_com">exampleEmail@gmail.com</string>
     <string name="select_the_folder">Select the folder</string>
+    <string name="cards1">Cards</string>
+    <string name="folders1">Folders</string>
 </resources>
