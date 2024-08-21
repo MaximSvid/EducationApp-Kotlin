@@ -14,23 +14,22 @@ class QuestionAnswerAdapter (
     private val recyclerView: RecyclerView
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    companion object {
-        private const val TYPE_QUESTION = 0
-        private const val TYPE_ANSWER = 1
-    }
+
+    private val questionType = 1
+    private val answerType = 2
 
     override fun getItemViewType(position: Int): Int {
-        return if (position % 2 == 0) TYPE_QUESTION else TYPE_ANSWER
+        return if (position % 2 == 0) questionType else answerType
     }
 
-    inner class QuestionViewHolder(private val binding: ItemQuestionBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class QuestionViewHolder(private val questionBinding: ItemQuestionBinding): RecyclerView.ViewHolder(questionBinding.root) {
         fun bind (flashcard: FlashcardData) {
-            binding.tvQuestion.text = flashcard.question
-            binding.mcvQuestion.strokeWidth = 10
-            binding.mcvQuestion.strokeColor = binding.root.context.getColor(R.color.blue)
+            questionBinding.tvQuestion.text = flashcard.question
+            questionBinding.mcvQuestion.strokeWidth = 10
+            questionBinding.mcvQuestion.strokeColor = questionBinding.root.context.getColor(R.color.blue)
 
 
-            binding.mcvQuestion.setOnClickListener {
+            questionBinding.mcvQuestion.setOnClickListener {
                 val answerPosition = adapterPosition + 1
                 if (answerPosition < itemCount) {
                     recyclerView.smoothScrollToPosition(answerPosition)
@@ -39,13 +38,13 @@ class QuestionAnswerAdapter (
         }
     }
 
-    inner class AnswerViewHolder (private val binding: ItemAnswerBinding): RecyclerView.ViewHolder (binding.root) {
+    inner class AnswerViewHolder (private val answerBinding: ItemAnswerBinding): RecyclerView.ViewHolder (answerBinding.root) {
         fun bind (flashcard: FlashcardData) {
-            binding.tvAnswer.text = flashcard.answer
-            binding.mcvAnswer.strokeWidth = 10
-            binding.mcvAnswer.strokeColor = binding.root.context.getColor(R.color.green)
+            answerBinding.tvAnswer.text = flashcard.answer
+            answerBinding.mcvAnswer.strokeWidth = 10
+            answerBinding.mcvAnswer.strokeColor = answerBinding.root.context.getColor(R.color.green)
 
-            binding.ivBackToQuestion.setOnClickListener {
+            answerBinding.ivBackToQuestion.setOnClickListener {
                 val  questionPosition = adapterPosition -1
                 if (questionPosition >= 0) {
                     recyclerView.smoothScrollToPosition(questionPosition)
@@ -53,13 +52,13 @@ class QuestionAnswerAdapter (
 
             }
 
-            binding.ivForwardToNewQuestion.setOnClickListener {
+            answerBinding.ivForwardToNewQuestion.setOnClickListener {
                 val nextQuestion = adapterPosition + 1
                 if (nextQuestion < itemCount) {
                    recyclerView.smoothScrollToPosition(nextQuestion)
                 }
                 else {
-                    Toast.makeText(binding.root.context, "You've learned all the cards", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(answerBinding.root.context, "You've learned all the cards", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -71,7 +70,7 @@ class QuestionAnswerAdapter (
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-       return if ((viewType == TYPE_QUESTION)) {
+       return if ((viewType == questionType)) {
            val binding = ItemQuestionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
            QuestionViewHolder(binding)
        } else {
@@ -82,7 +81,7 @@ class QuestionAnswerAdapter (
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currentCard = flashcards[position / 2]
-        if (getItemViewType(position) == TYPE_QUESTION) {
+        if (getItemViewType(position) == questionType) {
             (holder as QuestionViewHolder).bind(currentCard)
         } else {
             (holder as AnswerViewHolder).bind(currentCard)
