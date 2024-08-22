@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.ItemAnswerBinding
 import com.example.educationappmaximsvidrak.databinding.ItemQuestionBinding
 import com.example.educationappmaximsvidrak.model.FlashcardData
@@ -30,7 +29,7 @@ class QuestionAnswerAdapter (
             questionBinding.tvQuestion.text = flashcard.question
 
             questionBinding.mcvQuestion.setOnClickListener {
-                showNext()
+                showAnswer()
             }
 
         }
@@ -41,7 +40,7 @@ class QuestionAnswerAdapter (
             answerBinding.tvAnswer.text = flashcard.answer
 
             answerBinding.ivBackToQuestion.setOnClickListener {
-                showPrevious()
+                showQuestion()
             }
 
             answerBinding.ivForwardToNewQuestion.setOnClickListener {
@@ -85,14 +84,14 @@ class QuestionAnswerAdapter (
         notifyDataSetChanged()
     }
 
-    private fun showNext() {
+    private fun showAnswer() {
         if (currentPosition < itemCount -1) {
             currentPosition++
             recyclerView.scrollToPosition(currentPosition)
         }
     }
 
-    private fun showPrevious() {
+    private fun showQuestion() {
         if (currentPosition > 0) {
             currentPosition--
             recyclerView.scrollToPosition(currentPosition)
