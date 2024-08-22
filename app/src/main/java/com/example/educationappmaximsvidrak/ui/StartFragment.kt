@@ -51,9 +51,11 @@ class StartFragment : Fragment() {
         }
 
 
-        adapter = QuestionAnswerAdapter(emptyList(), binding.rvQuestionAnswer)
+
         binding.rvQuestionAnswer.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        adapter = QuestionAnswerAdapter(emptyList(), binding.rvQuestionAnswer)
         binding.rvQuestionAnswer.adapter = adapter
 
         // Подписка на изменения списка карточек
@@ -77,9 +79,7 @@ class StartFragment : Fragment() {
             }
         }
 
-        //название папки в заголовке
-        val selectedFolder = viewModel.selectedFolder.value
-        binding.tvFolder.text = selectedFolder?.name
+
 
 
 

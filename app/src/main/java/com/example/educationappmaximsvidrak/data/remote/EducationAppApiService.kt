@@ -17,13 +17,6 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 const val BASE_URL = "https://api.openai.com/v1/"
-//const val BASE_URL = "https://api.openai.com/v1 /chat/completions"?
-
-const val OPENAI_API_KEY =
-    "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"
-
-
-// key = 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
 
 private val logger: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BASIC

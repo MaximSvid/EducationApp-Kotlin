@@ -25,38 +25,49 @@ class QuestionAnswerAdapter (
     inner class QuestionViewHolder(private val questionBinding: ItemQuestionBinding): RecyclerView.ViewHolder(questionBinding.root) {
         fun bind (flashcard: FlashcardData) {
             questionBinding.tvQuestion.text = flashcard.question
-//
 
             questionBinding.mcvQuestion.setOnClickListener {
-                val answerPosition = adapterPosition + 1
-                if (answerPosition < itemCount) {
-                    recyclerView.smoothScrollToPosition(answerPosition)
-                }
+                showNext()
             }
+
+//            questionBinding.mcvQuestion.setOnClickListener {
+//                val answerPosition = adapterPosition + 1
+//                if (answerPosition < itemCount) {
+//                    recyclerView.smoothScrollToPosition(answerPosition)
+//                }
+//            }
         }
     }
 
     inner class AnswerViewHolder (private val answerBinding: ItemAnswerBinding): RecyclerView.ViewHolder (answerBinding.root) {
         fun bind (flashcard: FlashcardData) {
             answerBinding.tvAnswer.text = flashcard.answer
-//
-            answerBinding.ivBackToQuestion.setOnClickListener {
-                val  questionPosition = adapterPosition -1
-                if (questionPosition >= 0) {
-                    recyclerView.smoothScrollToPosition(questionPosition)
-                }
 
+            answerBinding.ivBackToQuestion.setOnClickListener {
+                showPrevious()
             }
 
             answerBinding.ivForwardToNewQuestion.setOnClickListener {
-                val nextQuestion = adapterPosition + 1
-                if (nextQuestion < itemCount) {
-                   recyclerView.smoothScrollToPosition(nextQuestion)
-                }
-                else {
-                    Toast.makeText(answerBinding.root.context, "You've learned all the cards", Toast.LENGTH_SHORT).show()
-                }
+                showNext()
             }
+
+//            answerBinding.ivBackToQuestion.setOnClickListener {
+//                val  questionPosition = adapterPosition -1
+//                if (questionPosition >= 0) {
+//                    recyclerView.smoothScrollToPosition(questionPosition)
+//                }
+//
+//            }
+//
+//            answerBinding.ivForwardToNewQuestion.setOnClickListener {
+//                val nextQuestion = adapterPosition + 1
+//                if (nextQuestion < itemCount) {
+//                   recyclerView.smoothScrollToPosition(nextQuestion)
+//                }
+//                else {
+//                    Toast.makeText(answerBinding.root.context, "You've learned all the cards", Toast.LENGTH_SHORT).show()
+//                }
+//            }
 
 
         }
@@ -93,5 +104,13 @@ class QuestionAnswerAdapter (
     fun updateData(newFlashcards: List<FlashcardData>) {
         flashcards = newFlashcards
         notifyDataSetChanged()
+    }
+
+    private fun showNext() {
+//        val questionPosition++
+    }
+
+    private fun showPrevious() {
+//        val anserPosition--
     }
 }
