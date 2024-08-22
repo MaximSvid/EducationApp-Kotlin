@@ -18,6 +18,9 @@ class QuestionAnswerAdapter (
     private val questionType = 1
     private val answerType = 2
 
+    private var currentPosition = 0
+
+
     override fun getItemViewType(position: Int): Int {
         return if (position % 2 == 0) questionType else answerType
     }
@@ -48,7 +51,7 @@ class QuestionAnswerAdapter (
             }
 
             answerBinding.ivForwardToNewQuestion.setOnClickListener {
-                showNext()
+                showNextCard()
             }
 
 //            answerBinding.ivBackToQuestion.setOnClickListener {
@@ -107,10 +110,24 @@ class QuestionAnswerAdapter (
     }
 
     private fun showNext() {
-//        val questionPosition++
+        if (currentPosition < itemCount -1) {
+            currentPosition++
+            recyclerView.scrollToPosition(currentPosition)
+        }
     }
 
     private fun showPrevious() {
-//        val anserPosition--
+        if (currentPosition > 0) {
+            currentPosition--
+            recyclerView.scrollToPosition(currentPosition)
+        }
+    }
+    private fun showNextCard () {
+        if (currentPosition < itemCount -2) {
+            currentPosition +=1
+            recyclerView.scrollToPosition(currentPosition)
+        } else {
+            Toast.makeText(recyclerView.context, "You've learned all the cards", Toast.LENGTH_SHORT).show()
+        }
     }
 }

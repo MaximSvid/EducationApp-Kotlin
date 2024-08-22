@@ -52,8 +52,9 @@ class StartFragment : Fragment() {
 
 
 
-        binding.rvQuestionAnswer.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//        binding.rvQuestionAnswer.layoutManager =
+//            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvQuestionAnswer.layoutManager = NonScrollableLinearLayoutManager(requireContext())
 
         adapter = QuestionAnswerAdapter(emptyList(), binding.rvQuestionAnswer)
         binding.rvQuestionAnswer.adapter = adapter
