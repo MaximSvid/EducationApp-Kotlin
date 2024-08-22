@@ -25,9 +25,7 @@ class QuestionAnswerAdapter (
     inner class QuestionViewHolder(private val questionBinding: ItemQuestionBinding): RecyclerView.ViewHolder(questionBinding.root) {
         fun bind (flashcard: FlashcardData) {
             questionBinding.tvQuestion.text = flashcard.question
-            questionBinding.mcvQuestion.strokeWidth = 10
-            questionBinding.mcvQuestion.strokeColor = questionBinding.root.context.getColor(R.color.blue)
-
+//
 
             questionBinding.mcvQuestion.setOnClickListener {
                 val answerPosition = adapterPosition + 1
@@ -41,9 +39,7 @@ class QuestionAnswerAdapter (
     inner class AnswerViewHolder (private val answerBinding: ItemAnswerBinding): RecyclerView.ViewHolder (answerBinding.root) {
         fun bind (flashcard: FlashcardData) {
             answerBinding.tvAnswer.text = flashcard.answer
-            answerBinding.mcvAnswer.strokeWidth = 10
-            answerBinding.mcvAnswer.strokeColor = answerBinding.root.context.getColor(R.color.green)
-
+//
             answerBinding.ivBackToQuestion.setOnClickListener {
                 val  questionPosition = adapterPosition -1
                 if (questionPosition >= 0) {

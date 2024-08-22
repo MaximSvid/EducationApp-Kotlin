@@ -38,4 +38,6 @@
     <string name="select_the_folder">Select the folder</string>
     <string name="cards1">Cards</string>
     <string name="folders1">Folders</string>
+    <string name="easy_n_cards">Easy \n Cards</string>
+    <string name="question1">Question</string>
 </resources>
