@@ -33,12 +33,6 @@ class QuestionAnswerAdapter (
                 showNext()
             }
 
-//            questionBinding.mcvQuestion.setOnClickListener {
-//                val answerPosition = adapterPosition + 1
-//                if (answerPosition < itemCount) {
-//                    recyclerView.smoothScrollToPosition(answerPosition)
-//                }
-//            }
         }
     }
 
@@ -53,24 +47,6 @@ class QuestionAnswerAdapter (
             answerBinding.ivForwardToNewQuestion.setOnClickListener {
                 showNextCard()
             }
-
-//            answerBinding.ivBackToQuestion.setOnClickListener {
-//                val  questionPosition = adapterPosition -1
-//                if (questionPosition >= 0) {
-//                    recyclerView.smoothScrollToPosition(questionPosition)
-//                }
-//
-//            }
-//
-//            answerBinding.ivForwardToNewQuestion.setOnClickListener {
-//                val nextQuestion = adapterPosition + 1
-//                if (nextQuestion < itemCount) {
-//                   recyclerView.smoothScrollToPosition(nextQuestion)
-//                }
-//                else {
-//                    Toast.makeText(answerBinding.root.context, "You've learned all the cards", Toast.LENGTH_SHORT).show()
-//                }
-//            }
 
 
         }
