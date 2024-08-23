@@ -58,7 +58,27 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnStart.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
+            viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
+                val countFlashcards = flashcards.size
+                if (countFlashcards <= 0) {
+                    Toast.makeText(context, "The cards don't exist yet", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment2())
+                } else {
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
+                }
+            }
+        }
+
+        binding.mcvStartClick.setOnClickListener {
+            viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
+                val countFlashcards = flashcards.size
+                if (countFlashcards <= 0) {
+                    Toast.makeText(context, "The cards don't exist yet", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment2())
+                } else {
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
+                }
+            }
         }
 
         binding.btnChatGPT.setOnClickListener {

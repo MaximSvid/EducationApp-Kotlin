@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_register_screen"
+    android:background="@drawable/login_reg_screen"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.RegisterFragment">
 
