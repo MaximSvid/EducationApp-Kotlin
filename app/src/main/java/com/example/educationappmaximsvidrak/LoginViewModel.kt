@@ -10,11 +10,16 @@ import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 
 class LoginViewModel : ViewModel() {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
+
+
+
 
     //LiveData currentUser
     private val _currentUser = MutableLiveData<FirebaseUser?>(firebaseAuth.currentUser)
@@ -23,7 +28,6 @@ class LoginViewModel : ViewModel() {
     //LiveData für result Login
     private val _loginResult = MutableLiveData<String>()
     val loginResult: LiveData<String> = _loginResult
-
 
 
     fun login(email: String, pass: String) {
