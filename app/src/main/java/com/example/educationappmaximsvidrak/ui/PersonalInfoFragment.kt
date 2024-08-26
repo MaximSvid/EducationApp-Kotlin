@@ -15,6 +15,9 @@ import com.example.educationappmaximsvidrak.databinding.FragmentPersonalInfoBind
 import com.example.educationappmaximsvidrak.model.Profile
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.database
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class PersonalInfoFragment : Fragment() {
 
@@ -29,7 +32,8 @@ class PersonalInfoFragment : Fragment() {
     ): View? {
         binding = FragmentPersonalInfoBinding.inflate(layoutInflater, container, false)
 
-        firebaseRef = FirebaseDatabase.getInstance().getReference("contacts")
+//        firebaseRef = FirebaseDatabase.getInstance().getReference("contacts")
+        firebaseRef = Firebase.database.reference
 
         binding.btnUpdateContact.setOnClickListener {
             saveData()
@@ -58,13 +62,14 @@ class PersonalInfoFragment : Fragment() {
         val phoneNumber = binding.tietPhoneNumber.text.toString()
 
         if (firstName.isEmpty()) binding.tietFirstName.error = "write a first name"
-        if (firstName.isEmpty()) binding.tietSecondName.error = "write a second name"
-        if (firstName.isEmpty()) binding.tietFirstName.error = "write a phone number"
+        if (secondName.isEmpty()) binding.tietSecondName.error = "write a second name"
+        if (phoneNumber.isEmpty()) binding.tietFirstName.error = "write a phone number"
 
         val contactId = firebaseRef.push().key!!
         val contacts = Profile(contactId, firstName, secondName, phoneNumber)
 
-        firebaseRef.child(contactId).setValue(contacts)
+//        firebaseRef.child(contactId).setValue(contacts)
+        firebaseRef.child("user").child(contactId).setValue(contacts)
             .addOnCompleteListener {
                 Toast.makeText(context, "Data stored successfully", Toast.LENGTH_SHORT).show()
             }

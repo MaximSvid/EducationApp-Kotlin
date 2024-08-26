@@ -44,10 +44,18 @@ class StatisticsFragment : Fragment() {
         binding.ibEditFolders.setOnClickListener {
             findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToFolderFragment())
         }
+
+        binding.mcvStatisticsFolder.setOnClickListener {
+            findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToFolderFragment())
+        }
     }
 
     private fun goToFlashcards() {
         binding.ibEditCards.setOnClickListener {
+            findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToFlashcardFragment())
+        }
+
+        binding.mcvStatisticsCards.setOnClickListener {
             findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToFlashcardFragment())
         }
     }
