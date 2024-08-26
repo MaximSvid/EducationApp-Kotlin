@@ -69,6 +69,18 @@
 
     </Toolbar>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="The folder is empty,\n select another folder \n or create a new one"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_question_answer"
         android:layout_width="match_parent"
@@ -78,6 +90,8 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         android:layout_marginTop="60dp"
         tools:listitem="@layout/item_answer"/>
+
+
 
     <!--    <com.google.android.material.card.MaterialCardView-->
 <!--        android:id="@+id/mcv_question"-->
