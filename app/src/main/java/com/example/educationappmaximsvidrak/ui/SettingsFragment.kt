@@ -39,6 +39,10 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToPersonalInfoFragment())
         }
 
+        binding.llStatistic.setOnClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToStatisticsFragment())
+        }
+
         binding.llLogout.setOnClickListener {
             viewModelLogin.logout()
             Toast.makeText(

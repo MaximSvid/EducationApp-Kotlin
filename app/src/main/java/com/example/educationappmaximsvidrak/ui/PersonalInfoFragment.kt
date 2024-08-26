@@ -45,6 +45,10 @@ class PersonalInfoFragment : Fragment() {
         binding.ibBack.setOnClickListener {
             findNavController().navigate(PersonalInfoFragmentDirections.actionPersonalInfoFragmentToSettingsFragment())
         }
+
+//        binding.btnUpdateContact.setOnClickListener {
+//            saveData()
+//        }
     }
 
 
