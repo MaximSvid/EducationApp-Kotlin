@@ -48,8 +48,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showFolders()
-        showFlashcards()
 
 
 
@@ -98,33 +96,10 @@ class HomeFragment : Fragment() {
             folderList.addAll(it.map { it.name })
         }
 
-        binding.btnLogout.setOnClickListener {
-            viewModelLogin.logout()
-            Toast.makeText(
-                context,
-                "You have successfully logged out of your account",
-                Toast.LENGTH_SHORT
-            ).show()
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
-        }
+
 
     }
 
-    private fun showFolders() {
-        //Количесво папок
-        viewModel.folderList.observe(viewLifecycleOwner) { folders ->
-            val count = folders.size
-            binding.tvCountFolders.text = count.toString()
-        }
-    }
-
-    private fun showFlashcards() {
-        //количесво карточек
-        viewModel.flashcardList.observe(viewLifecycleOwner) {flashcards ->
-            val count = flashcards.size
-            binding.tvCountCards.text = count.toString()
-        }
-    }
 
 
 

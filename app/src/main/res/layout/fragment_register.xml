@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_reg_screen"
+    android:background="@drawable/background5"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.RegisterFragment">
 
@@ -17,7 +17,7 @@
         android:text="@string/easy_n_cards"
         android:textSize="56sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="56dp"/>
 
     <TextView
@@ -29,7 +29,7 @@
         android:text="@string/registration"
         android:textSize="36sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="56dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
