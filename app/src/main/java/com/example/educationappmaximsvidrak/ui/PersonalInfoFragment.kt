@@ -32,8 +32,8 @@ class PersonalInfoFragment : Fragment() {
     ): View? {
         binding = FragmentPersonalInfoBinding.inflate(layoutInflater, container, false)
 
-//        firebaseRef = FirebaseDatabase.getInstance().getReference("contacts")
-        firebaseRef = Firebase.database.reference
+        firebaseRef = FirebaseDatabase.getInstance().getReference("contacts")
+//        firebaseRef = Firebase.database.reference
 
         binding.btnUpdateContact.setOnClickListener {
             saveData()
@@ -68,14 +68,16 @@ class PersonalInfoFragment : Fragment() {
         val contactId = firebaseRef.push().key!!
         val contacts = Profile(contactId, firstName, secondName, phoneNumber)
 
+        firebaseRef.push().setValue(contacts)
+
 //        firebaseRef.child(contactId).setValue(contacts)
-        firebaseRef.child("user").child(contactId).setValue(contacts)
-            .addOnCompleteListener {
-                Toast.makeText(context, "Data stored successfully", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Error ${it.message}", Toast.LENGTH_SHORT).show()
-            }
+//        firebaseRef.child("user").child(contactId).setValue(contacts)
+//            .addOnCompleteListener {
+//                Toast.makeText(context, "Data stored successfully", Toast.LENGTH_SHORT).show()
+//            }
+//            .addOnFailureListener {
+//                Toast.makeText(context, "Error ${it.message}", Toast.LENGTH_SHORT).show()
+//            }
     }
 
 }

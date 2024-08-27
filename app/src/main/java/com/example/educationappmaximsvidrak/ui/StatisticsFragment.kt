@@ -30,8 +30,6 @@ class StatisticsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showFolders()
         showFlashcards()
-        goToFolder()
-        goToFlashcards()
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToSettingsFragment())
@@ -40,25 +38,7 @@ class StatisticsFragment : Fragment() {
 
     }
 
-    private fun goToFolder () {
-        binding.ibEditFolders.setOnClickListener {
-            findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToFolderFragment())
-        }
 
-        binding.mcvStatisticsFolder.setOnClickListener {
-            findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToFolderFragment())
-        }
-    }
-
-    private fun goToFlashcards() {
-        binding.ibEditCards.setOnClickListener {
-            findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToFlashcardFragment())
-        }
-
-        binding.mcvStatisticsCards.setOnClickListener {
-            findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToFlashcardFragment())
-        }
-    }
 
     private fun showFolders () {
         viewModel.folderList.observe(viewLifecycleOwner) {
