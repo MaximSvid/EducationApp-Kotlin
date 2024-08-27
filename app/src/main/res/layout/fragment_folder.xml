@@ -68,8 +68,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:listitem="@layout/item_folders"
-        tools:ignore="UnknownIdInLayout" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/item_folders" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_new_folder"

@@ -69,7 +69,6 @@ class StartFragment : Fragment() {
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
             folder?.let {
                 viewModel.getFlashcardsBySelectedFolder().observe(viewLifecycleOwner) { flashcards ->
-//                    val adapter = QuestionAnswerAdapter(emptyList(), binding.rvQuestionAnswer)
                         adapter.updateData(flashcards)
                     }
             } ?: run {

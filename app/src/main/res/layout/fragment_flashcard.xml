@@ -69,6 +69,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_flashcard" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
