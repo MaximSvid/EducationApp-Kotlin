@@ -50,7 +50,7 @@ class StatisticsFragment : Fragment() {
 
                 val eventDay = CalendarDay(javaCalendar).apply {
                     backgroundResource = android.R.color.holo_green_light
-                    selectedLabelColor = android.graphics.Color.WHITE
+//                    selectedLabelColor = android.graphics.Color.WHITE
                 }
 
                 calendarDays.add(eventDay)
@@ -60,13 +60,13 @@ class StatisticsFragment : Fragment() {
             calendarView.setCalendarDays(calendarDays)
         }
 
-        // Обработка кликов по дням
-        calendarView.setOnDayClickListener(object : OnDayClickListener {
-            override fun onDayClick(eventDay: EventDay) {
-                val clickedDay = eventDay.calendar
-                // Действия при клике на день
-            }
-        })
+//        // Обработка кликов по дням
+//        calendarView.setOnDayClickListener(object : OnDayClickListener {
+//            override fun onDayClick(eventDay: EventDay) {
+//                val clickedDay = eventDay.calendar
+//                // Действия при клике на день
+//            }
+//        })
 
 
 
