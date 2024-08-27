@@ -1,16 +1,18 @@
 package com.example.educationappmaximsvidrak.ui
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.applandeo.materialcalendarview.CalendarDay
 import com.applandeo.materialcalendarview.EventDay
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentStatisticsBinding
@@ -30,6 +32,7 @@ class StatisticsFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ResourceAsColor", "ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showFolders()
@@ -39,16 +42,47 @@ class StatisticsFragment : Fragment() {
 
 
         viewModel.studyDates.observe(viewLifecycleOwner) {dates->
+            val calendarDays = mutableListOf<CalendarDay>()
 
+            dates.forEach { dateInMillis ->
+                val icuCalendar = Calendar.getInstance().apply { timeInMillis = dateInMillis }
+                val javaCalendar = convertIcuToJavaCalendar(icuCalendar)
 
+                val eventDay = CalendarDay(javaCalendar).apply {
+                    backgroundResource = android.R.color.holo_green_light
+                    selectedLabelColor = android.graphics.Color.WHITE
+                }
 
+                calendarDays.add(eventDay)
+            }
+
+            // Установка дней с событиями в календаре
+            calendarView.setCalendarDays(calendarDays)
         }
+
+        // Обработка кликов по дням
+        calendarView.setOnDayClickListener(object : OnDayClickListener {
+            override fun onDayClick(eventDay: EventDay) {
+                val clickedDay = eventDay.calendar
+                // Действия при клике на день
+            }
+        })
+
+
+
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToSettingsFragment())
         }
 
 
+    }
+
+    // Функция для преобразования android.icu.util.Calendar в java.util.Calendar
+    private fun convertIcuToJavaCalendar(icuCalendar: Calendar): java.util.Calendar {
+        val javaCalendar = java.util.Calendar.getInstance()
+        javaCalendar.timeInMillis = icuCalendar.timeInMillis
+        return javaCalendar
     }
 
 
