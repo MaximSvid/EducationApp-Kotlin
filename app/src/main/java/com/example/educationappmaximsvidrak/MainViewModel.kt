@@ -12,7 +12,7 @@ import com.example.educationappmaximsvidrak.model.Folder
 import com.example.educationappmaximsvidrak.model.Message
 import kotlinx.coroutines.launch
 
-class MainViewModel (application: Application) : AndroidViewModel (application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = getDatabase(application)
     private val repository = Repository(database)
@@ -23,6 +23,14 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
     val flashcardList: LiveData<List<FlashcardData>> = repository.flashcardList
     val folderList: LiveData<List<Folder>> = repository.folderList
 
+    val studyDates: LiveData<List<Long>> = repository.statisticsInfo
+
+    fun addStudyDate (cardId: Long, date: Long) {
+        viewModelScope.launch {
+            repository.addStudyDate(cardId, date)
+        }
+    }
+
     fun addFolder(folder: Folder) {
         viewModelScope.launch {
             repository.addFolder(folder)
@@ -32,7 +40,7 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
     private var _selectedFolder = MutableLiveData<Folder>()
     val selectedFolder: LiveData<Folder> = _selectedFolder
 
-    fun selectFolder (folder: Folder) {
+    fun selectFolder(folder: Folder) {
         _selectedFolder.postValue(folder)
     }
 
@@ -46,13 +54,13 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
     }
 
 
-    fun addFlashcard (flashcard: FlashcardData) {
+    fun addFlashcard(flashcard: FlashcardData) {
         viewModelScope.launch {
             repository.addFlashcard(flashcard)
         }
     }
 
-    fun updateFlashcard (flashcard: FlashcardData) {
+    fun updateFlashcard(flashcard: FlashcardData) {
         viewModelScope.launch {
             repository.updateFlashcard(flashcard)
         }
@@ -73,11 +81,9 @@ class MainViewModel (application: Application) : AndroidViewModel (application) 
     private var _selectedCard = MutableLiveData<FlashcardData>()
     val selectedCard: LiveData<FlashcardData> = _selectedCard
 
-    fun selectedFlashcard(flashcard: FlashcardData){
+    fun selectedFlashcard(flashcard: FlashcardData) {
         _selectedCard.postValue(flashcard)
     }
-
-
 
 
     fun sendMessage(content: String) {

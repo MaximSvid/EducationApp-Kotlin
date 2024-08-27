@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.educationappmaximsvidrak.model.FlashcardData
 import com.example.educationappmaximsvidrak.model.Folder
 
-@Database (entities = [FlashcardData::class, Folder::class], version = 2)
+@Database (entities = [FlashcardData::class, Folder::class], version = 3)
 abstract class FlashcardDatabase: RoomDatabase() {
 
     abstract val flashcardDAO: EducationAppDatabaseDao

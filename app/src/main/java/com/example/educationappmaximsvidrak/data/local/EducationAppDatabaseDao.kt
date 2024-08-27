@@ -34,6 +34,12 @@ interface EducationAppDatabaseDao {
     @Query("SELECT * FROM flashcard_table WHERE folderId = :folderId")
     fun getCardsByFolder(folderId: Long): LiveData<List<FlashcardData>>
 
+    @Query("SELECT DISTINCT studyDate FROM flashcard_table WHERE studyDate is NOT NULL")
+    fun getStudyDates(): LiveData<List<Long>> // Получение уникальных дат обучения
+
+    @Query("SELECT * FROM flashcard_table WHERE id = :cardId LIMIT 1")
+    suspend fun getCardById(cardId: Long): FlashcardData?
+
     @Delete
     suspend fun deleteFolder(folder: Folder)
 

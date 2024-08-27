@@ -21,6 +21,22 @@ class Repository(private val database: FlashcardDatabase) {
     val flashcardList: LiveData<List<FlashcardData>> = database.flashcardDAO.getAllCards()
     val folderList: LiveData<List<Folder>> = database.flashcardDAO.getAllFolders()
 
+    val statisticsInfo: LiveData<List<Long>> = database.flashcardDAO.getStudyDates()
+
+
+    suspend fun addStudyDate (cardId: Long, date: Long) {
+        val card = database.flashcardDAO.getCardById(cardId)
+        try {
+            card?.let {
+                it.studyDate = date
+                database.flashcardDAO.update(it)
+            }
+        } catch (e:Exception) {
+            Log.e("RepositoryLog", e.message.toString())
+        }
+
+    }
+
      fun getCardsByFolder(folderId: Long): LiveData<List<FlashcardData>> {
         return try {
             database.flashcardDAO.getCardsByFolder(folderId)

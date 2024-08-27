@@ -18,5 +18,6 @@ class FlashcardData(
     var id: Long = 0,
     var question: String,
     var answer: String,
-    val folderId: Long
+    val folderId: Long,
+    var studyDate: Long? = null
 )

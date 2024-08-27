@@ -94,7 +94,8 @@ class FlashcardFragment : Fragment() {
                     val updateFlashcard = FlashcardData(
                         question = questionText,
                         answer = answerText,
-                        folderId = selectedFolder.id
+                        folderId = selectedFolder.id,
+                        studyDate = System.currentTimeMillis() // Сохранение текущей даты в миллисекундах
                     )
                     viewModel.addFlashcard(updateFlashcard)
                     alertDialog.dismiss()

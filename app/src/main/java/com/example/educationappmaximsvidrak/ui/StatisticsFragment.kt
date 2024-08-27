@@ -1,5 +1,6 @@
 package com.example.educationappmaximsvidrak.ui
 
+import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,6 +31,27 @@ class StatisticsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showFolders()
         showFlashcards()
+
+        val calendarView = binding.cvCalendar
+
+
+        viewModel.studyDates.observe(viewLifecycleOwner) {dates->
+            dates?.let {
+                // Преобразуем каждую дату из миллисекунд в Calendar
+                for (date in dates) {
+                    val calendar = Calendar.getInstance()
+                    calendar.timeInMillis = date
+
+                    // Подсвечиваем день в CalendarView
+                    val day = calendar.get(Calendar.DAY_OF_MONTH)
+                    val month = calendar.get(Calendar.MONTH)
+                    val year = calendar.get(Calendar.YEAR)
+
+//                    calendarView.setDateTextAppearance(day, R.color.blue) // Замените на нужный метод для подсветки даты
+                }
+            }
+
+        }
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(StatisticsFragmentDirections.actionStatisticsFragmentToSettingsFragment())

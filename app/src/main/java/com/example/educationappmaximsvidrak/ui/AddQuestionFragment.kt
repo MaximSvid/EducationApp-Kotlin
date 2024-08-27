@@ -54,7 +54,8 @@ class AddQuestionFragment : Fragment() {
                 val newFlashcard = FlashcardData(
                     question = question,
                     answer = answer,
-                    folderId = selectedFolder.id
+                    folderId = selectedFolder.id,
+                    studyDate = System.currentTimeMillis() // Сохранение текущей даты в миллисекундах
                 )
                 viewModel.addFlashcard(newFlashcard)
                 Toast.makeText(context, "Card Saved", Toast.LENGTH_SHORT).show()
