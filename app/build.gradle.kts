@@ -97,4 +97,7 @@ implementation(libs.firebase.database)
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
 
+    //custom Calender
+    implementation ("com.applandeo:material-calendar-view:1.9.2")
+
 }
