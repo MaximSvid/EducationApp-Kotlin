@@ -1,7 +1,6 @@
 package com.example.educationappmaximsvidrak.ui
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,8 +10,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.applandeo.materialcalendarview.CalendarDay
-import com.applandeo.materialcalendarview.EventDay
-import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentStatisticsBinding
@@ -49,7 +46,8 @@ class StatisticsFragment : Fragment() {
                 val javaCalendar = convertIcuToJavaCalendar(icuCalendar)
 
                 val eventDay = CalendarDay(javaCalendar).apply {
-                    backgroundResource = android.R.color.holo_green_light
+//                    backgroundResource = android.R.color.holo_green_light
+                    backgroundResource = R.drawable.ic_braun_dot
 //                    selectedLabelColor = android.graphics.Color.WHITE
                 }
 

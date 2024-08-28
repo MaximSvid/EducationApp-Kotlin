@@ -29,6 +29,7 @@ class QuestionAnswerAdapter (
             questionBinding.tvQuestion.text = flashcard.question
 
             questionBinding.mcvQuestion.setOnClickListener {
+
                 showAnswer()
             }
 
@@ -40,6 +41,7 @@ class QuestionAnswerAdapter (
             answerBinding.tvAnswer.text = flashcard.answer
 
             answerBinding.ivBackToQuestion.setOnClickListener {
+                answerBinding
                 showQuestion()
             }
 
@@ -86,15 +88,27 @@ class QuestionAnswerAdapter (
 
     private fun showAnswer() {
         if (currentPosition < itemCount -1) {
-            currentPosition++
-            recyclerView.scrollToPosition(currentPosition)
+            recyclerView.animate().apply {
+                duration = 250
+                rotationYBy(360f)
+                currentPosition++
+                recyclerView.scrollToPosition(currentPosition)
+            }
+
+
+
         }
     }
 
     private fun showQuestion() {
         if (currentPosition > 0) {
-            currentPosition--
-            recyclerView.scrollToPosition(currentPosition)
+            recyclerView.animate().apply {
+                duration = 250
+                rotationYBy(-360f)
+                currentPosition--
+                recyclerView.scrollToPosition(currentPosition)
+            }
+
         }
     }
     private fun showNextCard () {

@@ -46,6 +46,8 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        checkFlashcards()
+
         binding.ibBack.setOnClickListener {
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToHomeFragment())
         }
@@ -111,11 +113,19 @@ class StartFragment : Fragment() {
                 viewModel.selectFolder(selectedFolder)
                 binding.tvFolder.text = selectedFolder.name
 
+
+
             }
             true
         }
 
         popupMenu.show()
+    }
+
+    private fun checkFlashcards() {
+        if (viewModel.folderList.value?.size == 0) {
+            binding.tvEmptyPage.visibility = View.VISIBLE
+        }
     }
 
 

@@ -167,7 +167,7 @@
         android:layout_height="206dp"
         android:layout_marginTop="98dp"
         android:backgroundTint="@color/white"
-        app:strokeColor="@color/green"
+        app:strokeColor="@color/braun"
         app:strokeWidth="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

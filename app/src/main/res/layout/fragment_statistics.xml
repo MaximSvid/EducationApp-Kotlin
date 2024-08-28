@@ -78,12 +78,13 @@
         app:abbreviationsBarColor="@color/background"
         app:abbreviationsLabelsColor="@color/black"
         app:disabledDaysLabelsColor="@color/background"
-        app:headerColor="@color/green"
+        app:headerColor="@color/braun"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:pagesColor="@color/background"
+        app:todayLabelColor="@color/black"
         />
 
     <com.google.android.material.card.MaterialCardView

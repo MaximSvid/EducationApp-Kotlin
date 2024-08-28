@@ -109,6 +109,9 @@
         <action
             android:id="@+id/action_folderFragment_to_homeFragment2"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_folderFragment_to_homeFragment3"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
