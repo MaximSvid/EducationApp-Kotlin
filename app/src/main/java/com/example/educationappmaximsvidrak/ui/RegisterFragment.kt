@@ -63,7 +63,7 @@ class RegisterFragment : Fragment() {
         val textSignIn = binding.tvLogin
         val spannable = SpannableString(text)
 
-        // Устанавливаем цвет для части текста "Sign in"
+        // Устанавливаем цвет для части текста "Log in"
         val start = text.indexOf("Log in")
         val end = start + "Log in".length
         spannable.setSpan(

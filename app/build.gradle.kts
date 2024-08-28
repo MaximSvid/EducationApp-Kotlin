@@ -100,4 +100,8 @@ implementation(libs.firebase.database)
     //custom Calender
     implementation ("com.applandeo:material-calendar-view:1.9.2")
 
+    //EpoxyTouchHelper (delete with swipe)
+    implementation ("com.airbnb.android:epoxy:5.1.4")
+    annotationProcessor ("com.airbnb.android:epoxy-processor:5.1.4")
+
 }

@@ -48,20 +48,7 @@ class LoginFragment : Fragment() {
                 binding.tietPassword.startAnimation(animation)
             }
 
-//            when {
-//                email.isEmpty() -> {
-//                    var animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
-//                    binding.tietEmail.startAnimation(animation)
-//                    Toast.makeText(context, "Please fill in the email field", Toast.LENGTH_SHORT).show()
-//                }
-//                pass.isEmpty() -> {
-//                    var animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
-//                    binding.tietPassword.startAnimation(animation)
-//                    Toast.makeText(context, "Please fill in the password field", Toast.LENGTH_SHORT).show()
-//                } else -> {
-//                    viewModel.login(email, pass)
-//                }
-//            }
+
         }
 
         // Наблюдение за результатом входа

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.airbnb.epoxy.EpoxyTouchHelper
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.FolderAdapter
@@ -37,8 +38,11 @@ class FolderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         viewModel.folderList.observe(viewLifecycleOwner) {
             binding.rvFolder.adapter = FolderAdapter(it, viewModel)
+
+
         }
 
         binding.ibBack.setOnClickListener {
@@ -48,6 +52,8 @@ class FolderFragment : Fragment() {
         binding.btnNewFolder.setOnClickListener {
             context?.let { it1 -> showAlertDialog(it1) }
         }
+
+
 
     }
 
