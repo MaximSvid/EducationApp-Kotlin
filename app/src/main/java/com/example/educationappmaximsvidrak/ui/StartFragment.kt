@@ -46,10 +46,6 @@ class StartFragment : Fragment() {
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToHomeFragment())
         }
 
-
-
-//        binding.rvQuestionAnswer.layoutManager =
-//            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvQuestionAnswer.layoutManager = NonScrollableLinearLayoutManager(requireContext())
 
         adapter = QuestionAnswerAdapter(emptyList(), binding.rvQuestionAnswer)
@@ -74,9 +70,6 @@ class StartFragment : Fragment() {
                 }
             }
         }
-
-
-
 
 
 

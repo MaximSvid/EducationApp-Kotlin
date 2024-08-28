@@ -54,4 +54,7 @@
     <string name="folders">Folders -</string>
     <string name="flashcards2">Flashcards -</string>
     <string name="the_folder_is_empty_n_select_another_folder_n_or_create_a_new_one">The folder is empty,\n select another folder \n or create a new one</string>
+    <string name="total_days">Total days</string>
+    <string name="_23">23</string>
+    <string name="total_time">Total Time</string>
 </resources>

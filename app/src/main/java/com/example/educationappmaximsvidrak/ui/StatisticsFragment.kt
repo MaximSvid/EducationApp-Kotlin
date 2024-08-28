@@ -46,9 +46,7 @@ class StatisticsFragment : Fragment() {
                 val javaCalendar = convertIcuToJavaCalendar(icuCalendar)
 
                 val eventDay = CalendarDay(javaCalendar).apply {
-//                    backgroundResource = android.R.color.holo_green_light
                     backgroundResource = R.drawable.ic_braun_dot
-//                    selectedLabelColor = android.graphics.Color.WHITE
                 }
 
                 calendarDays.add(eventDay)
@@ -58,13 +56,7 @@ class StatisticsFragment : Fragment() {
             calendarView.setCalendarDays(calendarDays)
         }
 
-//        // Обработка кликов по дням
-//        calendarView.setOnDayClickListener(object : OnDayClickListener {
-//            override fun onDayClick(eventDay: EventDay) {
-//                val clickedDay = eventDay.calendar
-//                // Действия при клике на день
-//            }
-//        })
+
 
 
 
@@ -81,6 +73,10 @@ class StatisticsFragment : Fragment() {
         val javaCalendar = java.util.Calendar.getInstance()
         javaCalendar.timeInMillis = icuCalendar.timeInMillis
         return javaCalendar
+    }
+
+    private fun totalTime () {
+
     }
 
 
