@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentLoginBinding
+import com.google.android.material.animation.AnimationUtils
 
 
 class LoginFragment : Fragment() {
@@ -35,19 +36,32 @@ class LoginFragment : Fragment() {
         textColor()
 
         binding.btnLogin.setOnClickListener {
+
             val email = binding.tietEmail.text.toString()
             val pass = binding.tietPassword.text.toString()
 
-            when {
-                email.isEmpty() -> {
-                    Toast.makeText(context, "Please fill in the email field", Toast.LENGTH_SHORT).show()
-                }
-                pass.isEmpty() -> {
-                    Toast.makeText(context, "Please fill in the password field", Toast.LENGTH_SHORT).show()
-                } else -> {
-                    viewModel.login(email, pass)
-                }
+            if (email != "" && pass != "") {
+                viewModel.login(email, pass)
+            } else {
+                var animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+                binding.tietEmail.startAnimation(animation)
+                binding.tietPassword.startAnimation(animation)
             }
+
+//            when {
+//                email.isEmpty() -> {
+//                    var animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+//                    binding.tietEmail.startAnimation(animation)
+//                    Toast.makeText(context, "Please fill in the email field", Toast.LENGTH_SHORT).show()
+//                }
+//                pass.isEmpty() -> {
+//                    var animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+//                    binding.tietPassword.startAnimation(animation)
+//                    Toast.makeText(context, "Please fill in the password field", Toast.LENGTH_SHORT).show()
+//                } else -> {
+//                    viewModel.login(email, pass)
+//                }
+//            }
         }
 
         // Наблюдение за результатом входа

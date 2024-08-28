@@ -39,6 +39,10 @@ class RegisterFragment : Fragment() {
 
             if (email != "" && pass != "") {
                 viewModel.register(email, pass)
+            } else {
+                var animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+                binding.tietEmail.startAnimation(animation)
+                binding.tietPassword.startAnimation(animation)
             }
         }
 
