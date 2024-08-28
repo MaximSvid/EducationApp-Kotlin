@@ -1,30 +1,17 @@
 package com.example.educationappmaximsvidrak.ui
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Typeface
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.AbsoluteSizeSpan
-import android.text.style.StyleSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.educationappmaximsvidrak.MainViewModel
-import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.QuestionAnswerAdapter
 import com.example.educationappmaximsvidrak.customElements.NonScrollableLinearLayoutManager
 import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
-import com.example.educationappmaximsvidrak.model.Folder
 
 
 class StartFragment : Fragment() {
@@ -46,7 +33,14 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        checkFlashcards()
+        // Если папок нет должна появится надпись
+        viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
+//            checkIfFolderIsEmpty(folder.id)
+            folder?.let {
+                // let неявная проверка на ноль
+                checkIfFolderIsEmpty(it.id)
+            }
+        }
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(StartFragmentDirections.actionStartFragmentToHomeFragment())
@@ -113,8 +107,6 @@ class StartFragment : Fragment() {
                 viewModel.selectFolder(selectedFolder)
                 binding.tvFolder.text = selectedFolder.name
 
-
-
             }
             true
         }
@@ -122,10 +114,16 @@ class StartFragment : Fragment() {
         popupMenu.show()
     }
 
-    private fun checkFlashcards() {
-        if (viewModel.folderList.value?.size == 0) {
-            binding.tvEmptyPage.visibility = View.VISIBLE
+    private fun checkIfFolderIsEmpty(folderId: Long) {
+        val folderItems = viewModel.getItemsInFolder(folderId)
+        folderItems.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                binding.tvEmptyPage.visibility = View.GONE
+            } else {
+                binding.tvEmptyPage.visibility = View.VISIBLE
+            }
         }
+
     }
 
 

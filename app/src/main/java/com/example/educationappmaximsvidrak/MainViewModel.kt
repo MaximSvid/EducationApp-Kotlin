@@ -25,6 +25,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val studyDates: LiveData<List<Long>> = repository.statisticsInfo
 
+    fun getItemsInFolder(folderId: Long): LiveData<List<FlashcardData>> {
+        return repository.getItemInFolder(folderId)
+    }
+
     fun addStudyDate (cardId: Long, date: Long) {
         viewModelScope.launch {
             repository.addStudyDate(cardId, date)
