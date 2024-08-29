@@ -11,14 +11,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyTouchHelper
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.FolderAdapter
+import com.example.educationappmaximsvidrak.adapter.FolderAdapter.*
 import com.example.educationappmaximsvidrak.databinding.FragmentFolderBinding
 import com.example.educationappmaximsvidrak.model.FlashcardData
 import com.example.educationappmaximsvidrak.model.Folder
 import com.google.android.material.textfield.TextInputEditText
+import java.util.Collections
 
 class FolderFragment : Fragment() {
 
@@ -39,8 +43,35 @@ class FolderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModel.folderList.observe(viewLifecycleOwner) {
-            binding.rvFolder.adapter = FolderAdapter(it, viewModel)
+
+
+
+
+
+        viewModel.folderList.observe(viewLifecycleOwner) { folder ->
+            binding.rvFolder.adapter = FolderAdapter(folder, viewModel)
+            val myAdapter = FolderAdapter(folder, viewModel)
+
+            val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT){
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    source: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    val sourcePosition = source.bindingAdapterPosition
+                    val targetPosition = target.bindingAdapterPosition
+                    Collections.swap(folder, sourcePosition, targetPosition)
+                    myAdapter.notifyItemMoved(sourcePosition, targetPosition)
+                    return true
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    myAdapter.deleteItem(viewHolder.bindingAdapterPosition)
+                }
+
+            })
+
+            itemTouchHelper.attachToRecyclerView(binding.rvFolder)
 
 
         }
