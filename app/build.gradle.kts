@@ -104,4 +104,6 @@ implementation(libs.firebase.database)
     implementation ("com.airbnb.android:epoxy:5.1.4")
     annotationProcessor ("com.airbnb.android:epoxy-processor:5.1.4")
 
+    implementation ("it.xabaras.android:recyclerview-swipedecorator:1.4")
+
 }
