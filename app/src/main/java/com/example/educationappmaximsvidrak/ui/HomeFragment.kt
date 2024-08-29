@@ -60,8 +60,10 @@ class HomeFragment : Fragment() {
                 val countFlashcards = flashcards.size
                 if (countFlashcards <= 0) {
                     Toast.makeText(context, "The cards don't exist yet", Toast.LENGTH_SHORT).show()
+//                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment2())
-                } else {
+                }
+                else {
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
                 }
             }
@@ -72,8 +74,10 @@ class HomeFragment : Fragment() {
                 val countFlashcards = flashcards.size
                 if (countFlashcards <= 0) {
                     Toast.makeText(context, "The cards don't exist yet", Toast.LENGTH_SHORT).show()
+//                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment2())
-                } else {
+                }
+                else {
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
                 }
             }
@@ -87,9 +91,6 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment())
         }
 
-        binding.btnFolders.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment())
-        }
 
         viewModel.folderList.observe(viewLifecycleOwner) {
             folderList.clear()
@@ -101,69 +102,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
-
-//    private fun showPopupMenu(view: View) {
-//        val popupMenu = android.widget.PopupMenu(context, view)
-//
-//        // Добавляем папки в меню
-//        folderList.forEachIndexed { index, folderName ->
-//            popupMenu.menu.add(0, index, 0, folderName)
-//        }
-//        // Добавляем кнопку "Добавить папку" в конце
-//        popupMenu.menu.add(1, folderList.size, 1, "Add a folder")
-//
-//        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
-//            if (menuItem.groupId == 1) {
-//                showAlertDialog(requireContext())
-//            } else {
-//                Toast.makeText(requireContext(), "Open ${menuItem.title}", Toast.LENGTH_SHORT)
-//                    .show()
-//            }
-//            true
-//        }
-//        popupMenu.show()
-//    }
-
-//    private fun showAlertDialog(context: Context) {
-//        val dialogBuilder = AlertDialog.Builder(context)
-//        val inflater = LayoutInflater.from(context)
-//        val dialogView = inflater.inflate(R.layout.pop_menu_new_folder, null)
-//        dialogBuilder.setView(dialogView)
-//
-//        val folderEditText = dialogView.findViewById<EditText>(R.id.pop_menu_new_folder)
-//
-//        dialogBuilder.setTitle("Enter a folder name")
-//        dialogBuilder.setPositiveButton("Save") { _, _ -> }
-//        dialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
-//            dialog.dismiss()
-//        }
-//
-//        val alertDialog = dialogBuilder.create()
-//        alertDialog.show()
-//
-//        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-//            val nameFolder = folderEditText.text.toString().trim()
-//
-//            if (nameFolder.isBlank()) {
-//                Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-//            } else {
-//                // добавляем новую папку в начало списка
-//                folderList.add(0, nameFolder)
-//                Toast.makeText(context, "Folder $nameFolder added", Toast.LENGTH_SHORT).show()
-//
-//                //закрываем диалог
-//                alertDialog.dismiss()
-//
-//                // Обновляем меню после добавления новой папки
-//                showPopupMenu(binding.tvFolder)
-//
-//
-//            }
-//        }
-//
-//
-//    }
 
 
 }

@@ -70,6 +70,7 @@ class FolderFragment : Fragment() {
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     myAdapter.deleteItem(viewHolder.bindingAdapterPosition)
+
                 }
 
                 override fun onChildDraw(

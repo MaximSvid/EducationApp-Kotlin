@@ -39,6 +39,7 @@ class Repository(private val database: FlashcardDatabase) {
             card?.let {
                 it.studyDate = date
                 database.flashcardDAO.update(it)
+                Log.e("RepositoryLog", "Card edit!!!")
             }
         } catch (e:Exception) {
             Log.e("RepositoryLog", e.message.toString())

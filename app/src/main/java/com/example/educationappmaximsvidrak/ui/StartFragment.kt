@@ -1,17 +1,24 @@
 package com.example.educationappmaximsvidrak.ui
 
+import android.graphics.Canvas
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.educationappmaximsvidrak.MainViewModel
+import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.QuestionAnswerAdapter
 import com.example.educationappmaximsvidrak.customElements.NonScrollableLinearLayoutManager
 import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
+import java.util.Collections
 
 
 class StartFragment : Fragment() {
@@ -35,11 +42,11 @@ class StartFragment : Fragment() {
 
         // Если папок нет должна появится надпись
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
-//            checkIfFolderIsEmpty(folder.id)
-            folder?.let {
-                // let неявная проверка на ноль
-                checkIfFolderIsEmpty(it.id)
-            }
+            checkIfFolderIsEmpty(folder.id)
+//            folder?.let {
+//                // let неявная проверка на ноль
+//                checkIfFolderIsEmpty(it.id)
+//            }
         }
 
         binding.ibBack.setOnClickListener {
@@ -54,6 +61,7 @@ class StartFragment : Fragment() {
         // Подписка на изменения списка карточек
         viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
             adapter.updateData(flashcards)
+
         }
 
 

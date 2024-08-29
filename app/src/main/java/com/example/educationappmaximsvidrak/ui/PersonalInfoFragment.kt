@@ -22,7 +22,6 @@ import com.google.firebase.ktx.Firebase
 class PersonalInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentPersonalInfoBinding
-    private val loginViewModel: LoginViewModel by activityViewModels()
     private lateinit var firebaseRef: DatabaseReference
 
 
