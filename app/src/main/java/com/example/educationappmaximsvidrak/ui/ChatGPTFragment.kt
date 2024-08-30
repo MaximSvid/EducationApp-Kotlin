@@ -66,7 +66,7 @@ class ChatGPTFragment : Fragment() {
             if (userMessage.isNotEmpty()) {
                 viewModel.sendMessage(userMessage)
                 binding.etMessage.text.clear()
-                binding.tvWelcomeText.visibility = View.GONE
+//                binding.tvWelcomeText.visibility = View.GONE
             }
         }
 

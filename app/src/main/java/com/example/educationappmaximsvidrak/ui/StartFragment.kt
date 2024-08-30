@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieDrawable
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.QuestionAnswerAdapter
@@ -72,7 +73,8 @@ class StartFragment : Fragment() {
         // Подписка на изменения выбранной папки
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
             folder?.let {
-                viewModel.getFlashcardsBySelectedFolder().observe(viewLifecycleOwner) { flashcards ->
+                viewModel.getFlashcardsBySelectedFolder()
+                    .observe(viewLifecycleOwner) { flashcards ->
                         adapter.updateData(flashcards)
                     }
             } ?: run {
@@ -126,16 +128,25 @@ class StartFragment : Fragment() {
                 binding.tvEmptyPage.visibility = View.GONE
                 binding.btnNewFolder.visibility = View.GONE
                 binding.rvQuestionAnswer.visibility = View.VISIBLE
+                binding.lavArrowUpAnim.visibility = View.GONE
             } else {
                 binding.tvEmptyPage.visibility = View.VISIBLE
                 binding.btnNewFolder.visibility = View.VISIBLE
                 binding.rvQuestionAnswer.visibility = View.GONE
+                binding.lavArrowUpAnim.visibility = View.VISIBLE
+                arrowAnim()
                 Log.d("ButtonVisibility", "Button is now visible")
             }
-            }
         }
-
     }
+
+    private fun arrowAnim() {
+        val animation = binding.lavArrowUpAnim
+        animation.repeatCount = LottieDrawable.INFINITE
+        animation.playAnimation()
+    }
+
+}
 
 
 
