@@ -1,6 +1,5 @@
 package com.example.educationappmaximsvidrak.ui
 
-import android.graphics.Canvas
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,19 +7,13 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieDrawable
 import com.example.educationappmaximsvidrak.MainViewModel
-import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.QuestionAnswerAdapter
 import com.example.educationappmaximsvidrak.customElements.NonScrollableLinearLayoutManager
 import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
-import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
-import java.util.Collections
 
 
 class StartFragment : Fragment() {
@@ -135,13 +128,16 @@ class StartFragment : Fragment() {
                 binding.btnNewFolder.visibility = View.GONE
                 binding.rvQuestionAnswer.visibility = View.VISIBLE
                 binding.lavArrowUpAnim.visibility = View.GONE
-                binding.tvFolder.visibility = View.GONE
+                binding.lavStartAnim.visibility = View.GONE
+//                binding.tvFolder.visibility = View.GONE
             } else {
                 binding.tvEmptyPage.visibility = View.VISIBLE
                 binding.btnNewFolder.visibility = View.VISIBLE
                 binding.rvQuestionAnswer.visibility = View.GONE
                 binding.lavArrowUpAnim.visibility = View.VISIBLE
-                binding.tvFolder.visibility = View.VISIBLE
+//                binding.tvFolder.visibility = View.VISIBLE
+                binding.lavStartAnim.visibility = View.VISIBLE
+                personAnim()
                 arrowAnim()
                 Log.d("ButtonVisibility", "Button is now visible")
             }
@@ -161,17 +157,24 @@ class StartFragment : Fragment() {
                binding.btnNewFolder.visibility = View.GONE
                binding.rvQuestionAnswer.visibility = View.VISIBLE
                binding.tvFolder.visibility = View.GONE
+               binding.lavStartAnim.visibility = View.GONE
            } else {
                binding.tvFolderNotExist.visibility = View.VISIBLE
                binding.btnNewFolder.visibility = View.VISIBLE
                binding.rvQuestionAnswer.visibility = View.GONE
                binding.tvFolder.visibility = View.VISIBLE
+               binding.lavStartAnim.visibility = View.VISIBLE
+               personAnim()
            }
        }
 
-
     }
 
+    private fun personAnim() {
+        val animation = binding.lavStartAnim
+        animation.repeatCount = LottieDrawable.INFINITE
+        animation.playAnimation()
+    }
 }
 
 

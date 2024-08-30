@@ -93,7 +93,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="@string/the_folders_don_t_exist"
         android:textColor="@color/black"
-        android:visibility="visible"
+        android:visibility="gone"
         android:textSize="24sp"
         android:textStyle="bold"/>
 
@@ -107,7 +107,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_empty_page"
         android:layout_marginTop="24dp"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_question_answer"
@@ -129,6 +129,17 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:lottie_fileName="arrow_up_anim.json"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_start_anim"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/btn_new_folder"
+        android:layout_marginTop="12dp"
+        app:lottie_fileName="person_of_doubt.json"/>
 
 
 
