@@ -19,9 +19,15 @@ class Repository(private val database: FlashcardDatabase) {
 
 
     val flashcardList: LiveData<List<FlashcardData>> = database.flashcardDAO.getAllCards()
+
     val folderList: LiveData<List<Folder>> = database.flashcardDAO.getAllFolders()
 
     val statisticsInfo: LiveData<List<Long>> = database.flashcardDAO.getStudyDates()
+
+
+     fun checkFolderExist (): LiveData<List<Folder>> {
+       return folderList
+    }
 
      fun getItemInFolder (folderId: Long): LiveData<List<FlashcardData>> {
         return try {

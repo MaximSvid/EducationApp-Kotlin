@@ -1,6 +1,7 @@
 package com.example.educationappmaximsvidrak
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,9 +22,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     val flashcardList: LiveData<List<FlashcardData>> = repository.flashcardList
+
     val folderList: LiveData<List<Folder>> = repository.folderList
 
     val studyDates: LiveData<List<Long>> = repository.statisticsInfo
+
+
+    fun checkFolderExist (): LiveData<List<Folder>> {
+        return repository.checkFolderExist()
+    }
 
     fun getItemsInFolder(folderId: Long): LiveData<List<FlashcardData>> {
         return repository.getItemInFolder(folderId)
@@ -61,6 +68,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun addFlashcard(flashcard: FlashcardData) {
         viewModelScope.launch {
             repository.addFlashcard(flashcard)
+            Log.i("New Flashcard", "done")
         }
     }
 

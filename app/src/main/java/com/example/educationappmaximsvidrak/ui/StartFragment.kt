@@ -45,13 +45,18 @@ class StartFragment : Fragment() {
         // Если папок нет должна появится надпись
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
             checkIfFolderIsEmpty(folder.id)
-
         }
+
+        viewModel.folderList.observe(viewLifecycleOwner) {folder ->
+            checkFolderExist()
+        }
+
+
 
 
         binding.btnNewFolder.setOnClickListener {
             Log.d("ButtonVisibility", "Button clicked")
-            findNavController().navigate(StartFragmentDirections.actionStartFragmentToFolderFragment())
+            findNavController().navigate(StartFragmentDirections.actionStartFragmentToAddQuestionFragment())
         }
 
         binding.ibBack.setOnClickListener {
@@ -72,6 +77,7 @@ class StartFragment : Fragment() {
 
         // Подписка на изменения выбранной папки
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
+            Log.e("LogS", "crash")
             folder?.let {
                 viewModel.getFlashcardsBySelectedFolder()
                     .observe(viewLifecycleOwner) { flashcards ->
@@ -129,11 +135,13 @@ class StartFragment : Fragment() {
                 binding.btnNewFolder.visibility = View.GONE
                 binding.rvQuestionAnswer.visibility = View.VISIBLE
                 binding.lavArrowUpAnim.visibility = View.GONE
+                binding.tvFolder.visibility = View.GONE
             } else {
                 binding.tvEmptyPage.visibility = View.VISIBLE
                 binding.btnNewFolder.visibility = View.VISIBLE
                 binding.rvQuestionAnswer.visibility = View.GONE
                 binding.lavArrowUpAnim.visibility = View.VISIBLE
+                binding.tvFolder.visibility = View.VISIBLE
                 arrowAnim()
                 Log.d("ButtonVisibility", "Button is now visible")
             }
@@ -144,6 +152,24 @@ class StartFragment : Fragment() {
         val animation = binding.lavArrowUpAnim
         animation.repeatCount = LottieDrawable.INFINITE
         animation.playAnimation()
+    }
+
+    private fun checkFolderExist () {
+       viewModel.checkFolderExist().observe(viewLifecycleOwner) {folders ->
+           if (folders.isNotEmpty()) {
+               binding.tvFolderNotExist.visibility = View.GONE
+               binding.btnNewFolder.visibility = View.GONE
+               binding.rvQuestionAnswer.visibility = View.VISIBLE
+               binding.tvFolder.visibility = View.GONE
+           } else {
+               binding.tvFolderNotExist.visibility = View.VISIBLE
+               binding.btnNewFolder.visibility = View.VISIBLE
+               binding.rvQuestionAnswer.visibility = View.GONE
+               binding.tvFolder.visibility = View.VISIBLE
+           }
+       }
+
+
     }
 
 }

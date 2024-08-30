@@ -58,4 +58,5 @@
     <string name="_23">23</string>
     <string name="total_time">Total Time</string>
     <string name="create_a_new_folder">Create a new folder</string>
+    <string name="the_folders_don_t_exist">The folders don\'t exist</string>
 </resources>

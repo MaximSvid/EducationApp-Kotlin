@@ -60,12 +60,12 @@ class HomeFragment : Fragment() {
                 val countFlashcards = flashcards.size
                 if (countFlashcards <= 0) {
                     Toast.makeText(context, "The cards don't exist yet", Toast.LENGTH_SHORT).show()
-//                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
-                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment2())
-                }
-                else {
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
+//                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment2())
                 }
+//                else {
+//                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
+//                }
             }
         }
 
@@ -73,13 +73,12 @@ class HomeFragment : Fragment() {
             viewModel.flashcardList.observe(viewLifecycleOwner) { flashcards ->
                 val countFlashcards = flashcards.size
                 if (countFlashcards <= 0) {
-                    Toast.makeText(context, "The cards don't exist yet", Toast.LENGTH_SHORT).show()
-//                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
-                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFolderFragment2())
-                }
-                else {
+//                    Toast.makeText(context, "The folders don't exist yet", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
                 }
+//                else {
+//                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
+//                }
             }
         }
 
