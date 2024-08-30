@@ -153,16 +153,16 @@ class StartFragment : Fragment() {
     private fun checkFolderExist () {
        viewModel.checkFolderExist().observe(viewLifecycleOwner) {folders ->
            if (folders.isNotEmpty()) {
-               binding.tvFolderNotExist.visibility = View.GONE
+//               binding.tvFolderNotExist.visibility = View.GONE
                binding.btnNewFolder.visibility = View.GONE
                binding.rvQuestionAnswer.visibility = View.VISIBLE
-               binding.tvFolder.visibility = View.GONE
+//               binding.tvFolder.visibility = View.GONE
                binding.lavStartAnim.visibility = View.GONE
            } else {
-               binding.tvFolderNotExist.visibility = View.VISIBLE
+//               binding.tvFolderNotExist.visibility = View.VISIBLE
                binding.btnNewFolder.visibility = View.VISIBLE
                binding.rvQuestionAnswer.visibility = View.GONE
-               binding.tvFolder.visibility = View.VISIBLE
+//               binding.tvFolder.visibility = View.VISIBLE
                binding.lavStartAnim.visibility = View.VISIBLE
                personAnim()
            }
