@@ -92,11 +92,11 @@
         android:label="fragment_flashcard_detail"
         tools:layout="@layout/fragment_flashcard_detail" >
         <action
-            android:id="@+id/action_flashcardDetailFragment_to_flashcardFragment"
-            app:destination="@id/flashcardFragment" />
-        <action
             android:id="@+id/action_flashcardDetailFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_flashcardDetailFragment_to_flashcardFragment"
+            app:destination="@id/flashcardFragment" />
     </fragment>
     <fragment
         android:id="@+id/folderFragment"

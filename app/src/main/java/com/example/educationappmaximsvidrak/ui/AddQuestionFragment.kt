@@ -68,9 +68,6 @@ class AddQuestionFragment : Fragment() {
             }
         }
 
-        //показывается название текущей папки в заголовке
-//        val selectedFolder = viewModel.selectedFolder.value
-//        binding.tvFolder.text = selectedFolder?.name
 
 
         binding.tvFolder.setOnClickListener {
@@ -83,35 +80,34 @@ class AddQuestionFragment : Fragment() {
 
     }
 
+
     private fun showPopupMenu(view: View) {
         val popupMenu = android.widget.PopupMenu(context, view)
 
-        // Добавляем папки в меню
-        viewModel.folderList.value?.forEach { folder ->
-            popupMenu.menu.add(0, folder.id.toInt(), 0, folder.name)
-        }
-
-
-        // Создаем SpannableString для кнопки "Add a folder" с жирным шрифтом
+        // Создаем SpannableString для кнопки "Add a new folder" с жирным шрифтом
         val addFolderText = SpannableString("Add a new folder +")
         addFolderText.setSpan(StyleSpan(Typeface.BOLD), 0, addFolderText.length, 0)
         addFolderText.setSpan(AbsoluteSizeSpan(18, true), 0, addFolderText.length, 0) // Устанавливаем размер текста
 
-        // Добавляем кнопку "Добавить папку" в конце
-//        viewModel.folderList.observe(viewLifecycleOwner) {folder ->
-//            viewModel.folderList.value?.forEach { folder ->
-//                popupMenu.menu.add(0, folder.id.toInt(), 0, folder.name)
-//            }
-//        }
+        // Наблюдаем за изменениями в списке папок
+        viewModel.folderList.observe(viewLifecycleOwner) { folders ->
+            popupMenu.menu.clear() // Очищаем старые пункты меню
 
-        popupMenu.menu.add(1, viewModel.folderList.value?.size ?: 0, 1, addFolderText)
+            // Добавляем папки в меню
+            folders.forEach { folder ->
+                popupMenu.menu.add(0, folder.id.toInt(), 0, folder.name)
+            }
 
+            // Добавляем кнопку "Add a new folder" в конце
+            popupMenu.menu.add(1, folders.size, 1, addFolderText)
+        }
+
+        // Обработчик кликов на пункты меню
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
             if (menuItem.groupId == 1) {
-                showAlertDialog(requireContext())
+                showAlertDialog(requireContext()) // Открываем диалог для добавления папки
             } else {
-                val selectedFolder =
-                    viewModel.folderList.value?.find { it.id.toInt() == menuItem.itemId }
+                val selectedFolder = viewModel.folderList.value?.find { it.id.toInt() == menuItem.itemId }
                 if (selectedFolder != null) {
                     viewModel.selectFolder(selectedFolder)
                     binding.tvFolder.text = selectedFolder.name
@@ -119,9 +115,9 @@ class AddQuestionFragment : Fragment() {
             }
             true
         }
+
         popupMenu.show()
     }
-
     private fun showAlertDialog(context: Context) {
         val dialogBuilder = AlertDialog.Builder(context)
         val inflater = LayoutInflater.from(context)
