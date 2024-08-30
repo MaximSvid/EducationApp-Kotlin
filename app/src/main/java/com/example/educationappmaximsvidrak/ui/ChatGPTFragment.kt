@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieDrawable
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.ChatGPTAdapter
@@ -33,6 +34,19 @@ class ChatGPTFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        animationRobot()
+
+        binding.mcvCloseAnim.setOnClickListener {
+            binding.lavRobotChat.visibility = View.GONE
+            binding.mcvCloseAnim.visibility = View.GONE
+
+
+        }
+
+        binding.lavRobotChat.setOnClickListener {
+            binding.mcvCloseAnim.visibility = View.VISIBLE
+        }
 
 
         binding.rvChatGPT.layoutManager = LinearLayoutManager(requireContext())
@@ -61,5 +75,12 @@ class ChatGPTFragment : Fragment() {
         binding.ibBack.setOnClickListener {
             findNavController().navigate(ChatGPTFragmentDirections.actionChatGPTFragmentToHomeFragment())
         }
+    }
+
+    private fun animationRobot() {
+        val animation = binding.lavRobotChat
+        animation.repeatCount = LottieDrawable.INFINITE
+        animation.playAnimation()
+
     }
 }
