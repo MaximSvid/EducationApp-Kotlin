@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,7 @@ class FolderFragment : Fragment() {
         viewModel.folderList.observe(viewLifecycleOwner) { folder ->
             val myAdapter = FolderAdapter(folder, viewModel)
             binding.rvFolder.adapter = myAdapter
+            Log.e("Adapter", "new adapter")
 
             val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT){
                 override fun onMove(
@@ -70,6 +72,9 @@ class FolderFragment : Fragment() {
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     myAdapter.deleteItem(viewHolder.bindingAdapterPosition)
+                    myAdapter.notifyDataSetChanged()
+                    myAdapter.notifyItemRemoved(viewHolder.bindingAdapterPosition)
+                    Log.e("Adapter Position", "${viewHolder.bindingAdapterPosition}")
 
                 }
 
@@ -111,7 +116,6 @@ class FolderFragment : Fragment() {
                         isCurrentlyActive
                     )
                 }
-
             })
 
             itemTouchHelper.attachToRecyclerView(binding.rvFolder)

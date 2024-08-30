@@ -43,10 +43,7 @@ class StartFragment : Fragment() {
         // Если папок нет должна появится надпись
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
             checkIfFolderIsEmpty(folder.id)
-//            folder?.let {
-//                // let неявная проверка на ноль
-//                checkIfFolderIsEmpty(it.id)
-//            }
+
         }
 
         binding.ibBack.setOnClickListener {

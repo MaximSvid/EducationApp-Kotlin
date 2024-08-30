@@ -98,6 +98,12 @@ class AddQuestionFragment : Fragment() {
         addFolderText.setSpan(AbsoluteSizeSpan(18, true), 0, addFolderText.length, 0) // Устанавливаем размер текста
 
         // Добавляем кнопку "Добавить папку" в конце
+//        viewModel.folderList.observe(viewLifecycleOwner) {folder ->
+//            viewModel.folderList.value?.forEach { folder ->
+//                popupMenu.menu.add(0, folder.id.toInt(), 0, folder.name)
+//            }
+//        }
+
         popupMenu.menu.add(1, viewModel.folderList.value?.size ?: 0, 1, addFolderText)
 
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->

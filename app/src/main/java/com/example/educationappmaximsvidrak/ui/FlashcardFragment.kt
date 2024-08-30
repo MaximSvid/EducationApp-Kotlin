@@ -50,67 +50,67 @@ class FlashcardFragment : Fragment() {
             val myAdapter = FlashcardAdapter(flashcards, viewModel)
             binding.rvFlashcard.adapter = myAdapter
 
-            val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-                ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT){
-                override fun onMove(
-                    recyclerView: RecyclerView,
-                    source: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder
-                ): Boolean {
-                    val sourcePosition = source.bindingAdapterPosition
-                    val targetPosition = target.bindingAdapterPosition
-                    Collections.swap(flashcards, sourcePosition, targetPosition)
-                    myAdapter.notifyItemMoved(sourcePosition, targetPosition)
-                    return true
-                }
-
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    myAdapter.deleteItem(viewHolder.bindingAdapterPosition)
-
-                }
-
-                override fun onChildDraw(
-                    c: Canvas,
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    dX: Float,
-                    dY: Float,
-                    actionState: Int,
-                    isCurrentlyActive: Boolean
-                ) {
-
-                    RecyclerViewSwipeDecorator.Builder(
-                        c,
-                        recyclerView,
-                        viewHolder,
-                        dX,
-                        dY,
-                        actionState,
-                        isCurrentlyActive
-                    )
-                        .addBackgroundColor(
-                            ContextCompat.getColor(
-                                requireContext(),
-                                R.color.my_background
-                            )
-                        )
-                        .addActionIcon(R.drawable.delete_black_icon)
-                        .create()
-                        .decorate()
-                    super.onChildDraw(
-                        c,
-                        recyclerView,
-                        viewHolder,
-                        dX,
-                        dY,
-                        actionState,
-                        isCurrentlyActive
-                    )
-                }
-
-            })
-
-            itemTouchHelper.attachToRecyclerView(binding.rvFlashcard)
+//            val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+//                ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT){
+//                override fun onMove(
+//                    recyclerView: RecyclerView,
+//                    source: RecyclerView.ViewHolder,
+//                    target: RecyclerView.ViewHolder
+//                ): Boolean {
+//                    val sourcePosition = source.bindingAdapterPosition
+//                    val targetPosition = target.bindingAdapterPosition
+//                    Collections.swap(flashcards, sourcePosition, targetPosition)
+//                    myAdapter.notifyItemMoved(sourcePosition, targetPosition)
+//                    return true
+//                }
+//
+//                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                    myAdapter.deleteItem(viewHolder.bindingAdapterPosition)
+//
+//                }
+//
+//                override fun onChildDraw(
+//                    c: Canvas,
+//                    recyclerView: RecyclerView,
+//                    viewHolder: RecyclerView.ViewHolder,
+//                    dX: Float,
+//                    dY: Float,
+//                    actionState: Int,
+//                    isCurrentlyActive: Boolean
+//                ) {
+//
+//                    RecyclerViewSwipeDecorator.Builder(
+//                        c,
+//                        recyclerView,
+//                        viewHolder,
+//                        dX,
+//                        dY,
+//                        actionState,
+//                        isCurrentlyActive
+//                    )
+//                        .addBackgroundColor(
+//                            ContextCompat.getColor(
+//                                requireContext(),
+//                                R.color.my_background
+//                            )
+//                        )
+//                        .addActionIcon(R.drawable.delete_black_icon)
+//                        .create()
+//                        .decorate()
+//                    super.onChildDraw(
+//                        c,
+//                        recyclerView,
+//                        viewHolder,
+//                        dX,
+//                        dY,
+//                        actionState,
+//                        isCurrentlyActive
+//                    )
+//                }
+//
+//            })
+//
+//            itemTouchHelper.attachToRecyclerView(binding.rvFlashcard)
 
         }
 

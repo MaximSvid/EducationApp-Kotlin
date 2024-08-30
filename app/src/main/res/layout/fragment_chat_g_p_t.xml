@@ -68,6 +68,52 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_chat_left"/>
 
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:visibility="visible"-->
+<!--        android:layout_marginStart="20dp">-->
+
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/mcv_close_anim"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:layout_marginEnd="12dp"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:visibility="visible"-->
+<!--            app:cardCornerRadius="50dp"-->
+<!--            >-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/iv_close_anim"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/close_icon"/>-->
+
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            android:id="@+id/lav_robot_chat"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:visibility="visible"-->
+<!--            app:lottie_fileName="robot"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--           />-->
+
+
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
     <TextView
         android:id="@+id/tv_welcome_text"
         android:layout_width="wrap_content"

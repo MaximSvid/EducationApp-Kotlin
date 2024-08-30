@@ -46,6 +46,7 @@ class FolderAdapter(
     }
 
     fun deleteItem(bindingAdapterPosition: Int) {
+
         viewModel.deleteFolder(folders[bindingAdapterPosition])
         notifyItemRemoved(bindingAdapterPosition)
 //        notifyItemRangeChanged(bindingAdapterPosition, folders.size - bindingAdapterPosition)
