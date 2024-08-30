@@ -2,6 +2,7 @@ package com.example.educationappmaximsvidrak.ui
 
 import android.graphics.Canvas
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -44,6 +45,12 @@ class StartFragment : Fragment() {
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
             checkIfFolderIsEmpty(folder.id)
 
+        }
+
+
+        binding.btnNewFolder.setOnClickListener {
+            Log.d("ButtonVisibility", "Button clicked")
+            findNavController().navigate(StartFragmentDirections.actionStartFragmentToFolderFragment())
         }
 
         binding.ibBack.setOnClickListener {
@@ -117,13 +124,19 @@ class StartFragment : Fragment() {
         folderItems.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 binding.tvEmptyPage.visibility = View.GONE
+                binding.btnNewFolder.visibility = View.GONE
+                binding.rvQuestionAnswer.visibility = View.VISIBLE
             } else {
                 binding.tvEmptyPage.visibility = View.VISIBLE
+                binding.btnNewFolder.visibility = View.VISIBLE
+                binding.rvQuestionAnswer.visibility = View.GONE
+                Log.d("ButtonVisibility", "Button is now visible")
+            }
             }
         }
 
     }
 
 
-}
+
 
