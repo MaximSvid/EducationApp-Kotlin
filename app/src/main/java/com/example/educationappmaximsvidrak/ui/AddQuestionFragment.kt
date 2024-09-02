@@ -53,33 +53,48 @@ class AddQuestionFragment : Fragment() {
             val answer = binding.tietAnswer.text.toString()
             val selectedFolder = viewModel.selectedFolder.value
 
-            if (question.isNotEmpty() && answer.isNotEmpty() && selectedFolder != null) {
+            if (question.isNotEmpty() && answer.isNotEmpty()) {
+                if (selectedFolder != null) {
+                    val newFlashcard = FlashcardData(
+                        question = question,
+                        answer = answer,
+                        folderId = selectedFolder.id,
+                        studyDate = System.currentTimeMillis() // Сохранение текущей даты в миллисекундах
+                    )
 
-                val newFlashcard = FlashcardData(
-                    question = question,
-                    answer = answer,
-                    folderId = selectedFolder.id,
-                    studyDate = System.currentTimeMillis() // Сохранение текущей даты в миллисекундах
-                )
 
+                    binding.tietQuestion.text?.clear()
+                    binding.tietAnswer.text?.clear()
 
-                binding.tietQuestion.text?.clear()
-                binding.tietAnswer.text?.clear()
+                    binding.ivArrow.visibility = View.VISIBLE
+                    binding.lavArrowUp2Anim.visibility = View.GONE
 
-//                binding.tvFolder.text = getString(R.string.select_the_folder)
-                binding.ivArrow.visibility = View.VISIBLE
-                binding.lavArrowUp2Anim.visibility = View.GONE
+                    viewModel.addFlashcard(newFlashcard)
+                    Log.i("AddFlashcard", "done")
+                    Toast.makeText(context, "Card Saved", Toast.LENGTH_SHORT).show()
+                } else {
 
-                viewModel.addFlashcard(newFlashcard)
-                Log.i("AddFlashcard", "done")
-                Toast.makeText(context, "Card Saved", Toast.LENGTH_SHORT).show()
+                    binding.lavArrowUp2Anim.visibility = View.VISIBLE
+                    arrowAnim()
+                    Toast.makeText(
+                        context,
+                        "Please select a folder before saving the card",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
             } else {
-
                 binding.lavArrowUp2Anim.visibility = View.VISIBLE
                 arrowAnim()
-                Toast.makeText(context, "Enter a Folder and fill in all fields", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    context,
+                    "Enter a Folder and fill in all fields",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
+
+
         }
 
 
@@ -177,7 +192,6 @@ class AddQuestionFragment : Fragment() {
 
 
     }
-
 
 
     private fun arrowAnim() {
