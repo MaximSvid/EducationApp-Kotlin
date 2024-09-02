@@ -59,8 +59,7 @@ class AddQuestionFragment : Fragment() {
                     folderId = selectedFolder.id,
                     studyDate = System.currentTimeMillis() // Сохранение текущей даты в миллисекундах
                 )
-                viewModel.addFlashcard(newFlashcard)
-                Toast.makeText(context, "Card Saved", Toast.LENGTH_SHORT).show()
+
 
                 binding.tietQuestion.text?.clear()
                 binding.tietAnswer.text?.clear()
@@ -68,6 +67,9 @@ class AddQuestionFragment : Fragment() {
                 binding.tvFolder.text = getString(R.string.select_the_folder)
                 binding.ivArrow.visibility = View.VISIBLE
                 binding.lavArrowUp2Anim.visibility = View.GONE
+
+                viewModel.addFlashcard(newFlashcard)
+                Toast.makeText(context, "Card Saved", Toast.LENGTH_SHORT).show()
             } else {
 
 //                binding.tvFolder.text = getString(R.string.create_a_new_folder2)

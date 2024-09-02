@@ -20,6 +20,7 @@ import androidx.core.view.MenuProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.airbnb.lottie.LottieDrawable
 import com.example.educationappmaximsvidrak.LoginViewModel
 import com.example.educationappmaximsvidrak.MainActivity
 import com.example.educationappmaximsvidrak.MainViewModel
@@ -47,6 +48,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        showAnim()
 
 
         binding.btnAdd.setOnClickListener {
@@ -77,6 +80,12 @@ class HomeFragment : Fragment() {
 
 
 
+    }
+
+    private fun showAnim() {
+        val animation = binding.lavHomeAnim
+        animation.repeatCount = LottieDrawable.INFINITE
+        animation.playAnimation()
     }
 
 
