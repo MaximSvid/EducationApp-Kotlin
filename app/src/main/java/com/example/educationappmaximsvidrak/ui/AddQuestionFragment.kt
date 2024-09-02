@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.airbnb.lottie.LottieDrawable
 import com.example.educationappmaximsvidrak.MainViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentAddQuestionBinding
@@ -39,6 +40,8 @@ class AddQuestionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        checkFolderExist()
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(AddQuestionFragmentDirections.actionAddQuestionFragmentToHomeFragment())
@@ -155,6 +158,28 @@ class AddQuestionFragment : Fragment() {
         }
 
 
+    }
+
+    private fun checkFolderExist () {
+        viewModel.checkFolderExist().observe(viewLifecycleOwner) {folder ->
+            if (folder.isEmpty()) {
+                binding.tvFolder.text = getString(R.string.create_a_new_folder2)
+                binding.ivArrow.visibility = View.GONE
+                binding.btnSave.isClickable = false
+                arrowAnim()
+            } else {
+                binding.tvFolder.text = getString(R.string.select_the_folder)
+                binding.ivArrow.visibility = View.VISIBLE
+                binding.btnSave.isClickable = true
+                binding.lavArrowUp2Anim.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun arrowAnim() {
+        val animation = binding.lavArrowUp2Anim
+        animation.repeatCount = LottieDrawable.INFINITE
+        animation.playAnimation()
     }
 
 

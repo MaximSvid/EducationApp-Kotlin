@@ -53,10 +53,14 @@
     <string name="statistics">Statistics</string>
     <string name="folders">Folders -</string>
     <string name="flashcards2">Flashcards -</string>
-    <string name="the_folder_is_empty_n_select_another_folder_n_or_create_a_new_one">The folder is empty,\n select another folder \n or create a new one</string>
+    <string name="the_folder_is_empty_n_select_another_folder_n_or_create_a_new_one">The folder is empty</string>
     <string name="total_days">Total days</string>
     <string name="_23">23</string>
     <string name="total_time">Total Time</string>
     <string name="create_a_new_folder">Create a new folder</string>
+    <string name="create_a_new_cards">Create a new cards</string>
     <string name="the_folders_don_t_exist">The folders don\'t exist</string>
+    <string name="create_a_folder">Create a folder</string>
+    <string name="create_a_new_folder2">Create a new folder +</string>
+    <string name="create">Create</string>
 </resources>

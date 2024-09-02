@@ -27,8 +27,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val studyDates: LiveData<List<Long>> = repository.statisticsInfo
 
+    // Наблюдение за списком папок
+    fun observeFolderList() {
+        folderList.observeForever { folders ->
+            if (folders.isNotEmpty() && _selectedFolder.value == null) {
+                _selectedFolder.value = folders.first()
+            }
+        }
+    }
 
-    fun checkFolderExist (): LiveData<List<Folder>> {
+
+    fun checkFolderExist(): LiveData<List<Folder>> {
         return repository.checkFolderExist()
     }
 
@@ -36,7 +45,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return repository.getItemInFolder(folderId)
     }
 
-    fun addStudyDate (cardId: Long, date: Long) {
+    fun addStudyDate(cardId: Long, date: Long) {
         viewModelScope.launch {
             repository.addStudyDate(cardId, date)
         }

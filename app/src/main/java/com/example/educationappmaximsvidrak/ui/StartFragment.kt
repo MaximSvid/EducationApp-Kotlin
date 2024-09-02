@@ -1,5 +1,6 @@
 package com.example.educationappmaximsvidrak.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieDrawable
 import com.example.educationappmaximsvidrak.MainViewModel
+import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.adapter.QuestionAnswerAdapter
 import com.example.educationappmaximsvidrak.customElements.NonScrollableLinearLayoutManager
 import com.example.educationappmaximsvidrak.databinding.FragmentStartBinding
@@ -30,19 +32,28 @@ class StartFragment : Fragment() {
         binding = FragmentStartBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
         return binding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         // Если папок нет должна появится надпись
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
             checkIfFolderIsEmpty(folder.id)
         }
 
-        viewModel.folderList.observe(viewLifecycleOwner) {folder ->
-            checkFolderExist()
+        viewModel.folderList.observe(viewLifecycleOwner) {folders ->
+            viewModel.observeFolderList()
+            checkFolderSelection()
         }
+//
+//        binding.btnNewCards.setOnClickListener {
+//            findNavController().navigate(StartFragmentDirections.actionStartFragmentToFolderFragment())
+//        }
 
 
 
@@ -127,48 +138,49 @@ class StartFragment : Fragment() {
                 binding.tvEmptyPage.visibility = View.GONE
                 binding.btnNewFolder.visibility = View.GONE
                 binding.rvQuestionAnswer.visibility = View.VISIBLE
-                binding.lavArrowUpAnim.visibility = View.GONE
                 binding.lavStartAnim.visibility = View.GONE
-//                binding.tvFolder.visibility = View.GONE
             } else {
                 binding.tvEmptyPage.visibility = View.VISIBLE
                 binding.btnNewFolder.visibility = View.VISIBLE
                 binding.rvQuestionAnswer.visibility = View.GONE
-                binding.lavArrowUpAnim.visibility = View.VISIBLE
-//                binding.tvFolder.visibility = View.VISIBLE
                 binding.lavStartAnim.visibility = View.VISIBLE
                 personAnim()
-                arrowAnim()
-                Log.d("ButtonVisibility", "Button is now visible")
             }
         }
     }
 
-    private fun arrowAnim() {
-        val animation = binding.lavArrowUpAnim
-        animation.repeatCount = LottieDrawable.INFINITE
-        animation.playAnimation()
+    private fun checkFolderSelection() {
+        viewModel.checkFolderExist().observe(viewLifecycleOwner) { folders ->
+            if (folders.isNotEmpty()) {
+                viewModel.selectedFolder.observe(viewLifecycleOwner) { selectedFolder ->
+                    if (selectedFolder != null) {
+                        // Если папка выбрана, скрываем сообщение о необходимости выбора папки
+                        binding.tvFolder.text = getString(R.string.select_the_folder) // Отображаем имя выбранной папки
+                        binding.ivArrow.visibility = View.VISIBLE
+                    } else {
+                        // Если папка не выбрана, отображаем сообщение о необходимости выбора папки
+                        binding.tvFolder.text = getString(R.string.select_the_folder)
+                        binding.rvQuestionAnswer.visibility = View.GONE
+                        binding.ivArrow.visibility = View.VISIBLE
+//                        binding.lavStartAnim.visibility = View.GONE
+                    }
+                }
+                binding.btnNewFolder.visibility = View.GONE
+            } else {
+                // Если папок нет, отображаем сообщение о необходимости создать новую папку
+                binding.tvFolder.text = getString(R.string.create_a_new_folder)
+                binding.btnNewFolder.visibility = View.VISIBLE
+                binding.rvQuestionAnswer.visibility = View.GONE
+                binding.ivArrow.visibility = View.GONE
+                binding.lavStartAnim.visibility = View.VISIBLE
+                personAnim()
+            }
+        }
     }
 
-    private fun checkFolderExist () {
-       viewModel.checkFolderExist().observe(viewLifecycleOwner) {folders ->
-           if (folders.isNotEmpty()) {
-//               binding.tvFolderNotExist.visibility = View.GONE
-               binding.btnNewFolder.visibility = View.GONE
-               binding.rvQuestionAnswer.visibility = View.VISIBLE
-//               binding.tvFolder.visibility = View.GONE
-               binding.lavStartAnim.visibility = View.GONE
-           } else {
-//               binding.tvFolderNotExist.visibility = View.VISIBLE
-               binding.btnNewFolder.visibility = View.VISIBLE
-               binding.rvQuestionAnswer.visibility = View.GONE
-//               binding.tvFolder.visibility = View.VISIBLE
-               binding.lavStartAnim.visibility = View.VISIBLE
-               personAnim()
-           }
-       }
 
-    }
+
+
 
     private fun personAnim() {
         val animation = binding.lavStartAnim
