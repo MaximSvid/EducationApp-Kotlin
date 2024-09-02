@@ -165,12 +165,12 @@ class AddQuestionFragment : Fragment() {
             if (folder.isEmpty()) {
                 binding.tvFolder.text = getString(R.string.create_a_new_folder2)
                 binding.ivArrow.visibility = View.GONE
-                binding.btnSave.isClickable = false
+//                binding.btnSave.isClickable = false
                 arrowAnim()
             } else {
                 binding.tvFolder.text = getString(R.string.select_the_folder)
                 binding.ivArrow.visibility = View.VISIBLE
-                binding.btnSave.isClickable = true
+//                binding.btnSave.isClickable = true
                 binding.lavArrowUp2Anim.visibility = View.GONE
             }
         }
