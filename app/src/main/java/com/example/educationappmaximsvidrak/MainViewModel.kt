@@ -10,7 +10,6 @@ import com.example.educationappmaximsvidrak.data.Repository
 import com.example.educationappmaximsvidrak.data.local.getDatabase
 import com.example.educationappmaximsvidrak.model.FlashcardData
 import com.example.educationappmaximsvidrak.model.Folder
-import com.example.educationappmaximsvidrak.model.Message
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -60,7 +59,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _selectedFolder = MutableLiveData<Folder>()
     val selectedFolder: LiveData<Folder> = _selectedFolder
 
-    fun selectFolder(folder: Folder) {
+    fun selectFolder1(folder: Folder) {
         _selectedFolder.postValue(folder)
     }
 

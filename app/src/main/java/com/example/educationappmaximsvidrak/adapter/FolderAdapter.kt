@@ -36,7 +36,7 @@ class FolderAdapter(
         }
 
         binding.mcvFolder.setOnClickListener {
-            viewModel.selectFolder(folder)
+            viewModel.selectFolder1(folder)
             holder.itemView.findNavController().navigate(FolderFragmentDirections.actionFolderFragmentToFlashcardFragment())
         }
     }

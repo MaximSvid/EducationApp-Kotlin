@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -22,6 +23,7 @@ import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentAddQuestionBinding
 import com.example.educationappmaximsvidrak.model.FlashcardData
 import com.example.educationappmaximsvidrak.model.Folder
+import com.google.android.play.integrity.internal.i
 
 
 class AddQuestionFragment : Fragment() {
@@ -64,16 +66,15 @@ class AddQuestionFragment : Fragment() {
                 binding.tietQuestion.text?.clear()
                 binding.tietAnswer.text?.clear()
 
-                binding.tvFolder.text = getString(R.string.select_the_folder)
+//                binding.tvFolder.text = getString(R.string.select_the_folder)
                 binding.ivArrow.visibility = View.VISIBLE
                 binding.lavArrowUp2Anim.visibility = View.GONE
 
                 viewModel.addFlashcard(newFlashcard)
+                Log.i("AddFlashcard", "done")
                 Toast.makeText(context, "Card Saved", Toast.LENGTH_SHORT).show()
             } else {
 
-//                binding.tvFolder.text = getString(R.string.create_a_new_folder2)
-//                binding.ivArrow.visibility = View.GONE
                 binding.lavArrowUp2Anim.visibility = View.VISIBLE
                 arrowAnim()
                 Toast.makeText(context, "Enter a Folder and fill in all fields", Toast.LENGTH_SHORT)
@@ -128,7 +129,7 @@ class AddQuestionFragment : Fragment() {
                 val selectedFolder =
                     viewModel.folderList.value?.find { it.id.toInt() == menuItem.itemId }
                 if (selectedFolder != null) {
-                    viewModel.selectFolder(selectedFolder)
+                    viewModel.selectFolder1(selectedFolder)
                     binding.tvFolder.text = selectedFolder.name
                 }
             }

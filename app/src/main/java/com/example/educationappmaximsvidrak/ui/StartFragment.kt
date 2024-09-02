@@ -1,6 +1,5 @@
 package com.example.educationappmaximsvidrak.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -121,7 +120,7 @@ class StartFragment : Fragment() {
             val selectedFolder =
                 viewModel.folderList.value?.find { it.id.toInt() == menuItem.itemId }
             if (selectedFolder != null) {
-                viewModel.selectFolder(selectedFolder)
+                viewModel.selectFolder1(selectedFolder)
                 binding.tvFolder.text = selectedFolder.name
 
             }
