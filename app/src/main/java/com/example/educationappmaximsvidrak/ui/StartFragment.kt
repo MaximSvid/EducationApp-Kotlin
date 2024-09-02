@@ -155,11 +155,11 @@ class StartFragment : Fragment() {
                 viewModel.selectedFolder.observe(viewLifecycleOwner) { selectedFolder ->
                     if (selectedFolder != null) {
                         // Если папка выбрана, скрываем сообщение о необходимости выбора папки
-                        binding.tvFolder.text = getString(R.string.select_the_folder) // Отображаем имя выбранной папки
+//                        binding.tvFolder.text = getString(R.string.select_the_folder) // Отображаем имя выбранной папки
                         binding.ivArrow.visibility = View.VISIBLE
                     } else {
                         // Если папка не выбрана, отображаем сообщение о необходимости выбора папки
-                        binding.tvFolder.text = getString(R.string.select_the_folder)
+//                        binding.tvFolder.text = getString(R.string.select_the_folder)
                         binding.rvQuestionAnswer.visibility = View.GONE
                         binding.ivArrow.visibility = View.VISIBLE
 //                        binding.lavStartAnim.visibility = View.GONE

@@ -41,7 +41,6 @@ class AddQuestionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        checkFolderExist()
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(AddQuestionFragmentDirections.actionAddQuestionFragmentToHomeFragment())
@@ -65,7 +64,16 @@ class AddQuestionFragment : Fragment() {
 
                 binding.tietQuestion.text?.clear()
                 binding.tietAnswer.text?.clear()
+
+                binding.tvFolder.text = getString(R.string.select_the_folder)
+                binding.ivArrow.visibility = View.VISIBLE
+                binding.lavArrowUp2Anim.visibility = View.GONE
             } else {
+
+//                binding.tvFolder.text = getString(R.string.create_a_new_folder2)
+//                binding.ivArrow.visibility = View.GONE
+                binding.lavArrowUp2Anim.visibility = View.VISIBLE
+                arrowAnim()
                 Toast.makeText(context, "Enter a Folder and fill in all fields", Toast.LENGTH_SHORT)
                     .show()
             }
@@ -90,7 +98,12 @@ class AddQuestionFragment : Fragment() {
         // Создаем SpannableString для кнопки "Add a new folder" с жирным шрифтом
         val addFolderText = SpannableString("Add a new folder +")
         addFolderText.setSpan(StyleSpan(Typeface.BOLD), 0, addFolderText.length, 0)
-        addFolderText.setSpan(AbsoluteSizeSpan(18, true), 0, addFolderText.length, 0) // Устанавливаем размер текста
+        addFolderText.setSpan(
+            AbsoluteSizeSpan(18, true),
+            0,
+            addFolderText.length,
+            0
+        ) // Устанавливаем размер текста
 
         // Наблюдаем за изменениями в списке папок
         viewModel.folderList.observe(viewLifecycleOwner) { folders ->
@@ -110,7 +123,8 @@ class AddQuestionFragment : Fragment() {
             if (menuItem.groupId == 1) {
                 showAlertDialog(requireContext()) // Открываем диалог для добавления папки
             } else {
-                val selectedFolder = viewModel.folderList.value?.find { it.id.toInt() == menuItem.itemId }
+                val selectedFolder =
+                    viewModel.folderList.value?.find { it.id.toInt() == menuItem.itemId }
                 if (selectedFolder != null) {
                     viewModel.selectFolder(selectedFolder)
                     binding.tvFolder.text = selectedFolder.name
@@ -121,6 +135,7 @@ class AddQuestionFragment : Fragment() {
 
         popupMenu.show()
     }
+
     private fun showAlertDialog(context: Context) {
         val dialogBuilder = AlertDialog.Builder(context)
         val inflater = LayoutInflater.from(context)
@@ -160,21 +175,7 @@ class AddQuestionFragment : Fragment() {
 
     }
 
-    private fun checkFolderExist () {
-        viewModel.checkFolderExist().observe(viewLifecycleOwner) {folder ->
-            if (folder.isEmpty()) {
-                binding.tvFolder.text = getString(R.string.create_a_new_folder2)
-                binding.ivArrow.visibility = View.GONE
-//                binding.btnSave.isClickable = false
-                arrowAnim()
-            } else {
-                binding.tvFolder.text = getString(R.string.select_the_folder)
-                binding.ivArrow.visibility = View.VISIBLE
-//                binding.btnSave.isClickable = true
-                binding.lavArrowUp2Anim.visibility = View.GONE
-            }
-        }
-    }
+
 
     private fun arrowAnim() {
         val animation = binding.lavArrowUp2Anim
