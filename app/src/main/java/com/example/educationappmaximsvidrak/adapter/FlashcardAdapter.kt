@@ -37,7 +37,6 @@ class FlashcardAdapter (
 
         binding.mcvFlashcard.setOnClickListener {
             viewModel.selectedFlashcard(flashcard)
-
             holder.itemView.findNavController().navigate(FlashcardFragmentDirections.actionFlashcardFragmentToFlashcardDetailFragment())
         }
     }
@@ -45,13 +44,6 @@ class FlashcardAdapter (
     override fun getItemCount(): Int {
      return flashcards.size
     }
-
-    fun deleteItem(bindingAdapterPosition: Int) {
-        viewModel.deleteFlashcard(flashcards[bindingAdapterPosition])
-        notifyItemRemoved(bindingAdapterPosition)
-//        notifyItemRangeChanged(bindingAdapterPosition, folders.size - bindingAdapterPosition)
-    }
-
 
 
 }

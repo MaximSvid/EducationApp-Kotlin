@@ -51,6 +51,10 @@ class HomeFragment : Fragment() {
 
         showAnim()
 
+        binding.lavHomeAnim.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStartFragment())
+        }
+
 
         binding.btnAdd.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddQuestionFragment())

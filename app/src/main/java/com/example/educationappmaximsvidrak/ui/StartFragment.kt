@@ -39,13 +39,12 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         // Если папок нет должна появится надпись
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
             checkIfFolderIsEmpty(folder.id)
         }
 
-        viewModel.folderList.observe(viewLifecycleOwner) {folders ->
+        viewModel.folderList.observe(viewLifecycleOwner) { folders ->
             viewModel.observeFolderList()
             checkFolderSelection()
         }
@@ -53,8 +52,6 @@ class StartFragment : Fragment() {
 //        binding.btnNewCards.setOnClickListener {
 //            findNavController().navigate(StartFragmentDirections.actionStartFragmentToFolderFragment())
 //        }
-
-
 
 
         binding.btnNewFolder.setOnClickListener {
@@ -154,14 +151,11 @@ class StartFragment : Fragment() {
                 viewModel.selectedFolder.observe(viewLifecycleOwner) { selectedFolder ->
                     if (selectedFolder != null) {
                         // Если папка выбрана, скрываем сообщение о необходимости выбора папки
-//                        binding.tvFolder.text = getString(R.string.select_the_folder) // Отображаем имя выбранной папки
                         binding.ivArrow.visibility = View.VISIBLE
                     } else {
                         // Если папка не выбрана, отображаем сообщение о необходимости выбора папки
-//                        binding.tvFolder.text = getString(R.string.select_the_folder)
                         binding.rvQuestionAnswer.visibility = View.GONE
                         binding.ivArrow.visibility = View.VISIBLE
-//                        binding.lavStartAnim.visibility = View.GONE
                     }
                 }
                 binding.btnNewFolder.visibility = View.GONE
@@ -176,9 +170,6 @@ class StartFragment : Fragment() {
             }
         }
     }
-
-
-
 
 
     private fun personAnim() {

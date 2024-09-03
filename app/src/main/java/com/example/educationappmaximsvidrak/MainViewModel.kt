@@ -102,6 +102,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val selectedCard: LiveData<FlashcardData> = _selectedCard
 
     fun selectedFlashcard(flashcard: FlashcardData) {
+        //TODO postValue oder setValue
+        /*
+        TODO Die postValue-Methode wird verwendet, um den LiveData-Wert von einem beliebigen Thread aus zu aktualisieren,
+         was besonders in einer Umgebung mit mehreren Threads nützlich ist.
+         Im Gegensatz zur setValue-Methode, die nur vom Haupt-Thread aus aufgerufen werden kann,
+         kann postValue von jedem Thread aus aufgerufen werden und überträgt Änderungen sicher an den Haupt-Thread,
+         um Beobachter zu informieren.
+         */
+
         _selectedCard.postValue(flashcard)
     }
 

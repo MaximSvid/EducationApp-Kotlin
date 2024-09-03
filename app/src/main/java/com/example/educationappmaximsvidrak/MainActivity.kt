@@ -32,11 +32,7 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
-//    private lateinit var drawerLayout: DrawerLayout
-
-//    private lateinit var fragmentManager: FragmentManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +40,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        drawerLayout = binding.drawerLayout
-
-//        binding.drawerNavView.setNavigationItemSelectedListener(this)
 
         //нижняя навигация
         val navHostFragment =
@@ -70,25 +63,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
-
-//        val navHostFragmentDrawer = supportFragmentManager.findFragmentById(R.id.fragment_container_view_drawer) as NavHostFragment
-//        val navController = navHostFragmentDrawer.navController
-//
-//
-//
-//        // Получите ссылку на HomeFragment
-//        val homeFragment = navHostFragment.childFragmentManager.fragments.firstOrNull { it is HomeFragment } as? HomeFragment
-//
-//        appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.startFragment, R.id.addQuestionFragment, R.id.chatGPTFragment, R.id.folderFragment), binding.drawerLayout)
-//
-//
-//
-//
-//
-//
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        binding.drawerNavView.setupWithNavController(navController)
 
 
 

@@ -41,15 +41,12 @@ class ChatGPTFragment : Fragment() {
             binding.lavRobotChat.visibility = View.GONE
             binding.mcvCloseAnim.visibility = View.GONE
 
-
         }
 
         binding.lavRobotChat.setOnClickListener {
             binding.mcvCloseAnim.visibility = View.VISIBLE
         }
 
-
-        binding.rvChatGPT.layoutManager = LinearLayoutManager(requireContext())
         val chatAdapter = ChatGPTAdapter(mutableListOf())
         binding.rvChatGPT.adapter = chatAdapter
 
@@ -58,19 +55,14 @@ class ChatGPTFragment : Fragment() {
             binding.rvChatGPT.scrollToPosition(messages.size -1)
         }
 
-
-
-
         binding.ibSend.setOnClickListener {
             val userMessage = binding.etMessage.text.toString()
             if (userMessage.isNotEmpty()) {
                 viewModel.sendMessage(userMessage)
                 binding.etMessage.text.clear()
-//                binding.tvWelcomeText.visibility = View.GONE
+
             }
         }
-
-
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(ChatGPTFragmentDirections.actionChatGPTFragmentToHomeFragment())
