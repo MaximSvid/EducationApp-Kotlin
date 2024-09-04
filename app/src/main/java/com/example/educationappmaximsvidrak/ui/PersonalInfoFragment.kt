@@ -2,6 +2,7 @@ package com.example.educationappmaximsvidrak.ui
 
 import android.os.Bundle
 import android.provider.ContactsContract.Contacts
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,9 @@ import com.google.firebase.ktx.Firebase
 class PersonalInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentPersonalInfoBinding
-    private lateinit var firebaseRef: DatabaseReference
+    private val loginViewModel: LoginViewModel by activityViewModels()
+
+
 
 
     override fun onCreateView(
@@ -31,12 +34,7 @@ class PersonalInfoFragment : Fragment() {
     ): View? {
         binding = FragmentPersonalInfoBinding.inflate(layoutInflater, container, false)
 
-        firebaseRef = FirebaseDatabase.getInstance().getReference("contacts")
-//        firebaseRef = Firebase.database.reference
 
-        binding.btnUpdateContact.setOnClickListener {
-            saveData()
-        }
 
 
         return binding.root
@@ -49,9 +47,18 @@ class PersonalInfoFragment : Fragment() {
             findNavController().navigate(PersonalInfoFragmentDirections.actionPersonalInfoFragmentToSettingsFragment())
         }
 
-//        binding.btnUpdateContact.setOnClickListener {
-//            saveData()
-//        }
+        binding.btnUpdateContact.setOnClickListener {
+            saveData()
+            test()
+        }
+
+    }
+
+    private fun test () {
+        val database = Firebase.database
+        val myRef = database.getReference("message")
+
+        myRef.setValue("Hello, World!")
     }
 
 
@@ -64,19 +71,19 @@ class PersonalInfoFragment : Fragment() {
         if (secondName.isEmpty()) binding.tietSecondName.error = "write a second name"
         if (phoneNumber.isEmpty()) binding.tietFirstName.error = "write a phone number"
 
+
+        val firebaseRef = loginViewModel.firebaseRef
+
         val contactId = firebaseRef.push().key!!
         val contacts = Profile(contactId, firstName, secondName, phoneNumber)
 
-        firebaseRef.push().setValue(contacts)
-
-//        firebaseRef.child(contactId).setValue(contacts)
-//        firebaseRef.child("user").child(contactId).setValue(contacts)
-//            .addOnCompleteListener {
-//                Toast.makeText(context, "Data stored successfully", Toast.LENGTH_SHORT).show()
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(context, "Error ${it.message}", Toast.LENGTH_SHORT).show()
-//            }
+        firebaseRef.push().setValue(contacts).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("Firebase", "Data saved successfully")
+            } else {
+                Log.e("Firebase", "Failed to save data", task.exception)
+            }
+        }
     }
 
 }

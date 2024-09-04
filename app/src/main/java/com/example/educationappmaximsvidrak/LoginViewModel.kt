@@ -18,6 +18,8 @@ class LoginViewModel : ViewModel() {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
 
+     val firebaseRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("contacts")
+
 
 
 

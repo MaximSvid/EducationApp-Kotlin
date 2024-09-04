@@ -29,7 +29,6 @@ class QuestionAnswerAdapter (
             questionBinding.tvQuestion.text = flashcard.question
 
             questionBinding.mcvQuestion.setOnClickListener {
-
                 showAnswer()
             }
 
@@ -89,8 +88,8 @@ class QuestionAnswerAdapter (
     private fun showAnswer() {
         if (currentPosition < itemCount -1) {
             recyclerView.animate().apply {
-                duration = 250
-                rotationYBy(360f)
+                duration = 250 //TODO zeit 0.25 sec
+                rotationYBy(360f) // TODO 360-Grad-Drehung, um die Y-Achse
                 currentPosition++
                 recyclerView.scrollToPosition(currentPosition)
             }
