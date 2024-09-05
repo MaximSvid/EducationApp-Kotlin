@@ -33,10 +33,6 @@ class PersonalInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPersonalInfoBinding.inflate(layoutInflater, container, false)
-
-
-
-
         return binding.root
     }
 
@@ -49,17 +45,10 @@ class PersonalInfoFragment : Fragment() {
 
         binding.btnUpdateContact.setOnClickListener {
             saveData()
-            test()
         }
 
     }
 
-    private fun test () {
-        val database = Firebase.database
-        val myRef = database.getReference("message")
-
-        myRef.setValue("Hello, World!")
-    }
 
 
     private fun saveData () {

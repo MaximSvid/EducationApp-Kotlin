@@ -31,7 +31,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textColor()
+//        textColor()
 
         binding.btnRegist.setOnClickListener {
             val email = binding.tietEmail.text.toString()
