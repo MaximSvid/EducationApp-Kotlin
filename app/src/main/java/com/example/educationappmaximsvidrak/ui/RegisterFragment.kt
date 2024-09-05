@@ -37,28 +37,32 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRegist.setOnClickListener {
-            val name = binding.tietName.text.toString()
+            val name = binding.tietName.text.toString().ifEmpty { "User" } // wenn das Namensfeld leer ist, den Namen als Benutzer festlegen
             val email = binding.tietEmail.text.toString()
             val pass = binding.tietPassword.text.toString()
 
-            val firebaseRef = viewModel.firebaseRef
+            val animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
 
+            val firebaseRef = viewModel.firebaseRef
             val contactId = firebaseRef.push().key!!
 
-            if (email != "" && Patterns.EMAIL_ADDRESS.matcher(email).matches() && pass != "" && name != "") {
+            if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches() && pass.isNotEmpty() && name.isNotEmpty()) {
                 //TODO Patterns.EMAIL_ADDRESS.matcher(email).matches() - prüfen, ob die Adresse im E-Mail-Format eingegeben wurde
                 viewModel.register(email, pass)
                 viewModel.addName(contactId, name)
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                Toast.makeText(requireContext(), "Enter correct email", Toast.LENGTH_SHORT).show()
-            } else {
-                var animation = android.view.animation.AnimationUtils.loadAnimation(
-                    requireContext(),
-                    R.anim.shake
-                )
-                binding.tietEmail.startAnimation(animation)
-                binding.tietPassword.startAnimation(animation)
-                binding.tietName.startAnimation(animation)
+            }  else {
+                // Если email некорректен
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//                    Toast.makeText(requireContext(), "Enter correct email", Toast.LENGTH_SHORT).show()
+                    binding.tietEmail.startAnimation(animation)
+                }
+
+                if (email.isEmpty()) {
+                    binding.tietEmail.startAnimation(animation)
+                }
+                if (pass.isEmpty()) {
+                    binding.tietPassword.startAnimation(animation)
+                }
             }
         }
 

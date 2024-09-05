@@ -22,9 +22,13 @@ class LoginViewModel : ViewModel() {
      val firebaseRef: DatabaseReference = FirebaseDatabase.getInstance("https://education-app-maxim-svidrak-default-rtdb.europe-west1.firebasedatabase.app").getReference("contacts")
 
 
+    //LiveData personalInfo firebase RealtimeDatabase
+    private val _profileLiveData = MutableLiveData<Profile>()
+    val profileLiveData: LiveData<Profile> = _profileLiveData
 
 
-    //LiveData currentUser
+
+    //LiveData currentUser firebaseAuth
     private val _currentUser = MutableLiveData<FirebaseUser?>(firebaseAuth.currentUser)
     val currentUser: LiveData<FirebaseUser?> = _currentUser
 
@@ -88,6 +92,22 @@ class LoginViewModel : ViewModel() {
             } else {
                 Log.e("RegisterLog", "RealtimeDatabase problem")
             }
+        }
+    }
+
+    fun getPersonFirstName(userId: String) {
+        firebaseRef.child(userId).get().addOnSuccessListener { dataSnapshot ->
+            if (dataSnapshot.exists()) {
+                // Преобразуем данные в объект Profile
+                val profile = dataSnapshot.getValue(Profile::class.java)
+                Log.d("Firebase", "Data snapshot exists, profile: ${profile?.firstName}")
+                _profileLiveData.postValue(profile!!)
+            } else {
+                _profileLiveData.postValue(null!!)
+            }
+        }.addOnFailureListener { exception ->
+            Log.e("Firebase", "Failed to retrieve data: ${exception.message}")
+            _profileLiveData.postValue(null!!)
         }
     }
 }

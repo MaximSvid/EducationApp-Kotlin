@@ -39,6 +39,8 @@ class PersonalInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getPersonInfo()
+
         binding.ibBack.setOnClickListener {
             findNavController().navigate(PersonalInfoFragmentDirections.actionPersonalInfoFragmentToSettingsFragment())
         }
@@ -71,6 +73,18 @@ class PersonalInfoFragment : Fragment() {
                 Log.d("Firebase", "Data saved successfully")
             } else {
                 Log.e("Firebase", "Failed to save data", task.exception)
+            }
+        }
+    }
+
+    private fun getPersonInfo() {
+        val userId = loginViewModel.profileLiveData.value?.id
+        // Наблюдаем за изменением текущего пользователя через LiveData
+        loginViewModel.profileLiveData.observe(viewLifecycleOwner) { profile ->
+            if (profile != null) {
+                binding.tietFirstName.setText(profile.firstName)
+            } else {
+                Log.e("Firebase", "Profile data not found")
             }
         }
     }

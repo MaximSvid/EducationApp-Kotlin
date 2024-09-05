@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,13 +40,24 @@ class LoginFragment : Fragment() {
             val email = binding.tietEmail.text.toString()
             val pass = binding.tietPassword.text.toString()
 
-            if (email != "" && pass != "") {
+            val animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+
+            if (email != ""&& Patterns.EMAIL_ADDRESS.matcher(email).matches() && pass != "") {
                 viewModel.login(email, pass)
-            } else {
-                var animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+            } else  {
+            // Если email некорректен
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//                Toast.makeText(requireContext(), "Enter correct email", Toast.LENGTH_SHORT).show()
                 binding.tietEmail.startAnimation(animation)
+            }
+
+            if (email.isEmpty()) {
+                binding.tietEmail.startAnimation(animation)
+            }
+            if (pass.isEmpty()) {
                 binding.tietPassword.startAnimation(animation)
             }
+        }
 
 
         }
