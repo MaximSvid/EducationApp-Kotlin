@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentRegisterBinding
+import com.example.educationappmaximsvidrak.model.Profile
 
 class RegisterFragment : Fragment() {
 
@@ -31,18 +34,27 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        textColor()
 
         binding.btnRegist.setOnClickListener {
+            val name = binding.tietName.text.toString()
             val email = binding.tietEmail.text.toString()
             val pass = binding.tietPassword.text.toString()
 
-            if (email != "" && pass != "") {
+            val firebaseRef = viewModel.firebaseRef
+
+            val contactId = firebaseRef.push().key!!
+
+            if (email != "" && pass != "" && name != "") {
                 viewModel.register(email, pass)
+                viewModel.addName(contactId, name)
             } else {
-                var animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
+                var animation = android.view.animation.AnimationUtils.loadAnimation(
+                    requireContext(),
+                    R.anim.shake
+                )
                 binding.tietEmail.startAnimation(animation)
                 binding.tietPassword.startAnimation(animation)
+                binding.tietName.startAnimation(animation)
             }
         }
 
@@ -56,23 +68,6 @@ class RegisterFragment : Fragment() {
             findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
         }
 
-    }
-
-    private fun textColor() {
-        val text = "Registered already? Log in"
-        val textSignIn = binding.tvLogin
-        val spannable = SpannableString(text)
-
-        // Устанавливаем цвет для части текста "Log in"
-        val start = text.indexOf("Log in")
-        val end = start + "Log in".length
-        spannable.setSpan(
-            ForegroundColorSpan(Color.BLUE),
-            start,
-            end,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        textSignIn.text = spannable
     }
 
 }

@@ -33,7 +33,6 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        textColor()
 
         binding.btnLogin.setOnClickListener {
 
@@ -71,23 +70,5 @@ class LoginFragment : Fragment() {
 
 
     }
-
-    private fun textColor() {
-        val text = "Don't have an account? Sign in"
-        val textSignIn = binding.tvSignIn
-        val spannable = SpannableString(text)
-
-        // Устанавливаем цвет для части текста "Sign in"
-        val start = text.indexOf("Sign in")
-        val end = start + "Sign in".length
-        spannable.setSpan(
-            ForegroundColorSpan(Color.BLUE),
-            start,
-            end,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        textSignIn.text = spannable
-    }
-
 
 }

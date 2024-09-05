@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.educationappmaximsvidrak.model.Profile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -77,6 +78,17 @@ class LoginViewModel : ViewModel() {
     fun logout() {
         firebaseAuth.signOut()
         _currentUser.value = null
+    }
+
+    fun addName (contactId: String, name: String) {
+        val contactName = Profile (contactId, name)
+        firebaseRef.child(contactId).setValue(contactName).addOnCompleteListener { dbTask ->
+            if (dbTask.isSuccessful) {
+                Log.e("RegisterLog", "Registration done")
+            } else {
+                Log.e("RegisterLog", "RealtimeDatabase problem")
+            }
+        }
     }
 }
 
