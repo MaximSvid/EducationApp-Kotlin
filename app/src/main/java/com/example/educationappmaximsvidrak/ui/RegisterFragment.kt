@@ -6,6 +6,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,9 +45,12 @@ class RegisterFragment : Fragment() {
 
             val contactId = firebaseRef.push().key!!
 
-            if (email != "" && pass != "" && name != "") {
+            if (email != "" && Patterns.EMAIL_ADDRESS.matcher(email).matches() && pass != "" && name != "") {
+                //TODO Patterns.EMAIL_ADDRESS.matcher(email).matches() - prüfen, ob die Adresse im E-Mail-Format eingegeben wurde
                 viewModel.register(email, pass)
                 viewModel.addName(contactId, name)
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(requireContext(), "Enter correct email", Toast.LENGTH_SHORT).show()
             } else {
                 var animation = android.view.animation.AnimationUtils.loadAnimation(
                     requireContext(),
