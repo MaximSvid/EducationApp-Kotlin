@@ -18,7 +18,7 @@ class LoginViewModel : ViewModel() {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
 
-     val firebaseRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("contacts")
+     val firebaseRef: DatabaseReference = FirebaseDatabase.getInstance("https://education-app-maxim-svidrak-default-rtdb.europe-west1.firebasedatabase.app").getReference("contacts")
 
 
 
