@@ -23,8 +23,8 @@ class LoginViewModel : ViewModel() {
 
 
     //LiveData personalInfo firebase RealtimeDatabase
-    private val _profileLiveData = MutableLiveData<Profile>()
-    val profileLiveData: LiveData<Profile> = _profileLiveData
+//    private val _profileLiveData = MutableLiveData<Profile>()
+//    val profileLiveData: LiveData<Profile> = _profileLiveData
 
 
 
@@ -95,20 +95,20 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    fun getPersonFirstName(userId: String) {
-        firebaseRef.child(userId).get().addOnSuccessListener { dataSnapshot ->
-            if (dataSnapshot.exists()) {
-                // Преобразуем данные в объект Profile
-                val profile = dataSnapshot.getValue(Profile::class.java)
-                Log.d("Firebase", "Data snapshot exists, profile: ${profile?.firstName}")
-                _profileLiveData.postValue(profile!!)
-            } else {
-                _profileLiveData.postValue(null!!)
-            }
-        }.addOnFailureListener { exception ->
-            Log.e("Firebase", "Failed to retrieve data: ${exception.message}")
-            _profileLiveData.postValue(null!!)
-        }
-    }
+//    fun getPersonFirstName(userId: String) {
+//        firebaseRef.child(userId).get().addOnSuccessListener { dataSnapshot ->
+//            if (dataSnapshot.exists()) {
+//                // Преобразуем данные в объект Profile
+//                val profile = dataSnapshot.getValue(Profile::class.java)
+//                Log.d("Firebase", "Data snapshot exists, profile: ${profile?.firstName}")
+//                _profileLiveData.postValue(profile!!)
+//            } else {
+//                _profileLiveData.postValue(null!!)
+//            }
+//        }.addOnFailureListener { exception ->
+//            Log.e("Firebase", "Failed to retrieve data: ${exception.message}")
+//            _profileLiveData.postValue(null!!)
+//        }
+//    }
 }
 

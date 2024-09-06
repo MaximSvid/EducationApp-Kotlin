@@ -1,30 +1,26 @@
 package com.example.educationappmaximsvidrak.ui
 
 import android.os.Bundle
-import android.provider.ContactsContract.Contacts
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
-import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentPersonalInfoBinding
 import com.example.educationappmaximsvidrak.model.Profile
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.database
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 class PersonalInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentPersonalInfoBinding
     private val loginViewModel: LoginViewModel by activityViewModels()
 
+    private lateinit var  profileClass: Profile
 
 
 
@@ -39,7 +35,10 @@ class PersonalInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        profileClass = mutableListOf()
+
         getPersonInfo()
+
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(PersonalInfoFragmentDirections.actionPersonalInfoFragmentToSettingsFragment())
@@ -77,16 +76,34 @@ class PersonalInfoFragment : Fragment() {
         }
     }
 
-    private fun getPersonInfo() {
-        val userId = loginViewModel.profileLiveData.value?.id
-        // Наблюдаем за изменением текущего пользователя через LiveData
-        loginViewModel.profileLiveData.observe(viewLifecycleOwner) { profile ->
-            if (profile != null) {
-                binding.tietFirstName.setText(profile.firstName)
-            } else {
-                Log.e("Firebase", "Profile data not found")
+
+    private fun getPersonInfo () {
+        loginViewModel.firebaseRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (profileSnap in snapshot.children) {
+                        val profile = profileSnap.getValue(Profile::class.java)
+                        if (profile != null) {
+                           profileClass = profile
+                           break
+                        } else {
+                            Log.e("Firebase", "Profile == null")
+                        }
+
+                    }
+                }
+
+                binding.tietFirstName.setText(profileClass.firstName)
+//                binding.tietSecondName.setText(profileClass.lastName)
+//                binding.tietPhoneNumber.setText(profileClass.phoneNumber)
             }
-        }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "error")
+            }
+
+        })
     }
+
 
 }
