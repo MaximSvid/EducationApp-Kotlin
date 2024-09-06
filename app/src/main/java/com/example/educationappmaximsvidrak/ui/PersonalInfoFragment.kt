@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
 import com.example.educationappmaximsvidrak.databinding.FragmentPersonalInfoBinding
 import com.example.educationappmaximsvidrak.model.Profile
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -46,29 +47,57 @@ class PersonalInfoFragment : Fragment() {
     }
 
 
+//    private fun saveData() {
+//        val firstName = binding.tietFirstName.text.toString()
+//        val secondName = binding.tietSecondName.text.toString()
+//        val phoneNumber = binding.tietPhoneNumber.text.toString()
+//
+//        if (firstName.isEmpty()) binding.tietFirstName.error = "write a first name"
+//        if (secondName.isEmpty()) binding.tietSecondName.error = "write a second name"
+//        if (phoneNumber.isEmpty()) binding.tietFirstName.error = "write a phone number"
+//
+//
+//        val firebaseRef = loginViewModel.firebaseRef
+//
+//        val contactId = firebaseRef.push().key!!
+//        val contacts = Profile(contactId, firstName, secondName, phoneNumber)
+//
+//        firebaseRef.push().setValue(contacts).addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                Log.d("Firebase", "Data saved successfully")
+//            } else {
+//                Log.e("Firebase", "Failed to save data", task.exception)
+//            }
+//        }
+//    }
+
     private fun saveData() {
         val firstName = binding.tietFirstName.text.toString()
         val secondName = binding.tietSecondName.text.toString()
         val phoneNumber = binding.tietPhoneNumber.text.toString()
 
-        if (firstName.isEmpty()) binding.tietFirstName.error = "write a first name"
-        if (secondName.isEmpty()) binding.tietSecondName.error = "write a second name"
-        if (phoneNumber.isEmpty()) binding.tietFirstName.error = "write a phone number"
-
+        if (firstName.isEmpty()) binding.tietFirstName.error = "Write a first name"
+        if (secondName.isEmpty()) binding.tietSecondName.error = "Write a username name"
+        if (phoneNumber.isEmpty()) binding.tietFirstName.error = "Write a phone number"
 
         val firebaseRef = loginViewModel.firebaseRef
 
-        val contactId = firebaseRef.push().key!!
-        val contacts = Profile(contactId, firstName, secondName, phoneNumber)
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        val userId = firebaseUser?.uid // Получаем uid пользователя
 
-        firebaseRef.push().setValue(contacts).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.d("Firebase", "Data saved successfully")
-            } else {
-                Log.e("Firebase", "Failed to save data", task.exception)
+        if (userId != null) {
+            val contacts = Profile(userId, firstName, secondName, phoneNumber)
+
+            // Сохраняем данные под ключом userId
+            firebaseRef.child(userId).setValue(contacts).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("Firebase", "Data saved successfully")
+                } else {
+                    Log.e("Firebase", "Failed to save data", task.exception)
+                }
             }
         }
+
+
     }
-
-
 }

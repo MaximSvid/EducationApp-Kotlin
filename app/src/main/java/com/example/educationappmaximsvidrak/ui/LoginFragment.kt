@@ -37,8 +37,8 @@ class LoginFragment : Fragment() {
 
         binding.btnLogin.setOnClickListener {
 
-            val email = binding.tietEmail.text.toString()
-            val pass = binding.tietPassword.text.toString()
+            val email = binding.loginEmail.text.toString()
+            val pass = binding.loginPass.text.toString()
 
             val animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
 
@@ -48,14 +48,14 @@ class LoginFragment : Fragment() {
             // Если email некорректен
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 //                Toast.makeText(requireContext(), "Enter correct email", Toast.LENGTH_SHORT).show()
-                binding.tietEmail.startAnimation(animation)
+                binding.loginEmail.startAnimation(animation)
             }
 
             if (email.isEmpty()) {
-                binding.tietEmail.startAnimation(animation)
+                binding.loginEmail.startAnimation(animation)
             }
             if (pass.isEmpty()) {
-                binding.tietPassword.startAnimation(animation)
+                binding.loginPass.startAnimation(animation)
             }
         }
 
@@ -77,6 +77,7 @@ class LoginFragment : Fragment() {
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if (it != null) {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                Toast.makeText(context, "You have successfully logged in", Toast.LENGTH_SHORT).show()
             }
         }
 

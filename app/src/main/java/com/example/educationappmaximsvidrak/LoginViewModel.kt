@@ -1,13 +1,11 @@
 package com.example.educationappmaximsvidrak
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.educationappmaximsvidrak.model.Profile
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseUser
@@ -20,11 +18,6 @@ class LoginViewModel : ViewModel() {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
      val firebaseRef: DatabaseReference = FirebaseDatabase.getInstance("https://education-app-maxim-svidrak-default-rtdb.europe-west1.firebasedatabase.app").getReference("contacts")
-
-
-    //LiveData personalInfo firebase RealtimeDatabase
-//    private val _profileLiveData = MutableLiveData<Profile>()
-//    val profileLiveData: LiveData<Profile> = _profileLiveData
 
 
 
@@ -84,9 +77,9 @@ class LoginViewModel : ViewModel() {
         _currentUser.value = null
     }
 
-    fun addName (contactId: String, name: String) {
-        val contactName = Profile (contactId, name)
-        firebaseRef.child(contactId).setValue(contactName).addOnCompleteListener { dbTask ->
+    fun dataUser (userId: String, firstName: String, username: String) {
+        val contactName = Profile (userId, firstName, username)
+        firebaseRef.child(userId).setValue(contactName).addOnCompleteListener { dbTask ->
             if (dbTask.isSuccessful) {
                 Log.e("RegisterLog", "Registration done")
             } else {
@@ -95,20 +88,6 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-//    fun getPersonFirstName(userId: String) {
-//        firebaseRef.child(userId).get().addOnSuccessListener { dataSnapshot ->
-//            if (dataSnapshot.exists()) {
-//                // Преобразуем данные в объект Profile
-//                val profile = dataSnapshot.getValue(Profile::class.java)
-//                Log.d("Firebase", "Data snapshot exists, profile: ${profile?.firstName}")
-//                _profileLiveData.postValue(profile!!)
-//            } else {
-//                _profileLiveData.postValue(null!!)
-//            }
-//        }.addOnFailureListener { exception ->
-//            Log.e("Firebase", "Failed to retrieve data: ${exception.message}")
-//            _profileLiveData.postValue(null!!)
-//        }
-//    }
+
 }
 
