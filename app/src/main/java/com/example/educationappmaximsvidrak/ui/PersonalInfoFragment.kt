@@ -20,8 +20,7 @@ class PersonalInfoFragment : Fragment() {
     private lateinit var binding: FragmentPersonalInfoBinding
     private val loginViewModel: LoginViewModel by activityViewModels()
 
-    private lateinit var  profileClass: Profile
-
+    private lateinit var profileClass: Profile
 
 
     override fun onCreateView(
@@ -35,10 +34,6 @@ class PersonalInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        profileClass = mutableListOf()
-
-        getPersonInfo()
-
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(PersonalInfoFragmentDirections.actionPersonalInfoFragmentToSettingsFragment())
@@ -51,8 +46,7 @@ class PersonalInfoFragment : Fragment() {
     }
 
 
-
-    private fun saveData () {
+    private fun saveData() {
         val firstName = binding.tietFirstName.text.toString()
         val secondName = binding.tietSecondName.text.toString()
         val phoneNumber = binding.tietPhoneNumber.text.toString()
@@ -74,35 +68,6 @@ class PersonalInfoFragment : Fragment() {
                 Log.e("Firebase", "Failed to save data", task.exception)
             }
         }
-    }
-
-
-    private fun getPersonInfo () {
-        loginViewModel.firebaseRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (profileSnap in snapshot.children) {
-                        val profile = profileSnap.getValue(Profile::class.java)
-                        if (profile != null) {
-                           profileClass = profile
-                           break
-                        } else {
-                            Log.e("Firebase", "Profile == null")
-                        }
-
-                    }
-                }
-
-                binding.tietFirstName.setText(profileClass.firstName)
-                binding.tietSecondName.setText(profileClass.lastName)
-                binding.tietPhoneNumber.setText(profileClass.phoneNumber)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("Firebase", "error")
-            }
-
-        })
     }
 
 

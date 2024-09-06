@@ -64,13 +64,15 @@ class RegisterFragment : Fragment() {
                     binding.tietPassword.startAnimation(animation)
                 }
             }
+
+
         }
 
-        viewModel.currentUser.observe(viewLifecycleOwner) {
-            if (it != null) {
-                findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToHomeFragment())
-            }
-        }
+//        viewModel.currentUser.observe(viewLifecycleOwner) {
+//            if (it != null) {
+//                findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToHomeFragment())
+//            }
+//        }
 
         binding.tvLogin.setOnClickListener {
             findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
