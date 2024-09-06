@@ -94,8 +94,8 @@ class PersonalInfoFragment : Fragment() {
                 }
 
                 binding.tietFirstName.setText(profileClass.firstName)
-//                binding.tietSecondName.setText(profileClass.lastName)
-//                binding.tietPhoneNumber.setText(profileClass.phoneNumber)
+                binding.tietSecondName.setText(profileClass.lastName)
+                binding.tietPhoneNumber.setText(profileClass.phoneNumber)
             }
 
             override fun onCancelled(error: DatabaseError) {
