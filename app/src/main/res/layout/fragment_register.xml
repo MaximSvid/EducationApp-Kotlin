@@ -14,7 +14,7 @@
             android:id="@+id/tv_easy_cards"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="56dp"
             android:text="@string/easy_n_cards"
             android:textColor="@color/black"
             android:textSize="56sp"
@@ -27,7 +27,7 @@
             android:id="@+id/tv_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="56dp"
             android:text="@string/registration"
             android:textColor="@color/black"
             android:textSize="36sp"
@@ -55,7 +55,7 @@
             android:id="@+id/register_email"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="18sp"
+            android:layout_marginTop="36sp"
             android:background="@drawable/input_field"
             android:drawableStart="@drawable/email_icon2"
             android:drawablePadding="8dp"
@@ -109,7 +109,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register_password"
-            android:layout_marginTop="28dp"/>
+            android:layout_marginTop="56dp"/>
 
         <TextView
             android:id="@+id/tv_login"
