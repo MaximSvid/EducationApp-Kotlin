@@ -27,7 +27,6 @@ import com.example.educationappmaximsvidrak.ui.LoginFragment
 import com.example.educationappmaximsvidrak.ui.StartFragment
 import com.google.android.material.navigation.NavigationView
 
-//import com.example.educationappmaximsvidrak.adapter.ChatGPTAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // возврат назад
+        // rückwärts
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 binding.fragmentContainerViewBottom.findNavController().navigateUp()

@@ -8,4 +8,8 @@
     </style>
 
     <style name="Theme.EducationAppMaximSvidrak" parent="Base.Theme.EducationAppMaximSvidrak" />
+    
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/background</item>
+    </style>
 </resources>
