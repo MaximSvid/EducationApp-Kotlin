@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentRegisterBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterFragment : Fragment() {
 
@@ -38,8 +39,8 @@ class RegisterFragment : Fragment() {
 
             val animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
 
-            val firebaseRef = viewModel.firebaseRef
-            val contactId = firebaseRef.push().key!!
+            val firebaseAuth = FirebaseAuth.getInstance().currentUser
+            val contactId = firebaseAuth?.uid
 
             if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches() && pass.isNotEmpty() && name.isNotEmpty()) {
                 //TODO Patterns.EMAIL_ADDRESS.matcher(email).matches() - prüfen, ob die Adresse im E-Mail-Format eingegeben wurde

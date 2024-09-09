@@ -50,13 +50,13 @@ class PersonalInfoFragment : Fragment() {
 
 
     private fun saveData() {
-        val firstName = binding.tietFirstName.text.toString()
-        val secondName = binding.tietSecondName.text.toString()
-        val phoneNumber = binding.tietPhoneNumber.text.toString()
+        val firstName = binding.etName.text.toString()
+        val secondName = binding.etUsername.text.toString()
+        val phoneNumber = binding.etPhone.text.toString()
 
-        if (firstName.isEmpty()) binding.tietFirstName.error = "Write a first name"
-        if (secondName.isEmpty()) binding.tietSecondName.error = "Write a username name"
-        if (phoneNumber.isEmpty()) binding.tietFirstName.error = "Write a phone number"
+        if (firstName.isEmpty()) binding.etName.error = "Write a first name"
+        if (secondName.isEmpty()) binding.etUsername.error = "Write a username name"
+        if (phoneNumber.isEmpty()) binding.etPhone.error = "Write a phone number"
 
         val firebaseRef = loginViewModel.firebaseRef
 
@@ -97,9 +97,9 @@ class PersonalInfoFragment : Fragment() {
                         val profile = snapshot.getValue(Profile::class.java)
                         if (profile != null) {
                             // Заполняем UI данными профиля
-                            binding.tietFirstName.setText(profile.firstName)
-                            binding.tietSecondName.setText(profile.username)  // Это "второе имя"
-                            binding.tietPhoneNumber.setText(profile.phoneNumber)
+                            binding.etName.setText(profile.firstName)
+                            binding.etUsername.setText(profile.username)  // Это "второе имя"
+                            binding.etPhone.setText(profile.phoneNumber)
                         } else {
                             Log.e("Firebase", "Profile data is null")
                         }

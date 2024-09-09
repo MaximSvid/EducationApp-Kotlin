@@ -77,9 +77,9 @@ class LoginViewModel : ViewModel() {
         _currentUser.value = null
     }
 
-    fun dataUser (userId: String, firstName: String, username: String) {
+    fun dataUser (userId: String?, firstName: String, username: String) {
         val contactName = Profile (userId, firstName, username)
-        firebaseRef.child(userId).setValue(contactName).addOnCompleteListener { dbTask ->
+        firebaseRef.child(userId!!).setValue(contactName).addOnCompleteListener { dbTask ->
             if (dbTask.isSuccessful) {
                 Log.e("RegisterLog", "Registration done")
             } else {

@@ -58,73 +58,128 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_first_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="26dp"
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24sp"
         android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/input_field"
+        android:drawableStart="@drawable/person_icon2"
+        android:drawablePadding="8dp"
+        android:hint="@string/name"
+        android:padding="8dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_profile_picture">
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile_picture" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_first_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/first_name" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_last_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="26dp"
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24sp"
         android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/input_field"
+        android:drawableStart="@drawable/username_icon2"
+        android:drawablePadding="8dp"
+        android:hint="@string/username"
+        android:padding="8dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_first_name">
+        app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_second_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/username" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_tel_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="26dp"
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24sp"
         android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/input_field"
+        android:drawableStart="@drawable/phone_icon"
+        android:drawablePadding="8dp"
+        android:hint="@string/phone_number"
+        android:padding="8dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_last_name">
+        app:layout_constraintTop_toBottomOf="@+id/et_username" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/phone_number" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/et_name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="12dp"-->
+<!--        android:layout_marginTop="26dp"-->
+<!--        android:layout_marginEnd="12dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/iv_profile_picture">-->
 
-    <Button
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/tiet_first_name"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="@string/first_name" />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/til_last_name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="12dp"-->
+<!--        android:layout_marginTop="26dp"-->
+<!--        android:layout_marginEnd="12dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/et_name">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/tiet_second_name"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="@string/username" />-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/til_tel_number"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="12dp"-->
+<!--        android:layout_marginTop="26dp"-->
+<!--        android:layout_marginEnd="12dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/til_last_name">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/tiet_phone_number"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="number"-->
+<!--            android:hint="@string/phone_number" />-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_update_contact"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36sp"
         android:layout_weight="1"
         android:text="@string/update"
+        android:backgroundTint="@color/blue"
+        android:background="@drawable/input_field"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_tel_number" />
+        app:layout_constraintTop_toBottomOf="@+id/et_phone" />
 
 <!--    <Button-->
 <!--        android:id="@+id/btn_update_image"-->
