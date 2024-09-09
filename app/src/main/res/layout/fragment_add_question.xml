@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/hint"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.AddQuestionFragment">
 
     <Toolbar
@@ -36,9 +36,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/arrow_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_folder"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <ImageButton
@@ -51,16 +51,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <ImageButton-->
-<!--                android:id="@+id/ib_plus"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="12dp"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                android:src="@drawable/baseline_more_vert_24"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/ib_plus"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginEnd="12dp"-->
+            <!--                android:background="@android:color/transparent"-->
+            <!--                android:src="@drawable/baseline_more_vert_24"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -70,66 +70,111 @@
         android:id="@+id/lav_arrow_up2_anim"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:lottie_fileName="arrow.json"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        />
+        app:lottie_fileName="arrow.json" />
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_question"
+    <EditText
+        android:id="@+id/et_question"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_height="50dp"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="56sp"
         android:layout_marginEnd="12dp"
+        android:background="@drawable/input_field"
+        android:drawablePadding="8dp"
+        android:hint="@string/question"
+        android:padding="8dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+    <!--        android:id="@+id/til_question"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="56dp"-->
+    <!--        android:layout_marginStart="12dp"-->
+    <!--        android:layout_marginEnd="12dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/toolbar">-->
 
-            android:hint="@string/question" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <!--        <com.google.android.material.textfield.TextInputEditText-->
+    <!--            android:id="@+id/et_question"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:hint="@string/question" />-->
+    <!--    </com.google.android.material.textfield.TextInputLayout>-->
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_answer"
+    <EditText
+        android:id="@+id/et_answer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
+        android:layout_height="150dp"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="24sp"
         android:layout_marginEnd="12dp"
+        android:background="@drawable/input_field"
+        android:drawablePadding="8dp"
+        android:gravity="top|start"
+        android:hint="@string/answer"
+        android:inputType="textMultiLine"
+        android:maxLines="6"
+        android:minLines="3"
+        android:padding="8dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_question">
+        app:layout_constraintTop_toBottomOf="@+id/et_question" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_answer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
-            android:hint="@string/answer"
-            android:inputType="textMultiLine"
-            android:minLines="3"
-            android:maxLines="6"
-            android:gravity="top|start"
-            android:scrollbars="vertical"/>
-    </com.google.android.material.textfield.TextInputLayout>
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+    <!--        android:id="@+id/til_answer"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="26dp"-->
+    <!--        android:layout_marginStart="12dp"-->
+    <!--        android:layout_marginEnd="12dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        android:inputType="textMultiLine"-->
+    <!--        android:minLines="3"-->
+    <!--        android:maxLines="6"-->
+    <!--        android:gravity="top|start"-->
+    <!--        android:scrollbars="vertical"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/et_question">-->
 
-    <Button
+    <!--        <com.google.android.material.textfield.TextInputEditText-->
+    <!--            android:id="@+id/et_answer"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+
+    <!--            android:hint="@string/answer"-->
+    <!--            android:inputType="textMultiLine"-->
+    <!--            android:minLines="3"-->
+    <!--            android:maxLines="6"-->
+    <!--            android:gravity="top|start"-->
+    <!--            android:scrollbars="vertical"/>-->
+    <!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_save"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="@string/save"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_answer"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/input_field"
         android:backgroundTint="@color/blue"
-        android:layout_marginTop="36dp"/>
+        android:text="@string/save"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_answer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

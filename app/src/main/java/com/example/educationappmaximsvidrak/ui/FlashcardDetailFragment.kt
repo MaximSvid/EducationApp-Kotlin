@@ -33,13 +33,13 @@ class FlashcardDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.selectedCard.observe(viewLifecycleOwner) {
-            binding.tietQuestion.setText(it.question)
-            binding.tietAnswer.setText(it.answer)
+            binding.etQuestion.setText(it.question)
+            binding.etAnswer.setText(it.answer)
         }
 
         binding.btnSave.setOnClickListener {
-            val questionText = binding.tietQuestion.text.toString()
-            val answerText = binding.tietAnswer.text.toString()
+            val questionText = binding.etQuestion.text.toString()
+            val answerText = binding.etAnswer.text.toString()
             if (questionText.isNotEmpty() && answerText.isNotEmpty()) {
                 val updateFlashcard = FlashcardData(
                     viewModel.selectedCard.value!!.id,

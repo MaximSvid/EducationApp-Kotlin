@@ -71,7 +71,7 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_question"
+            android:id="@+id/et_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint=" Question" />
@@ -89,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/til_question">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_answer"
+            android:id="@+id/et_answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/answer"

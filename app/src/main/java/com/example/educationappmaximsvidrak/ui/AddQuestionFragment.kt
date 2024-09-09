@@ -49,8 +49,8 @@ class AddQuestionFragment : Fragment() {
         }
 
         binding.btnSave.setOnClickListener {
-            val question = binding.tietQuestion.text.toString()
-            val answer = binding.tietAnswer.text.toString()
+            val question = binding.etQuestion.text.toString()
+            val answer = binding.etAnswer.text.toString()
             val selectedFolder = viewModel.selectedFolder.value
 
             if (question.isNotEmpty() && answer.isNotEmpty()) {
@@ -63,8 +63,8 @@ class AddQuestionFragment : Fragment() {
                     )
 
 
-                    binding.tietQuestion.text?.clear()
-                    binding.tietAnswer.text?.clear()
+                    binding.etQuestion.text?.clear()
+                    binding.etAnswer.text?.clear()
 
                     binding.ivArrow.visibility = View.VISIBLE
                     binding.lavArrowUp2Anim.visibility = View.GONE
