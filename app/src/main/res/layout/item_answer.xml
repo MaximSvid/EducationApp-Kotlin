@@ -41,17 +41,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:gravity="center_horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/mcv_back"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/mcv_back"
-                android:layout_width="60dp"
+                android:layout_width="40dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="12dp"
                 android:backgroundTint="@color/background"
@@ -74,7 +76,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/mcv_forward"
-                android:layout_width="60dp"
+                android:layout_width="40dp"
                 android:layout_height="60dp"
                 android:layout_marginEnd="12dp"
                 android:backgroundTint="@color/background"
