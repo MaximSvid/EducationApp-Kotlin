@@ -36,20 +36,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_easy_cards" />
 
-        <EditText
-            android:id="@+id/register_name"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="18sp"
-            android:background="@drawable/input_field"
-            android:drawableStart="@drawable/person_icon2"
-            android:drawablePadding="8dp"
-            android:hint="@string/name"
-            android:padding="8dp"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_text" />
+<!--        <EditText-->
+<!--            android:id="@+id/register_name"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginTop="18sp"-->
+<!--            android:background="@drawable/input_field"-->
+<!--            android:drawableStart="@drawable/person_icon2"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:hint="@string/name"-->
+<!--            android:padding="8dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_text" />-->
 
         <EditText
             android:id="@+id/register_email"
@@ -65,22 +65,22 @@
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_text" />
 
-        <EditText
-            android:id="@+id/register_username"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="18sp"
-            android:background="@drawable/input_field"
-            android:drawableStart="@drawable/username_icon2"
-            android:drawablePadding="8dp"
-            android:hint="@string/username"
-            android:padding="8dp"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_email" />
+<!--        <EditText-->
+<!--            android:id="@+id/register_username"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginTop="18sp"-->
+<!--            android:background="@drawable/input_field"-->
+<!--            android:drawableStart="@drawable/username_icon2"-->
+<!--            android:drawablePadding="8dp"-->
+<!--            android:hint="@string/username"-->
+<!--            android:padding="8dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/register_email" />-->
 
         <EditText
             android:id="@+id/register_password"
@@ -96,7 +96,7 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_username" />
+            app:layout_constraintTop_toBottomOf="@+id/register_email" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_regist"
