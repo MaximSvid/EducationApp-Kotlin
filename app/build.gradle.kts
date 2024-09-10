@@ -104,4 +104,7 @@ implementation(libs.firebase.database)
     //firebase storage
     implementation("com.google.firebase:firebase-storage-ktx:21.0.0")
 
+    //picasso
+    implementation ("com.squareup.picasso:picasso:2.8")
+
 }
