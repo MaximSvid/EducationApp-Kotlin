@@ -43,47 +43,72 @@ class LoginViewModel : ViewModel() {
     private val _loginResult = MutableLiveData<String>()
     val loginResult: LiveData<String> = _loginResult
 
-    fun getProfileInfo () {
+    fun getProfileInfo() {
         val userId = firebaseAuth.currentUser?.uid
         if (userId != null) {
-            firebaseRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener{
+            firebaseRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    // Проверяем, существует ли профиль в базе данных
                     val profile = snapshot.getValue(Profile::class.java)
-                    _profileLiveData.value = profile!!
+
+                    // Если профиль существует, обновляем LiveData, иначе создаём новый с пустыми значениями
+                    if (profile != null) {
+                        _profileLiveData.value = profile!!
+                    } else {
+                        // Значения по умолчанию для нового профиля
+                        val newProfile = Profile(
+                            userId = userId,
+                            firstName = "",
+                            username = "",
+                            phoneNumber = "",
+                            image = ""
+                        )
+                        _profileLiveData.value = newProfile
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                     Log.e("Firebase", "Error loading profile: ${error.message}")
                 }
-
             })
         }
-
     }
 
-    private fun saveProfileData(userId: String, firsName: String, secondName: String, phoneNumber: String, imageUrl: String) {
-        val profile = Profile (userId, firsName, secondName, phoneNumber, imageUrl)
-        firebaseRef.child(userId).setValue(profile).addOnCompleteListener { tast ->
-            _updateStatus.value = tast.isSuccessful
+    private fun saveProfileData(userId: String, firstName: String, lastName: String, phoneNumber: String, imageUrl: String) {
+        val profile = Profile(userId, firstName, lastName, phoneNumber, imageUrl)
+        firebaseRef.child(userId).setValue(profile).addOnCompleteListener { task ->
+            _updateStatus.value = task.isSuccessful
         }
     }
 
-    fun  updateProfile (firsName: String, secondName: String, phoneNumber: String, uri: Uri?) {
+    fun updateProfile(firstName: String, lastName: String, phoneNumber: String, uri: Uri?) {
         val userId = firebaseAuth.currentUser?.uid
         if (userId != null) {
             if (uri != null) {
-                storageReference.child(userId).putFile(uri)
-                    .addOnSuccessListener { task ->
-                        task.metadata?.reference?.downloadUrl?.addOnCompleteListener { url ->
-                            val imageUrl = url.toString()
-                            saveProfileData (userId, firsName, secondName, phoneNumber, imageUrl)
+                val imageRef = storageReference.child(userId)
+                val uploadTask = imageRef.putFile(uri)
+
+                // Get URL after upload completes
+                uploadTask.addOnCompleteListener { uploadTask ->
+                    if (uploadTask.isSuccessful) {
+                        imageRef.downloadUrl.addOnCompleteListener { urlTask ->
+                            if (urlTask.isSuccessful) {
+                                val imageUrl = urlTask.result.toString()
+                                saveProfileData(userId, firstName, lastName, phoneNumber, imageUrl)
+                            } else {
+                                Log.e("Firebase", "Error getting download URL: ${urlTask.exception?.message}")
+                            }
                         }
+                    } else {
+                        Log.e("Firebase", "Image upload failed: ${uploadTask.exception?.message}")
                     }
+                }
             } else {
-                saveProfileData(userId, firsName, secondName, phoneNumber, "")
+                saveProfileData(userId, firstName, lastName, phoneNumber, "")
             }
         }
     }
+
 
 
     fun login(email: String, pass: String) {

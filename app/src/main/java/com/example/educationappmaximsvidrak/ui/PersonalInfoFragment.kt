@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.example.educationappmaximsvidrak.LoginViewModel
 import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentPersonalInfoBinding
@@ -28,7 +29,6 @@ class PersonalInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentPersonalInfoBinding
     private val loginViewModel: LoginViewModel by activityViewModels()
-
     private var uri: Uri? = null
 
 
@@ -45,8 +45,8 @@ class PersonalInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeViewModel()
         loginViewModel.getProfileInfo()
+        observeViewModel()
 
 
         binding.ibBack.setOnClickListener {
@@ -72,6 +72,8 @@ class PersonalInfoFragment : Fragment() {
             val phoneNumber = binding.etPhone.text.toString()
             if (firstName.isNotEmpty() && secondName.isNotEmpty() && phoneNumber.isNotEmpty()) {
                 loginViewModel.updateProfile(firstName, secondName, phoneNumber, uri)
+            } else {
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -84,7 +86,13 @@ class PersonalInfoFragment : Fragment() {
                 binding.etName.setText(it.firstName)
                 binding.etUsername.setText(it.username)
                 binding.etPhone.setText(it.phoneNumber)
-                binding.ivProfilePicture.setImageURI(uri)
+                binding.ivProfilePicture.load(it.image)
+
+//                if (!it.image.isNullOrEmpty()) {
+//                    Picasso.get().load(it.image).into(binding.ivProfilePicture)
+//                } else {
+//                    binding.ivProfilePicture.setImageResource(R.drawable.error_icon)
+//                }
             }
         }
 
