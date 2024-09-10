@@ -107,31 +107,32 @@ class Repository(private val database: FlashcardDatabase) {
     val chat: LiveData<MutableList<Message>> get() = _chat
 
     suspend fun sendMessage(content: String) {
-        //Асинхронные операции: Сетевые запросы выполняются внутри withContext(Dispatchers.IO), что обеспечивает выполнение в фоновом потоке.
+        /*TODO Asynchrone Operationen: Netzanfragen werden innerhalb von withContext(Dispatchers.IO) ausgeführt,
+        TODO was die Ausführung im Hintergrund-Thread gewährleistet.
+         */
         withContext(Dispatchers.IO) {
             try {
                 val currentMessages = _chat.value ?: mutableListOf()
-
-                // Добавляем сообщение пользователя
+                // TODO Benutzernachricht hinzufügen
                 val userMessage = Message(role = "user", content = content)
                 currentMessages.add(userMessage)
 
-                // Создаем запрос с учетом всех предыдущих сообщений
+                // TODO Erstellen Sie eine Abfrage, die alle vorherigen Nachrichten berücksichtigt
                 val request = ChatCompletionRequest(
                     model = "gpt-3.5-turbo",
                     messages = currentMessages
                 )
 
-                // Отправляем запрос в API
+                // TODO Anfrage an API senden
                 val response = EducationApi.retrofitService.sendMessage("Bearer $API_KEY", request)
 
-                // Получаем ответ от ChatGPT
+                // TODO Empfangen einer Antwort von ChatGPT
                 val gptMessage = response.choices.first().message
 
-                // Добавляем ответ в список сообщений
+                // TODO Hinzufügen der Antwort zur Nachrichtenliste
                 currentMessages.add(gptMessage)
 
-                // Обновляем LiveData
+                // TODO LiveDaten aktualisieren
                 _chat.postValue(currentMessages)
             } catch (e: Exception) {
                 Log.e("RepositoryLog", e.message.toString())

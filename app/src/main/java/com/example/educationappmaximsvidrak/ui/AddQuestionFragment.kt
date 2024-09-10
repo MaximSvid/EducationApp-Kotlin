@@ -174,7 +174,7 @@ class AddQuestionFragment : Fragment() {
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
             val nameFolder = folderEditText.text.toString().trim()
 
-            if (nameFolder.isBlank()) {
+            if (nameFolder.isEmpty()) {
                 Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                 // добавляем новую папку в начало списка

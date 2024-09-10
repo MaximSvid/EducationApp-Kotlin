@@ -101,4 +101,7 @@ implementation(libs.firebase.database)
     //lottie animation
     implementation ("com.airbnb.android:lottie:6.5.1")
 
+    //firebase storage
+    implementation("com.google.firebase:firebase-storage-ktx:21.0.0")
+
 }
