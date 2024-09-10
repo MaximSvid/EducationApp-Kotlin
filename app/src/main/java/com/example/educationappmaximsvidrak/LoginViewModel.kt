@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.StorageReference
 
 
 class LoginViewModel : ViewModel() {
@@ -18,6 +19,8 @@ class LoginViewModel : ViewModel() {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
      val firebaseRef: DatabaseReference = FirebaseDatabase.getInstance("https://education-app-maxim-svidrak-default-rtdb.europe-west1.firebasedatabase.app").getReference("contacts")
+
+    private lateinit var storageReference: StorageReference
 
 
 
@@ -77,16 +80,15 @@ class LoginViewModel : ViewModel() {
         _currentUser.value = null
     }
 
-    fun dataUser (userId: String?, firstName: String, username: String) {
-        val contactName = Profile (userId, firstName, username)
-        firebaseRef.child(userId!!).setValue(contactName).addOnCompleteListener { dbTask ->
-            if (dbTask.isSuccessful) {
-                Log.e("RegisterLog", "Registration done")
-            } else {
-                Log.e("RegisterLog", "RealtimeDatabase problem")
-            }
-        }
+    fun updateDataAndImage () {
+
+
+
     }
+
+
+
+
 
 
 }

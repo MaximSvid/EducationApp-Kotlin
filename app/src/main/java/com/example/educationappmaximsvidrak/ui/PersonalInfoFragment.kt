@@ -1,11 +1,14 @@
 package com.example.educationappmaximsvidrak.ui
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
@@ -15,13 +18,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class PersonalInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentPersonalInfoBinding
     private val loginViewModel: LoginViewModel by activityViewModels()
 
-    private lateinit var profileClass: Profile
+    private lateinit var storageRef: StorageReference
+    private var uri: Uri? = null
+
+
 
 
     override fun onCreateView(
@@ -29,6 +37,8 @@ class PersonalInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPersonalInfoBinding.inflate(layoutInflater, container, false)
+
+        storageRef = FirebaseStorage.getInstance().getReference("Images")
         return binding.root
     }
 
@@ -46,7 +56,20 @@ class PersonalInfoFragment : Fragment() {
             saveData()
         }
 
+        val addImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
+            binding.ivProfilePicture.setImageURI(it)
+            if (it != null) {
+                uri = it
+            }
+        }
+
+        binding.btnUpdateImage.setOnClickListener {
+            addImage.launch("image/*")
+        }
+
     }
+
+
 
 
     private fun saveData() {
@@ -64,16 +87,32 @@ class PersonalInfoFragment : Fragment() {
         val userId = firebaseUser?.uid // Получаем uid пользователя
 
         if (userId != null) {
-            val contacts = Profile(userId, firstName, secondName, phoneNumber)
+            var contacts: Profile
 
-            // Сохраняем данные под ключом userId
-            firebaseRef.child(userId).setValue(contacts).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d("Firebase", "Data saved successfully")
-                } else {
-                    Log.e("Firebase", "Failed to save data", task.exception)
-                }
+            uri?.let {
+                storageRef.child(userId).putFile(it)
+                    .addOnSuccessListener { task ->
+                        task.metadata!!.reference!!.downloadUrl
+                            .addOnSuccessListener { url ->
+                                Toast.makeText(requireContext(), "Image done", Toast.LENGTH_SHORT).show()
+                                val imageUrl = url.toString()
+
+                                contacts = Profile(userId, firstName, secondName, phoneNumber, imageUrl)
+
+                                // Сохраняем данные под ключом userId
+                                firebaseRef.child(userId).setValue(contacts).addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        Log.d("Firebase", "Data saved successfully")
+                                    } else {
+                                        Log.e("Firebase", "Failed to save data", task.exception)
+                                    }
+                                }
+
+                            }
+                    }
             }
+
+
         }
 
     }
