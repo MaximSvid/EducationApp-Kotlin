@@ -46,7 +46,7 @@ class FlashcardDetailFragment : Fragment() {
                     questionText,
                     answerText,
                     folderId = viewModel.selectedFolder.value!!.id,
-                    studyDate = System.currentTimeMillis() // Сохранение текущей даты в миллисекундах
+                    studyDate = System.currentTimeMillis() // Speichern des aktuellen Datums in Millisekunden
                 )
                 viewModel.updateFlashcard(updateFlashcard)
                 findNavController().navigate(FlashcardDetailFragmentDirections.actionFlashcardDetailFragmentToFlashcardFragment())

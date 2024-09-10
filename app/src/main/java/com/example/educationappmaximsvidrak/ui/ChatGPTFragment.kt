@@ -67,6 +67,7 @@ class ChatGPTFragment : Fragment() {
         binding.ibBack.setOnClickListener {
             findNavController().navigate(ChatGPTFragmentDirections.actionChatGPTFragmentToHomeFragment())
         }
+
     }
 
     private fun animationRobot() {

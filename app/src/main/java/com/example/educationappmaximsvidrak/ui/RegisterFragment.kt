@@ -32,28 +32,21 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRegist.setOnClickListener {
-//            val name = binding.registerName.text.toString().ifEmpty { "User" } // wenn das Namensfeld leer ist, den Namen als Benutzer festlegen
             val email = binding.registerEmail.text.toString()
             val pass = binding.registerPassword.text.toString()
-//            val username = binding.registerUsername.text.toString()
 
             val animation = android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
 
-//            val firebaseAuth = FirebaseAuth.getInstance().currentUser
-//            val contactId = firebaseAuth?.uid
 
             if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches() && pass.isNotEmpty()) {
                 //TODO Patterns.EMAIL_ADDRESS.matcher(email).matches() - prüfen, ob die Adresse im E-Mail-Format eingegeben wurde
                 viewModel.register(email, pass)
-//                viewModel.dataUser(contactId, name, username)
-
             }  else {
-                // Если email некорректен
+                // TODO Wenn die E-Mail falsch ist
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     Toast.makeText(requireContext(), "Enter correct email", Toast.LENGTH_SHORT).show()
                     binding.registerEmail.startAnimation(animation)
                 }
-
                 if (email.isEmpty()) {
                     binding.registerEmail.startAnimation(animation)
                 }
@@ -70,8 +63,6 @@ class RegisterFragment : Fragment() {
                 Toast.makeText(context, "You have successfully registered", Toast.LENGTH_SHORT).show()
             }
         }
-
-
 
         binding.tvLogin.setOnClickListener {
             findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())

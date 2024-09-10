@@ -45,9 +45,8 @@ class LoginFragment : Fragment() {
             if (email != ""&& Patterns.EMAIL_ADDRESS.matcher(email).matches() && pass != "") {
                 viewModel.login(email, pass)
             } else  {
-            // Если email некорректен
+                // Wenn die E-Mail falsch ist
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//                Toast.makeText(requireContext(), "Enter correct email", Toast.LENGTH_SHORT).show()
                 binding.loginEmail.startAnimation(animation)
             }
 
@@ -62,7 +61,7 @@ class LoginFragment : Fragment() {
 
         }
 
-        // Наблюдение за результатом входа
+        // Beobachtung des Ergebnisses der Eingabe
         viewModel.loginResult.observe(viewLifecycleOwner) { result ->
             Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
         }

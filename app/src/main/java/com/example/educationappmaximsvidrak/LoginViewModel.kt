@@ -31,6 +31,7 @@ class LoginViewModel : ViewModel() {
     private val _profileLiveData = MutableLiveData<Profile>()
     val profileLiveData: LiveData<Profile> get() = _profileLiveData
 
+    // Eine interessante Lösung für die Verfolgung von Profilaktualisierungen
     private val _updateStatus = MutableLiveData<Boolean>()
     val updateStatus: LiveData<Boolean> get() = _updateStatus
 
@@ -48,14 +49,14 @@ class LoginViewModel : ViewModel() {
         if (userId != null) {
             firebaseRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    // Проверяем, существует ли профиль в базе данных
+                    // Prüfen, ob das Profil in der Datenbank existiert
                     val profile = snapshot.getValue(Profile::class.java)
 
-                    // Если профиль существует, обновляем LiveData, иначе создаём новый с пустыми значениями
+                    // Wenn das Profil existiert, LiveData aktualisieren, andernfalls ein neues Profil mit leeren Werten erstellen
                     if (profile != null) {
                         _profileLiveData.value = profile!!
                     } else {
-                        // Значения по умолчанию для нового профиля
+                        // Standardwerte für das neue Profil
                         val newProfile = Profile(
                             userId = userId,
                             firstName = "",
@@ -123,17 +124,17 @@ class LoginViewModel : ViewModel() {
                     val exception = it.exception
                     when (exception) {
                         is FirebaseAuthInvalidUserException -> {
-                            // Учетная запись не существует
+                            // Das Konto existiert nicht
                             _loginResult.value = "Account does not exist"
                         }
 
                         is FirebaseAuthInvalidCredentialsException -> {
-                            // Неправильный пароль
+                            // Falsches Passwort
                             _loginResult.value = "Incorrect password"
                         }
 
                         else -> {
-                            // Другие ошибки
+                            // Andere Fehler
                             _loginResult.value = "Login failed: ${exception?.message}"
                         }
                     }

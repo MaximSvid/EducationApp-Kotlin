@@ -29,7 +29,6 @@ class StartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStartBinding.inflate(layoutInflater)
-        // Inflate the layout for this fragment
         return binding.root
 
 
@@ -39,7 +38,7 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // Если папок нет должна появится надпись
+        // Wenn keine Ordner vorhanden sind, erscheint folgende Meldung
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
             checkIfFolderIsEmpty(folder.id)
         }
@@ -48,10 +47,6 @@ class StartFragment : Fragment() {
             viewModel.observeFolderList()
             checkFolderSelection()
         }
-//
-//        binding.btnNewCards.setOnClickListener {
-//            findNavController().navigate(StartFragmentDirections.actionStartFragmentToFolderFragment())
-//        }
 
 
         binding.btnNewFolder.setOnClickListener {
@@ -75,17 +70,19 @@ class StartFragment : Fragment() {
         }
 
 
-        // Подписка на изменения выбранной папки
+        // Änderungen im ausgewählten Ordner abonnieren
         viewModel.selectedFolder.observe(viewLifecycleOwner) { folder ->
-            Log.e("LogS", "crash")
-            folder?.let {
-                viewModel.getFlashcardsBySelectedFolder()
-                    .observe(viewLifecycleOwner) { flashcards ->
-                        adapter.updateData(flashcards)
-                    }
-            } ?: run {
-                // Если папка не выбрана, показать все карточки
-                viewModel.flashcardList.value?.let { flashcards ->
+            Log.e("StartFragment", "crash")
+
+            if (folder != null) {
+                // Wenn Ordner nicht null ist, Karteikarten für den ausgewählten Ordner holen
+                viewModel.getFlashcardsBySelectedFolder().observe(viewLifecycleOwner) { flashcards ->
+                    adapter.updateData(flashcards)
+                }
+            } else {
+                // Wenn der Ordner leer ist, werden alle Karteikarten angezeigt.
+                val flashcards = viewModel.flashcardList.value
+                if (flashcards != null) {
                     adapter.updateData(flashcards)
                 }
             }
@@ -108,7 +105,7 @@ class StartFragment : Fragment() {
     private fun showPopupMenu(view: View) {
         val popupMenu = android.widget.PopupMenu(context, view)
 
-        // Добавляем папки в меню
+        // Hinzufügen von Ordnern zum Menü
         viewModel.folderList.value?.forEach { folder ->
             popupMenu.menu.add(0, folder.id.toInt(), 0, folder.name)
         }
@@ -150,17 +147,17 @@ class StartFragment : Fragment() {
             if (folders.isNotEmpty()) {
                 viewModel.selectedFolder.observe(viewLifecycleOwner) { selectedFolder ->
                     if (selectedFolder != null) {
-                        // Если папка выбрана, скрываем сообщение о необходимости выбора папки
+                        // Wenn der Ordner ausgewählt ist, die Meldung über die Notwendigkeit der Auswahl des Ordners ausblenden
                         binding.ivArrow.visibility = View.VISIBLE
                     } else {
-                        // Если папка не выбрана, отображаем сообщение о необходимости выбора папки
+                        // Wenn der Ordner nicht ausgewählt ist, wird eine Meldung angezeigt, dass der Ordner ausgewählt werden muss.
                         binding.rvQuestionAnswer.visibility = View.GONE
                         binding.ivArrow.visibility = View.VISIBLE
                     }
                 }
                 binding.btnNewFolder.visibility = View.GONE
             } else {
-                // Если папок нет, отображаем сообщение о необходимости создать новую папку
+                // Wenn keine Ordner vorhanden sind, wird eine Meldung angezeigt, dass ein neuer Ordner erstellt werden muss
                 binding.tvFolder.text = getString(R.string.create_a_new_folder)
                 binding.btnNewFolder.visibility = View.VISIBLE
                 binding.rvQuestionAnswer.visibility = View.GONE

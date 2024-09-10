@@ -31,9 +31,6 @@ class PersonalInfoFragment : Fragment() {
     private val loginViewModel: LoginViewModel by activityViewModels()
     private var uri: Uri? = null
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,8 +49,6 @@ class PersonalInfoFragment : Fragment() {
         binding.ibBack.setOnClickListener {
             findNavController().navigate(PersonalInfoFragmentDirections.actionPersonalInfoFragmentToSettingsFragment())
         }
-
-
 
         val addImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
             binding.ivProfilePicture.setImageURI(it)
@@ -89,7 +84,6 @@ class PersonalInfoFragment : Fragment() {
                 if (it.image.isNotEmpty()) {
                     binding.ivProfilePicture.load(it.image)
                 }
-//
             }
         }
 

@@ -52,7 +52,7 @@ class StatisticsFragment : Fragment() {
                 calendarDays.add(eventDay)
             }
 
-            // Установка дней с событиями в календаре
+            // Tage mit Ereignissen im Kalender einstellen
             calendarView.setCalendarDays(calendarDays)
         }
 
@@ -68,17 +68,12 @@ class StatisticsFragment : Fragment() {
 
     }
 
-    // Функция для преобразования android.icu.util.Calendar в java.util.Calendar
+    // Funktion zur Konvertierung von android.icu.util.Calendar nach java.util.Calendar
     private fun convertIcuToJavaCalendar(icuCalendar: Calendar): java.util.Calendar {
         val javaCalendar = java.util.Calendar.getInstance()
         javaCalendar.timeInMillis = icuCalendar.timeInMillis
         return javaCalendar
     }
-
-    private fun totalTime () {
-
-    }
-
 
 
     private fun showFolders () {

@@ -19,6 +19,9 @@ interface EducationAppDatabaseDao {
     @Delete
     suspend fun delete(card: FlashcardData)
 
+    @Delete
+    suspend fun deleteFolder(folder: Folder)
+
     @Update
     suspend fun update(card: FlashcardData)
 
@@ -40,8 +43,7 @@ interface EducationAppDatabaseDao {
     @Query("SELECT * FROM flashcard_table WHERE id = :cardId LIMIT 1")
     suspend fun getCardById(cardId: Long): FlashcardData?
 
-    @Delete
-    suspend fun deleteFolder(folder: Folder)
+
 
 
 

@@ -44,10 +44,6 @@ class AddQuestionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding.ibBack.setOnClickListener {
-            findNavController().navigate(AddQuestionFragmentDirections.actionAddQuestionFragmentToHomeFragment())
-        }
-
         binding.btnSave.setOnClickListener {
             val question = binding.etQuestion.text.toString()
             val answer = binding.etAnswer.text.toString()
@@ -59,7 +55,7 @@ class AddQuestionFragment : Fragment() {
                         question = question,
                         answer = answer,
                         folderId = selectedFolder.id,
-                        studyDate = System.currentTimeMillis() // Сохранение текущей даты в миллисекундах
+                        studyDate = System.currentTimeMillis() // Speichern des aktuellen Datums in Millisekunden
                     )
 
 
@@ -97,14 +93,18 @@ class AddQuestionFragment : Fragment() {
 
         }
 
+        binding.apply {
 
+            tvFolder.setOnClickListener {
+                showPopupMenu(it)
+            }
 
-        binding.tvFolder.setOnClickListener {
-            showPopupMenu(it)
-        }
-
-        binding.ivArrow.setOnClickListener {
-            showPopupMenu(it)
+            ivArrow.setOnClickListener {
+                showPopupMenu(it)
+            }
+            ibBack.setOnClickListener {
+                findNavController().navigate(AddQuestionFragmentDirections.actionAddQuestionFragmentToHomeFragment())
+            }
         }
 
     }

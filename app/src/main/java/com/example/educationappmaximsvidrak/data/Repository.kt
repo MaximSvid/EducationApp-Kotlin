@@ -34,7 +34,7 @@ class Repository(private val database: FlashcardDatabase) {
              database.flashcardDAO.getCardsByFolder(folderId)
         }catch (e: Exception) {
             Log.e("RepositoryLog", e.message.toString())
-            MutableLiveData<List<FlashcardData>>() // Вернуть пустой LiveData, если произошла ошибка
+            MutableLiveData<List<FlashcardData>>() // Leere LiveData zurückgeben, wenn ein Fehler auftritt
         }
     }
 
@@ -58,7 +58,7 @@ class Repository(private val database: FlashcardDatabase) {
             database.flashcardDAO.getCardsByFolder(folderId)
         } catch (e: Exception) {
             Log.e("RepositoryLog", e.message.toString())
-            MutableLiveData<List<FlashcardData>>() // Вернуть пустой LiveData, если произошла ошибка
+            MutableLiveData<List<FlashcardData>>() // Leere LiveData zurückgeben, wenn ein Fehler auftritt
         }
     }
 
