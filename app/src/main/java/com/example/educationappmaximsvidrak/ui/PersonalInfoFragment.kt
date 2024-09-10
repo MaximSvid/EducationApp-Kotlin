@@ -86,13 +86,10 @@ class PersonalInfoFragment : Fragment() {
                 binding.etName.setText(it.firstName)
                 binding.etUsername.setText(it.username)
                 binding.etPhone.setText(it.phoneNumber)
-                binding.ivProfilePicture.load(it.image)
-
-//                if (!it.image.isNullOrEmpty()) {
-//                    Picasso.get().load(it.image).into(binding.ivProfilePicture)
-//                } else {
-//                    binding.ivProfilePicture.setImageResource(R.drawable.error_icon)
-//                }
+                if (it.image.isNotEmpty()) {
+                    binding.ivProfilePicture.load(it.image)
+                }
+//
             }
         }
 
