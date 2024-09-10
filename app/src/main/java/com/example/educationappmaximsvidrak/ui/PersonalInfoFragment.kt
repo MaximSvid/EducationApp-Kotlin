@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.educationappmaximsvidrak.LoginViewModel
+import com.example.educationappmaximsvidrak.R
 import com.example.educationappmaximsvidrak.databinding.FragmentPersonalInfoBinding
 import com.example.educationappmaximsvidrak.model.Profile
 import com.google.firebase.auth.FirebaseAuth
@@ -20,13 +21,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.squareup.picasso.Picasso
+import kotlin.math.log
 
 class PersonalInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentPersonalInfoBinding
     private val loginViewModel: LoginViewModel by activityViewModels()
 
-    private lateinit var storageRef: StorageReference
     private var uri: Uri? = null
 
 
@@ -37,24 +39,21 @@ class PersonalInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPersonalInfoBinding.inflate(layoutInflater, container, false)
-
-        storageRef = FirebaseStorage.getInstance().getReference("Images")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getPersonInfo()
+        observeViewModel()
+        loginViewModel.getProfileInfo()
 
 
         binding.ibBack.setOnClickListener {
             findNavController().navigate(PersonalInfoFragmentDirections.actionPersonalInfoFragmentToSettingsFragment())
         }
 
-        binding.btnUpdateContact.setOnClickListener {
-            saveData()
-        }
+
 
         val addImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
             binding.ivProfilePicture.setImageURI(it)
@@ -67,94 +66,40 @@ class PersonalInfoFragment : Fragment() {
             addImage.launch("image/*")
         }
 
-    }
-
-
-
-
-    private fun saveData() {
-        val firstName = binding.etName.text.toString()
-        val secondName = binding.etUsername.text.toString()
-        val phoneNumber = binding.etPhone.text.toString()
-
-        if (firstName.isEmpty()) binding.etName.error = "Write a first name"
-        if (secondName.isEmpty()) binding.etUsername.error = "Write a username name"
-        if (phoneNumber.isEmpty()) binding.etPhone.error = "Write a phone number"
-
-        val firebaseRef = loginViewModel.firebaseRef
-
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
-        val userId = firebaseUser?.uid // Получаем uid пользователя
-
-        if (userId != null) {
-            var contacts: Profile
-
-            uri?.let {
-                storageRef.child(userId).putFile(it)
-                    .addOnSuccessListener { task ->
-                        task.metadata!!.reference!!.downloadUrl
-                            .addOnSuccessListener { url ->
-                                Toast.makeText(requireContext(), "Image done", Toast.LENGTH_SHORT).show()
-                                val imageUrl = url.toString()
-
-                                contacts = Profile(userId, firstName, secondName, phoneNumber, imageUrl)
-
-                                // Сохраняем данные под ключом userId
-                                firebaseRef.child(userId).setValue(contacts).addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        Log.d("Firebase", "Data saved successfully")
-                                    } else {
-                                        Log.e("Firebase", "Failed to save data", task.exception)
-                                    }
-                                }
-
-                            }
-                    }
+        binding.btnUpdateContact.setOnClickListener {
+            val firstName = binding.etName.text.toString()
+            val secondName = binding.etUsername.text.toString()
+            val phoneNumber = binding.etPhone.text.toString()
+            if (firstName.isNotEmpty() && secondName.isNotEmpty() && phoneNumber.isNotEmpty()) {
+                loginViewModel.updateProfile(firstName, secondName, phoneNumber, uri)
             }
 
-
         }
 
     }
 
-    private fun getPersonInfo () {
-
-        // Получаем текущего авторизованного пользователя
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
-        val userId = firebaseUser?.uid // Получаем уникальный идентификатор пользователя (uid)
-
-        // Проверяем, что uid не равен null
-        if (userId != null) {
-            // Получаем ссылку на узел с данными пользователя
-            val firebaseRef = loginViewModel.firebaseRef
-
-            // Загрузка данных пользователя по его userId
-            firebaseRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        // Получаем данные профиля пользователя и заполняем ими UI
-                        val profile = snapshot.getValue(Profile::class.java)
-                        if (profile != null) {
-                            // Заполняем UI данными профиля
-                            binding.etName.setText(profile.firstName)
-                            binding.etUsername.setText(profile.username)  // Это "второе имя"
-                            binding.etPhone.setText(profile.phoneNumber)
-                        } else {
-                            Log.e("Firebase", "Profile data is null")
-                        }
-                    } else {
-                        Log.e("Firebase", "Profile data not found")
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.e("Firebase", "Error loading profile: ${error.message}")
-                }
-            })
-        } else {
-            Log.e("Firebase", "User ID is null")
+    private fun observeViewModel() {
+        loginViewModel.profileLiveData.observe(viewLifecycleOwner) { profile ->
+            profile?.let {
+                binding.etName.setText(it.firstName)
+                binding.etUsername.setText(it.username)
+                binding.etPhone.setText(it.phoneNumber)
+                binding.ivProfilePicture.setImageURI(uri)
+            }
         }
 
-
+        loginViewModel.updateStatus.observe(viewLifecycleOwner) { isSuccessful ->
+            if (isSuccessful) {
+                Toast.makeText(requireContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Failed to update profile", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
+
+
+
+
+
 }
