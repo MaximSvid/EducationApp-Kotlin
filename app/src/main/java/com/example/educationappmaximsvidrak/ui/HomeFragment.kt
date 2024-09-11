@@ -33,7 +33,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
     private val folderList = mutableListOf<String>()
-    private val viewModelLogin: LoginViewModel by activityViewModels()
 
 
     override fun onCreateView(

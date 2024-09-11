@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        //нижняя навигация
+        //Bottom navigation
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerViewBottom) as NavHostFragment
         binding.bottomNavigation.setupWithNavController(navHostFragment.navController)

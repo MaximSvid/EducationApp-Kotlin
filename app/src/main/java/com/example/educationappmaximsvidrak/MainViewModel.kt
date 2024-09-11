@@ -26,7 +26,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val studyDates: LiveData<List<Long>> = repository.statisticsInfo
 
-    // Наблюдение за списком папок
+
     fun observeFolderList() {
         folderList.observeForever { folders ->
             if (folders.isNotEmpty() && _selectedFolder.value == null) {
@@ -68,7 +68,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return if (folder != null) {
             repository.getCardsByFolder(folder.id)
         } else {
-            MutableLiveData(emptyList()) // Возвращаем пустой список, если папка не выбрана
+            MutableLiveData(emptyList()) // Leere Liste zurückgeben, wenn kein Ordner ausgewählt ist
         }
     }
 

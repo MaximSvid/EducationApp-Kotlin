@@ -44,16 +44,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <ImageButton-->
-<!--                android:id="@+id/ib_plus"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="12dp"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                android:src="@drawable/baseline_more_vert_24"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -117,23 +107,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_welcome_text"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            android:layout_marginTop="150dp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            android:text="@string/welcome_to_chat_gpt_n_enter_your_question"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold"/>-->
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 
