@@ -68,7 +68,7 @@ implementation(libs.firebase.database)
     //Interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
-    // Coil
+    // Coli (image)
     implementation("io.coil-kt:coil:2.5.0")
 
     //Room
