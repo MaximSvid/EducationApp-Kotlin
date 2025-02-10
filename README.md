@@ -1,7 +1,8 @@
-Education App
+# Education App
 
-The app is designed for learning via flashcards. Additionally, GPT chat is integrated.
-The following tools were used to create the application:
+## The app is designed for learning via flashcards. Additionally, GPT chat is integrated.
+
+### The following tools were used to create the application:
 1. MVVM (Repository)
 2. Room Database
 3. Firebase database
